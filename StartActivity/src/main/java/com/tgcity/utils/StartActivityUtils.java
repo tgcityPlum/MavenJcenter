@@ -70,8 +70,10 @@ public class StartActivityUtils {
      *
      * @param activity Activity
      */
-    public void setActivity(Activity activity) {
+    public StartActivityUtils setActivity(Activity activity) {
         this.activity = activity;
+
+        return this;
     }
 
     /**

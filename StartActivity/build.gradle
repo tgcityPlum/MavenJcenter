@@ -38,7 +38,7 @@ def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
 def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地址
 def module_name = 'StartActivity' // 项目的名称
 group = 'com.tgcity.utils' // 所在组
-version = "1.0.5" //aar的版本号
+version = "1.0.6" //aar的版本号
 
 install {
     repositories.mavenInstaller {
