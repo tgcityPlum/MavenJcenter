@@ -24,8 +24,8 @@ import android.text.style.RelativeSizeSpan;
 public class SpannableUtils {
 
     private static volatile SpannableUtils spannableUtils;
-    private static int mDefaultColor;
-    private static float mProportion;
+    private int mDefaultColor;
+    private float mProportion;
 
     public static SpannableUtils getInstance() {
         if (spannableUtils == null) {
@@ -38,34 +38,34 @@ public class SpannableUtils {
         return spannableUtils;
     }
 
-    public static SpannableUtils setDefaultColor(int defaultColor) {
+    public SpannableUtils setDefaultColor(int defaultColor) {
         mDefaultColor = defaultColor;
 
         return spannableUtils;
     }
 
-    public static SpannableUtils setProportion(float proportion) {
+    public SpannableUtils setProportion(float proportion) {
         mProportion = proportion;
 
         return spannableUtils;
     }
 
-    public static SpannableString setSpannableForColor(Context context, String message, int partLength, boolean isFromStart) {
+    public SpannableString setSpannableForColor(Context context, String message, int partLength, boolean isFromStart) {
         return setSpannableForColor(message, context, mDefaultColor, isFromStart ? 0 : partLength, isFromStart ? partLength : message.length());
     }
 
-    public static SpannableString setSpannableForColor(String message, Context context, int color, int startLength, int endLength) {
+    public SpannableString setSpannableForColor(String message, Context context, int color, int startLength, int endLength) {
         SpannableString spannableString = new SpannableString(message);
         spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(color)), startLength, endLength, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
 
         return spannableString;
     }
 
-    public static SpannableString setSpannableSize(String message, int partLength, boolean isFromStart) {
+    public SpannableString setSpannableSize(String message, int partLength, boolean isFromStart) {
         return setSpannableSize(message, mProportion, isFromStart ? 0 : partLength, isFromStart ? partLength : message.length());
     }
 
-    public static SpannableString setSpannableSize(String message, float proportion, int startLength, int endLength) {
+    public SpannableString setSpannableSize(String message, float proportion, int startLength, int endLength) {
         SpannableString spannableString = new SpannableString(message);
         spannableString.setSpan(new RelativeSizeSpan(proportion), startLength, endLength, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         return spannableString;
