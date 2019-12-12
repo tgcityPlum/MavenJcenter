@@ -1,2 +1,2 @@
 include ':app'
-include ':utils:StartActivity', ':utils:Log', ':utils:Toast', ':utils:String', ':utils:Density'
+include ':utils:StartActivity', ':utils:Log', ':utils:Toast', ':utils:String', ':utils:Density', ':utils:Screen'
