@@ -1,2 +1,3 @@
 include ':app'
 include ':utils:StartActivity', ':utils:Log', ':utils:Toast', ':utils:String', ':utils:Density', ':utils:Screen', ':utils:Date'
+include ':utils:Spannable'
