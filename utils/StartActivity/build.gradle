@@ -3,18 +3,17 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.1"
+    def versionConfig = rootProject.extensions.getByName("ext")
 
+    compileSdkVersion versionConfig.compileSdkVersion
+    buildToolsVersion versionConfig.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion versionConfig.minSdkVersion
+        targetSdkVersion versionConfig.targetSdkVersion
+        versionCode versionConfig.versionCode
+        versionName versionConfig.versionName
+        testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
     buildTypes {
@@ -29,7 +28,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation supportDependencies.appcompat
 }
 
 
@@ -46,7 +45,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'StartActivity' // 名称
+                name module_name // 名称
                 url siteUrl
                 licenses {
                     license {
