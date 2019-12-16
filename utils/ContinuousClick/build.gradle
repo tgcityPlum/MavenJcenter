@@ -36,7 +36,7 @@ dependencies {
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
 def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地址
 def moduleName = 'ContinuousClick' // 项目的名称
-group = 'com.tgcity.widget' // 所在组
+group = 'com.tgcity.utils' // 所在组
 version = "1.0.0" //aar的版本号
 
 install {

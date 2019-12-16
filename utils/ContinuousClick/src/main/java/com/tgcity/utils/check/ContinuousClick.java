@@ -1,4 +1,4 @@
-package com.tgcity.widget.check;
+package com.tgcity.utils.check;
 
 /**
  * @author TGCity
