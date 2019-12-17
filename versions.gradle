@@ -14,7 +14,6 @@ ext {
     gsonVersion = '2.8.5'
     stringVersion = '1.0.0'
     constraintVersion = '1.1.3'
-    resourceVersion = '1.0.0'
 
     //**************** supportDependencies ****************
     supportDependencies = [
@@ -34,11 +33,6 @@ ext {
     //**************** utilsDependencies ****************
     utilDependencies = [
             string          : "com.tgcity.utils:String:${stringVersion}"
-    ]
-
-    //**************** functionDependencies ****************
-    functionDependencies = [
-            resource        : "com.tgcity.function:Resource:${resourceVersion}"
     ]
 
 }

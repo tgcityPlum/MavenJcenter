@@ -68,11 +68,11 @@ public class DoubleTextView extends ConstraintLayout {
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.dt_DoubleTextViewStyle);
 
-        leftTitleStr = typedArray.getString(R.styleable.dt_DoubleTextViewStyle_leftTitleStr);
-        leftTitleCol = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_leftTitleCol, context.getResources().getColor(R.color.color_666666));
-        rightTitleCol = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_rightTitleCol, context.getResources().getColor(R.color.color_666666));
-        isShowLine = typedArray.getBoolean(R.styleable.dt_DoubleTextViewStyle_isShowLine, false);
-        viewBackground = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_viewBackground, context.getResources().getColor(R.color.color_white));
+        leftTitleStr = typedArray.getString(R.styleable.dt_DoubleTextViewStyle_dt_leftTitleStr);
+        leftTitleCol = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_dt_leftTitleCol, context.getResources().getColor(R.color.dt_color_666666));
+        rightTitleCol = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_dt_rightTitleCol, context.getResources().getColor(R.color.dt_color_666666));
+        isShowLine = typedArray.getBoolean(R.styleable.dt_DoubleTextViewStyle_dt_isShowLine, false);
+        viewBackground = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_dt_viewBackground, context.getResources().getColor(R.color.dt_color_666666));
 
         typedArray.recycle();
 

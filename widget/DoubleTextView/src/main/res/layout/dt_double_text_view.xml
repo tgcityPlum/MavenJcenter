@@ -5,16 +5,17 @@
     android:id="@+id/cl_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="@dimen/dp_36"
-    android:paddingLeft="@dimen/dp_20"
-    android:paddingRight="@dimen/dp_20">
+    android:minHeight="@dimen/dt_dp_36"
+    android:paddingLeft="@dimen/dt_dp_20"
+    android:paddingRight="@dimen/dt_dp_20">
 
     <TextView
         android:id="@+id/tv_title"
-        style="@style/size_15_color_2D2D2F"
-        android:layout_width="@dimen/dp_0"
+        android:layout_width="@dimen/dt_dp_0"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:textColor="@color/dt_color_2D2D2F"
+        android:textSize="@dimen/dt_sp_15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,11 +23,12 @@
 
     <TextView
         android:id="@+id/tv_content"
-        style="@style/size_18_color_2D2D2F"
-        android:layout_width="@dimen/dp_0"
+        android:layout_width="@dimen/dt_dp_0"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginLeft="@dimen/dt_dp_16"
         android:gravity="right"
+        android:textColor="@color/dt_color_2D2D2F"
+        android:textSize="@dimen/dt_sp_18"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/tv_title"
         app:layout_constraintRight_toRightOf="parent"
@@ -36,9 +38,9 @@
     <View
         android:id="@+id/v_line"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0_5"
+        android:layout_height="@dimen/dt_dp_0_5"
         android:layout_gravity="bottom"
-        android:background="@color/color_line"
+        android:background="@color/dt_color_EFEFF4"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
