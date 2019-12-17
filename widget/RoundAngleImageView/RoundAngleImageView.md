@@ -3,22 +3,10 @@
 ##  使用步骤
 1.xml file
 ```
-<com.tgcity.base.widget.TwoTextViewLayout
-    android:id="@+id/ttv_riverName"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_45"
-    android:layout_marginLeft="@dimen/dp_6"
-    app:dt_isShowLine="true"
-    app:dt_leftTitleCol="@color/color_ff000000"
-    app:dt_leftTitleStr="问题河道"
-    app:dt_rightTitleCol="@color/color_a6000000" />
+<com.tgcity.widget.RoundAngleImageView
+      android:id="@+id/rv_avatar"
+      android:layout_width="@dimen/dp_88"
+      android:layout_height="@dimen/dp_88"
+      app:ri_circle="true"
+      app:ri_hasbroader="true" />
 ```
- 2.class file
-```
-   tv.setRightContent("xxx");
-   tv.setContentSize(14);
-   tv.setPaddingWidth(0);
-```
-
-
- 

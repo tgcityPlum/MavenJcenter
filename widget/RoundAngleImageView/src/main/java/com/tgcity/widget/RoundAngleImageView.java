@@ -13,8 +13,10 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
-import android.widget.ImageView;
+
+import com.tgcity.widget.roundangleimageview.R;
 
 /**
  * @author TGCity
@@ -22,24 +24,16 @@ import android.widget.ImageView;
  * <pre>
  *     <code>
  *         1.xml file
- *         <com.tgcity.base.widget.TwoTextViewLayout
- *                         android:id="@+id/ttv_riverName"
- *                         android:layout_width="match_parent"
- *                         android:layout_height="@dimen/dp_45"
- *                         android:layout_marginLeft="@dimen/dp_6"
- *                         app:dt_isShowLine="true"
- *                         app:dt_leftTitleCol="@color/color_ff000000"
- *                         app:dt_leftTitleStr="问题河道"
- *                         app:dt_rightTitleCol="@color/color_a6000000" />
- *
- *         2.class file
- *         tv.setRightContent("xxx");
- *         tv.setContentSize(14);
- *         tv.setPaddingWidth(0);
+ *         <com.tgcity.widget.RoundAngleImageView
+ *             android:id="@+id/rv_avatar"
+ *             android:layout_width="@dimen/dp_88"
+ *             android:layout_height="@dimen/dp_88"
+ *             app:ri_circle="true"
+ *             app:ri_hasbroader="true" />
  *     </code>
  * </pre>
  */
-public class RoundAngleImageView extends ImageView {
+public class RoundAngleImageView extends AppCompatImageView {
     private Paint paint;
     private Paint paintBorder;
     private Bitmap mSrcBitmap;
@@ -56,11 +50,11 @@ public class RoundAngleImageView extends ImageView {
     public RoundAngleImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ri_RoundAngleImageViewStyle);
-        mRadius = ta.getDimension(R.styleable.ri_RoundAngleImageViewStyle_radius, 0);
-        mIsCircle = ta.getBoolean(R.styleable.ri_RoundAngleImageViewStyle_circle, false);
-        mHasBroader = ta.getBoolean(R.styleable.ri_RoundAngleImageViewStyle_hasbroader, false);
-        mBroaderWidth = ta.getDimension(R.styleable.ri_RoundAngleImageViewStyle_broaderwidth, 5);
-        mBroaderColor = ta.getColor(R.styleable.ri_RoundAngleImageViewStyle_broadercolor, Color.WHITE);
+        mRadius = ta.getDimension(R.styleable.ri_RoundAngleImageViewStyle_ri_radius, 0);
+        mIsCircle = ta.getBoolean(R.styleable.ri_RoundAngleImageViewStyle_ri_circle, false);
+        mHasBroader = ta.getBoolean(R.styleable.ri_RoundAngleImageViewStyle_ri_hasbroader, false);
+        mBroaderWidth = ta.getDimension(R.styleable.ri_RoundAngleImageViewStyle_ri_broaderwidth, 5);
+        mBroaderColor = ta.getColor(R.styleable.ri_RoundAngleImageViewStyle_ri_broadercolor, Color.WHITE);
         ta.recycle();
         paint = new Paint();
         paint.setAntiAlias(true);
