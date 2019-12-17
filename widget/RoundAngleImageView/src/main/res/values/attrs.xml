@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ri_RoundAngleImageViewStyle">
+        <attr name="ri_circle" format="boolean" />
+        <attr name="ri_radius" format="dimension" />
+        <attr name="ri_hasbroader" format="boolean" />
+        <attr name="ri_broaderwidth" format="dimension" />
+        <attr name="ri_broadercolor" format="color" />
+    </declare-styleable>
+</resources>

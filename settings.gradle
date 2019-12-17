@@ -1,5 +1,5 @@
 include ':app'
 include ':utils:StartActivity', ':utils:Log', ':utils:Toast', ':utils:String', ':utils:Density', ':utils:Screen', ':utils:Date'
 include ':utils:Spannable',':utils:SharedPreference',':utils:ContinuousClick',':utils:ImageLoader'
-include ':widget:RoundCountDownProgress',':widget:DoubleTextView'
+include ':widget:RoundCountDownProgress',':widget:DoubleTextView',':widget:RoundAngleImageView'
 include ':function:Resource'

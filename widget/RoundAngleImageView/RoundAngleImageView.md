@@ -1,9 +1,9 @@
 ##  简介
-这是一个由左右两个TextView组合而来的自定义控件，可以自主设置自定义控件和两个控件的属性
+这是一个加载圆形图片的自定义控件，场景比如用户头像
 ##  使用步骤
 1.xml file
 ```
-<com.tgcity.widget.TwoTextViewLayout
+<com.tgcity.base.widget.TwoTextViewLayout
     android:id="@+id/ttv_riverName"
     android:layout_width="match_parent"
     android:layout_height="@dimen/dp_45"

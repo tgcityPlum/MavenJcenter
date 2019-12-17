@@ -18,7 +18,7 @@ import com.tgcity.widget.doubletextview.R;
  * <pre>
  *     <code>
  *         1.xml file
- *         <com.tgcity.base.widget.TwoTextViewLayout
+ *         <com.tgcity.widget.TwoTextViewLayout
  *                         android:id="@+id/ttv_riverName"
  *                         android:layout_width="match_parent"
  *                         android:layout_height="@dimen/dp_45"
