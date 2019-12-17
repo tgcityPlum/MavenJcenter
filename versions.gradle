@@ -13,10 +13,14 @@ ext {
     glideVersion = '4.9.0'
     gsonVersion = '2.8.5'
     stringVersion = '1.0.0'
+    constraintVersion = '1.1.3'
+    resourceVersion = '1.0.0'
 
     //**************** supportDependencies ****************
     supportDependencies = [
-            appcompat        : "com.android.support:appcompat-v7:${androidSupportSdkVersion}"
+            appcompat        : "com.android.support:appcompat-v7:${androidSupportSdkVersion}",
+            // constraint-layout
+            constraint       : "com.android.support.constraint:constraint-layout:${constraintVersion}"
     ]
 
     //**************** dataDependencies ****************
@@ -30,6 +34,11 @@ ext {
     //**************** utilsDependencies ****************
     utilDependencies = [
             string          : "com.tgcity.utils:String:${stringVersion}"
+    ]
+
+    //**************** functionDependencies ****************
+    functionDependencies = [
+            resource        : "com.tgcity.function:Resource:${resourceVersion}"
     ]
 
 }
