@@ -23,10 +23,10 @@ import com.tgcity.widget.doubletextview.R;
  *                         android:layout_width="match_parent"
  *                         android:layout_height="@dimen/dp_45"
  *                         android:layout_marginLeft="@dimen/dp_6"
- *                         app:isShowLine="true"
- *                         app:leftTitleCol="@color/color_ff000000"
- *                         app:leftTitleStr="问题河道"
- *                         app:rightTitleCol="@color/color_a6000000" />
+ *                         app:dt_isShowLine="true"
+ *                         app:dt_leftTitleCol="@color/color_ff000000"
+ *                         app:dt_leftTitleStr="问题河道"
+ *                         app:dt_rightTitleCol="@color/color_a6000000" />
  *
  *         2.class file
  *         tv.setRightContent("xxx");
