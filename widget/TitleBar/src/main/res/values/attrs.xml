@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="tb_TitleBar">
+        <attr name="tb_back" format="reference" />
+        <attr name="tb_rightImgRes" format="reference" />
+        <attr name="tb_rightImgScaleType" format="integer" />
+        <attr name="tb_leftImgScaleType" format="integer" />
+        <attr name="tb_rightStr" format="string" />
+        <attr name="tb_rightStrColor" format="color" />
+        <attr name="tb_title" format="string" />
+        <attr name="tb_doubleClickTip" format="string" />
+        <attr name="tb_doubleClickTipValves" format="integer" />
+
+    </declare-styleable>
+</resources>
