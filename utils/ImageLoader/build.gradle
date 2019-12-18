@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode versionConfig.versionCode
-        versionName versionConfig.versionName
+        versionCode 1912182
+        versionName "1.0.2"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -41,7 +41,7 @@ def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
 def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地址
 def module_name = 'ImageLoader' // 项目的名称
 group = 'com.tgcity.utils' // 所在组
-version = "1.0.0" //aar的版本号
+version = "1.0.2" //aar的版本号
 
 install {
     repositories.mavenInstaller {

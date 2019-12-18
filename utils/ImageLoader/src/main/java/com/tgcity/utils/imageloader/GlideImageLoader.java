@@ -83,7 +83,7 @@ public class GlideImageLoader extends BaseImageLoader {
                 }
                 return false;
             }
-        }).into(imageView);
+        }).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
     }
 
     @SuppressLint("CheckResult")
