@@ -10,16 +10,22 @@ ext {
 
     //**************** dependencyVersions ****************
     androidSupportSdkVersion = '28.0.0'
+    xAppcompatVersion = '1.1.0'
     glideVersion = '4.9.0'
     gsonVersion = '2.8.5'
     constraintVersion = '1.1.3'
+    xRecyclerviewVersion = '1.1.0'
+    xConstraintLayoutVersion = '2.0.0-beta4'
 
     //**************** supportDependencies ****************
     supportDependencies = [
             appcompat        : "com.android.support:appcompat-v7:${androidSupportSdkVersion}",
             recyclerview        : "com.android.support:recyclerview-v7:${androidSupportSdkVersion}",
-            // constraint-layout
-            constraint       : "com.android.support.constraint:constraint-layout:${constraintVersion}"
+            constraint       : "com.android.support.constraint:constraint-layout:${constraintVersion}",
+
+            xAppcompat        : "androidx.appcompat:appcompat:${xAppcompatVersion}",
+            xRecyclerview     : "androidx.recyclerview:recyclerview:${xRecyclerviewVersion}",
+            xConstraintLayout : "androidx.constraintlayout:constraintlayout:${xConstraintLayoutVersion}"
     ]
 
     //**************** dataDependencies ****************
