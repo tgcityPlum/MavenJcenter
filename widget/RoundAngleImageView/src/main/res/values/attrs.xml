@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="ri_RoundAngleImageViewStyle">
+    <!--圆形 圆角ImageView-->
+    <declare-styleable name="ri_RoundImageView">
+        <!-- 默认图片资源，默认值为 null -->
+        <attr name="android:src" />
+        <!-- 是否是圆形，默认值为 false -->
         <attr name="ri_circle" format="boolean" />
-        <attr name="ri_radius" format="dimension" />
-        <attr name="ri_hasbroader" format="boolean" />
-        <attr name="ri_broaderwidth" format="dimension" />
-        <attr name="ri_broadercolor" format="color" />
+        <!-- 圆角矩形的半径，默认值为 0dp -->
+        <attr name="ri_cornerRadius" format="reference|dimension" />
+        <!-- 是否是矩形，默认值为 false -->
+        <attr name="ri_square" format="boolean" />
+        <!-- 描边的宽度，默认值为 0dp -->
+        <attr name="ri_borderWidth" format="reference|dimension" />
+        <!-- 描边的颜色，默认值为 Color.WHITE -->
+        <attr name="ri_borderColor" format="reference|color" />
     </declare-styleable>
 </resources>

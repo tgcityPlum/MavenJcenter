@@ -13,6 +13,10 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
+import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
@@ -34,182 +38,156 @@ import com.tgcity.widget.roundangleimageview.R;
  * </pre>
  */
 public class RoundAngleImageView extends AppCompatImageView {
-    private Paint paint;
-    private Paint paintBorder;
-    private Bitmap mSrcBitmap;
-    private float mRadius;
-    private boolean mIsCircle;
-    private boolean mHasBroader;
-    private float mBroaderWidth;
-    private int mBroaderColor;
+    private int mDefaultImageId;
+    private int mCornerRadius = 0;
+    private boolean mCircle = false;
+    private boolean mSquare = false;
+    private int mBorderWidth = 0;
+    private int mBorderColor = Color.WHITE;
 
-    public RoundAngleImageView(final Context context) {
+    private Paint mBorderPaint;
+
+    private Delegate mDelegate;
+
+    public RoundAngleImageView(Context context) {
         this(context, null);
     }
 
     public RoundAngleImageView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.ri_RoundAngleImageViewStyle);
-        mRadius = ta.getDimension(R.styleable.ri_RoundAngleImageViewStyle_ri_radius, 0);
-        mIsCircle = ta.getBoolean(R.styleable.ri_RoundAngleImageViewStyle_ri_circle, false);
-        mHasBroader = ta.getBoolean(R.styleable.ri_RoundAngleImageViewStyle_ri_hasbroader, false);
-        mBroaderWidth = ta.getDimension(R.styleable.ri_RoundAngleImageViewStyle_ri_broaderwidth, 5);
-        mBroaderColor = ta.getColor(R.styleable.ri_RoundAngleImageViewStyle_ri_broadercolor, Color.WHITE);
-        ta.recycle();
-        paint = new Paint();
-        paint.setAntiAlias(true);
-        paintBorder = new Paint();
-        paintBorder.setAntiAlias(true);
+        this(context, attrs, 0);
+    }
+
+    public RoundAngleImageView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+
+        initCustomAttrs(context, attrs);
+
+        initBorderPaint();
+
+        setDefaultImage();
+    }
+
+    private void initBorderPaint() {
+        mBorderPaint = new Paint();
+        mBorderPaint.setAntiAlias(true);
+        mBorderPaint.setStyle(Paint.Style.STROKE);
+        mBorderPaint.setColor(mBorderColor);
+        mBorderPaint.setStrokeWidth(mBorderWidth);
+    }
+
+    private void initCustomAttrs(Context context, AttributeSet attrs) {
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ri_RoundImageView);
+        final int N = typedArray.getIndexCount();
+        for (int i = 0; i < N; i++) {
+            initCustomAttr(typedArray.getIndex(i), typedArray);
+        }
+        typedArray.recycle();
+    }
+
+    private void initCustomAttr(int attr, TypedArray typedArray) {
+        if (attr == R.styleable.ri_RoundImageView_android_src) {
+            mDefaultImageId = typedArray.getResourceId(attr, 0);
+        } else if (attr == R.styleable.ri_RoundImageView_ri_circle) {
+            mCircle = typedArray.getBoolean(attr, mCircle);
+        } else if (attr == R.styleable.ri_RoundImageView_ri_cornerRadius) {
+            mCornerRadius = typedArray.getDimensionPixelSize(attr, mCornerRadius);
+        } else if (attr == R.styleable.ri_RoundImageView_ri_square) {
+            mSquare = typedArray.getBoolean(attr, mSquare);
+        } else if (attr == R.styleable.ri_RoundImageView_ri_borderWidth) {
+            mBorderWidth = typedArray.getDimensionPixelSize(attr, mBorderWidth);
+        } else if (attr == R.styleable.ri_RoundImageView_ri_borderColor) {
+            mBorderColor = typedArray.getColor(attr, mBorderColor);
+        }
+    }
+
+    private void setDefaultImage() {
+        if (mDefaultImageId != 0) {
+            setImageResource(mDefaultImageId);
+        }
     }
 
     @Override
-    public void onDraw(Canvas canvas) {
-        int width = canvas.getWidth() - getPaddingLeft() - getPaddingRight();
-        int height = canvas.getHeight() - getPaddingTop() - getPaddingBottom();
-        Bitmap image = drawableToBitmap(getDrawable(), width, height);
-        if (image != null) {
-            if (mIsCircle) {
-                Bitmap reSizeImage = reSizeImageC(image, (int) (width * 1.2), (int) (height * 1.2));
-                canvas.drawBitmap(createOutCircleImage(width, height), getPaddingLeft(), getPaddingTop(), null);
-                canvas.drawBitmap(createWhiteCircleImage(width, height), getPaddingLeft(), getPaddingTop(), null);
-                canvas.drawBitmap(createCircleImage(reSizeImage, width, height), getPaddingLeft(), getPaddingTop(),
-                        null);
+    public void setImageResource(@DrawableRes int resId) {
+        setImageDrawable(getResources().getDrawable(resId));
+    }
+
+    @Override
+    public void setImageDrawable(@Nullable Drawable drawable) {
+        if (drawable instanceof BitmapDrawable && mCornerRadius > 0) {
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            if (bitmap != null) {
+                super.setImageDrawable(getRoundedDrawable(getContext(), bitmap, mCornerRadius));
             } else {
-                Bitmap reSizeImage = reSizeImage(image, width, height);
-                if (mHasBroader) {
-                    canvas.drawBitmap(createOutRoundImage(width, height), getPaddingLeft(), getPaddingTop(), null);
-                }
-                canvas.drawBitmap(createRoundImage(reSizeImage, width, height), getPaddingLeft(), getPaddingTop(),
-                        null);
+                super.setImageDrawable(drawable);
             }
-        }
-    }
-
-    private Bitmap createRoundImage(Bitmap source, int width, int height) {
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        Bitmap target = Bitmap.createBitmap(width, height, Config.ARGB_8888);
-        Canvas canvas = new Canvas(target);
-        if (mHasBroader) {
-            RectF rect = new RectF(mBroaderWidth, mBroaderWidth, width - mBroaderWidth, height - mBroaderWidth);
-            paint.setColor(Color.WHITE);
-            canvas.drawRoundRect(rect, mRadius, mRadius, paint);
-            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-            canvas.drawBitmap(source, mBroaderWidth, mBroaderWidth, paint);
-            return target;
+        } else if (drawable instanceof BitmapDrawable && mCircle) {
+            Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+            if (bitmap != null) {
+                super.setImageDrawable(getCircleDrawable(getContext(), bitmap));
+            } else {
+                super.setImageDrawable(drawable);
+            }
         } else {
-            RectF rect = new RectF(mBroaderWidth, mBroaderWidth, width, height);
-            paint.setColor(Color.WHITE);
-            canvas.drawRoundRect(rect, mRadius, mRadius, paint);
-            paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-            canvas.drawBitmap(source, 0, 0, paint);
-            return target;
+            super.setImageDrawable(drawable);
         }
-    }
-
-    private Bitmap createOutRoundImage(int width, int height) {
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        Bitmap target = Bitmap.createBitmap(width, height, Config.ARGB_8888);
-        Canvas canvas = new Canvas(target);
-        RectF rect = new RectF(0, 0, width, height);
-        paint.setColor(mBroaderColor);
-        canvas.drawRoundRect(rect, mRadius, mRadius, paint);
-        return target;
-    }
-
-    private Bitmap createWhiteCircleImage(int width, int height) {
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        Bitmap target = Bitmap.createBitmap(width, height, Config.ARGB_8888);
-        Canvas canvas = new Canvas(target);
-        paint.setColor(Color.WHITE);
-        canvas.drawCircle(width / 2, height / 2, Math.min(width, height) / 2 - mBroaderWidth, paint);
-        return target;
-    }
-
-    private Bitmap createCircleImage(Bitmap source, int width, int height) {
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        Bitmap target = Bitmap.createBitmap(width, height, Config.ARGB_8888);
-        Canvas canvas = new Canvas(target);
-        canvas.drawCircle(width / 2, height / 2, Math.min(width, height) / 2 - mBroaderWidth, paint);
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(source, (width - source.getHeight()) / 2, (height - source.getHeight()) / 2, paint);
-        return target;
-    }
-
-    private Bitmap createOutCircleImage(int width, int height) {
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        Bitmap target = Bitmap.createBitmap(width, height, Config.ARGB_8888);
-        Canvas canvas = new Canvas(target);
-        paint.setColor(mBroaderColor);
-        canvas.drawCircle(width / 2, height / 2, Math.min(width, height) / 2, paint);
-        return target;
+        notifyDrawableChanged(drawable);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = MeasureSpec.getSize(heightMeasureSpec);
-        setMeasuredDimension(width, height);
-    }
-
-    private Bitmap drawableToBitmap(Drawable drawable, int width, int height) {
-        if (drawable == null) {
-            if (mSrcBitmap != null) {
-                return mSrcBitmap;
-            } else {
-                return null;
-            }
-        } else if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable) drawable).getBitmap();
+        if (mCircle || mSquare) {
+            setMeasuredDimension(getDefaultSize(0, widthMeasureSpec), getDefaultSize(0, heightMeasureSpec));
+            int childWidthSize = getMeasuredWidth();
+            heightMeasureSpec = widthMeasureSpec = MeasureSpec.makeMeasureSpec(childWidthSize, MeasureSpec.EXACTLY);
         }
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
-        drawable.draw(canvas);
-        return bitmap;
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    private Bitmap reSizeImage(Bitmap bitmap, int newWidth, int newHeight) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        float scaleWidth = ((float) newWidth) / width;
-        float scaleHeight = ((float) newHeight) / height;
-        Matrix matrix = new Matrix();
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
 
-        matrix.postScale(scaleWidth, scaleHeight);
-        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
-    }
-
-    private Bitmap reSizeImageC(Bitmap bitmap, int newWidth, int newHeight) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        int x = (newWidth - width) / 2;
-        int y = (newHeight - height) / 2;
-        if (x > 0 && y > 0) {
-            return Bitmap.createBitmap(bitmap, 0, 0, width, height, null, true);
+        if (mCircle && mBorderWidth > 0) {
+            canvas.drawCircle(getWidth() / 2, getHeight() / 2, getWidth() / 2 - 1.0f * mBorderWidth / 2, mBorderPaint);
         }
+    }
 
-        float scale = 1;
+    private void notifyDrawableChanged(Drawable drawable) {
+        if (mDelegate != null) {
+            mDelegate.onDrawableChanged(drawable);
+        }
+    }
 
-        if (width > height) {
-            scale = ((float) newWidth) / width;
+    public void setCornerRadius(int cornerRadius) {
+        mCornerRadius = cornerRadius;
+    }
+
+    public void setDelegate(Delegate delegate) {
+        mDelegate = delegate;
+    }
+
+    public interface Delegate {
+        void onDrawableChanged(Drawable drawable);
+    }
+
+    public static RoundedBitmapDrawable getCircleDrawable(Context context, Bitmap src) {
+        Bitmap dst;
+        if (src.getWidth() >= src.getHeight()) {
+            dst = Bitmap.createBitmap(src, src.getWidth() / 2 - src.getHeight() / 2, 0, src.getHeight(), src.getHeight());
         } else {
-            scale = ((float) newHeight) / height;
+            dst = Bitmap.createBitmap(src, 0, src.getHeight() / 2 - src.getWidth() / 2, src.getWidth(), src.getWidth());
         }
-        Matrix matrix = new Matrix();
-        matrix.postScale(scale, scale);
-        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+
+        RoundedBitmapDrawable circleDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), dst);
+        circleDrawable.setAntiAlias(true);
+        circleDrawable.setCircular(true);
+        return circleDrawable;
     }
 
-    public void setBoraderWidth(int broaderWidth) {
-        this.mBroaderWidth = broaderWidth;
-    }
-
-    public void setBroaderColor(int broaderColor) {
-        this.mBroaderColor = broaderColor;
+    public static RoundedBitmapDrawable getRoundedDrawable(Context context, Bitmap bitmap, float cornerRadius) {
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(context.getResources(), bitmap);
+        roundedBitmapDrawable.setAntiAlias(true);
+        roundedBitmapDrawable.setCornerRadius(cornerRadius);
+        return roundedBitmapDrawable;
     }
 }
