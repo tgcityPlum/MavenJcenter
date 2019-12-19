@@ -13,11 +13,50 @@ import android.widget.ListView;
 import android.widget.OverScroller;
 
 import com.google.android.material.appbar.AppBarLayout;
-import com.tgcity.xwidget.R;
+import com.tgcity.xwidget.springview.R;
 import com.tgcity.xwidget.springview.listener.AppBarStateChangeListener;
 
 /**
  * Created by liaoinstan on 2016/3/11.
+ * <pre>
+ *     <code>
+ *         1 xml文件
+ *          <com.tgcity.xwidget.springview.widget.SpringView
+ *              android:id="@+id/springView"
+ *              android:layout_width="match_parent"
+ *              android:layout_height="match_parent">
+ *
+ *              <ExpandableListView
+ *                  android:id="@+id/expandListView"
+ *                  android:layout_width="match_parent"
+ *                  android:layout_height="match_parent"
+ *                  android:childDivider="@null"
+ *                  android:divider="@null"/>
+ *         </com.tgcity.xwidget.springview.widget.SpringView>
+ *
+ *         2 class文件
+ *          @BindView(R.id.springView)
+ *          SpringView springView;
+ *
+ *          springView.setHeader(new DefaultHeader(getContext()));
+ *          springView.setListener(new SpringView.OnFreshListener() {
+ *             @Override
+ *             public void onPreDrag(boolean HeaderOrFooter) {
+ *
+ *             }
+ *
+ *             @Override
+ *             public void onRefresh() {
+ *                 onLoadData();
+ *             }
+ *
+ *             @Override
+ *             public void onLoadMore() {
+ *
+ *             }
+ *         });
+ *     </code>
+ * </pre>
  */
 @SuppressWarnings("ALL")
 public class SpringView extends ViewGroup {

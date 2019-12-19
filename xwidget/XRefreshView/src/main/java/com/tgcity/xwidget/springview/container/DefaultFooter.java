@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.tgcity.xwidget.R;
+import com.tgcity.xwidget.springview.R;
 import com.tgcity.xwidget.springview.widget.SpringView;
 
 /**
