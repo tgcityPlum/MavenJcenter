@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="gb_StrongGradientButton">
+        <attr name="gb_leftTopRadius_Gradient" format="dimension" />
+        <attr name="gb_leftBottomRadius_Gradient" format="dimension" />
+        <attr name="gb_rightTopRadius_Gradient" format="dimension" />
+        <attr name="gb_rightBottomRadius_Gradient" format="dimension" />
+        <attr name="gb_radius_Gradient" format="dimension" />
+        <attr name="gb_normalTextColor_Gradient" format="color" />
+        <attr name="gb_pressTextColor_Gradient" format="color" />
+        <attr name="gb_unableTextColor_Gradient" format="color" />
+        <attr name="gb_normalBackgroundColor_start_Gradient" format="color" />
+        <attr name="gb_normalBackgroundColor_end_Gradient" format="color" />
+        <attr name="gb_pressBackgroundColor_start_Gradient" format="color" />
+        <attr name="gb_pressBackgroundColor_end_Gradient" format="color" />
+        <attr name="gb_unableBackgroundColor_start_Gradient" format="color" />
+        <attr name="gb_unableBackgroundColor_end_Gradient" format="color" />
+        <attr name="gb_normalStrokeColor_Gradient" format="color" />
+        <attr name="gb_pressStrokeColor_Gradient" format="color" />
+        <attr name="gb_unableStrokeColor_Gradient" format="color" />
+        <attr name="gb_normalStrokeWidth_Gradient" format="dimension" />
+        <attr name="gb_pressStrokeWidth_Gradient" format="dimension" />
+        <attr name="gb_unableStrokeWidth_Gradient" format="dimension" />
+    </declare-styleable>
+</resources>

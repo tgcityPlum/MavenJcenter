@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="gb_strong_gradient_button_normal_end_background_color">#E9302D</color>
+    <color name="gb_strong_gradient_button_normal_start_background_color">#FF5053</color>
+    <color name="gb_strong_gradient_button_normal_stroke_color">#00000000</color>
+    <color name="gb_strong_gradient_button_normal_text_color">#ffffff</color>
+    <color name="gb_strong_gradient_button_press_end_background_color">#D9302D</color>
+    <color name="gb_strong_gradient_button_press_start_background_color">#DF5053</color>
+    <color name="gb_strong_gradient_button_press_stroke_color">#00000000</color>
+    <color name="gb_strong_gradient_button_press_text_color">#ffffff</color>
+    <color name="gb_strong_gradient_button_unable_end_background_color">#F29C9A</color>
+    <color name="gb_strong_gradient_button_unable_start_background_color">#FBAAAA</color>
+    <color name="gb_strong_gradient_button_unable_stroke_color">#00000000</color>
+    <color name="gb_strong_gradient_button_unable_text_color">#ffffff</color>
+</resources>

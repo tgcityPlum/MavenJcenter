@@ -22,7 +22,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    resourcePrefix "gb_"   //前缀的名字
 }
 
 dependencies {
