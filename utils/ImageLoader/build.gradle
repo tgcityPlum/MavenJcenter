@@ -39,6 +39,7 @@ dependencies {
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
 def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地址
+def repoName = 'utils' // 项目的名称
 def module_name = 'ImageLoader' // 项目的名称
 group = 'com.tgcity.utils' // 所在组
 version = "1.0.2" //aar的版本号
@@ -96,7 +97,7 @@ bintray {
     key = properties.getProperty("bintray.apikey")
     configurations = ['archives']
     pkg {
-        repo = "utils" // 你在bintray上创建的库的名称
+        repo = repoName // 你在bintray上创建的库的名称
         name = module_name // 在jcenter中的项目名称
         websiteUrl = siteUrl
         vcsUrl = gitUrl

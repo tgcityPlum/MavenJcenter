@@ -10,7 +10,7 @@ import android.os.Build;
 import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 
-import com.tgcity.utils.gradientbutton.R;
+import com.tgcity.widget.gradientbutton.R;
 
 
 /**
