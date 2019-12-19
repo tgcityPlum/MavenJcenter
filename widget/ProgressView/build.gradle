@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 1912192
-        versionName "1.0.8"
+        versionCode 1912190
+        versionName "1.0.0"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -22,23 +22,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    resourcePrefix "dt_"   //前缀的名字
+    resourcePrefix "pv_"   //前缀的名字
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation supportDependencies.appcompat
-    implementation supportDependencies.constraint
-    implementation utilDependencies.density
+    implementation utilDependencies.imageLoader
+    implementation 'com.tgcity.widget:GradientButton:1.0.0'
 }
+
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
 def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地址
 def repoName = 'widget' // 项目的名称
-def moduleName = 'DoubleTextView' // 项目的名称
+def moduleName = 'ProgressView' // 项目的名称
 group = 'com.tgcity.widget' // 所在组
-version = "1.0.8" //aar的版本号
+version = "1.0.0" //aar的版本号
 
 install {
     repositories.mavenInstaller {

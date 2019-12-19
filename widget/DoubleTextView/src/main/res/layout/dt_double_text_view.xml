@@ -26,7 +26,7 @@
         android:layout_width="@dimen/dt_dp_0"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dt_dp_16"
-        android:gravity="right"
+        android:gravity="right|center_vertical"
         android:textColor="@color/dt_color_2D2D2F"
         android:textSize="@dimen/dt_sp_18"
         app:layout_constraintBottom_toBottomOf="parent"

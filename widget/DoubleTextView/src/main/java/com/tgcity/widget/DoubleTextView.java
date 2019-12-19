@@ -2,6 +2,7 @@ package com.tgcity.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.support.constraint.ConstraintLayout;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.tgcity.utils.DensityUtils;
 import com.tgcity.widget.doubletextview.R;
 
 /**
@@ -42,6 +44,7 @@ public class DoubleTextView extends ConstraintLayout {
     private int leftTitleCol;
     private int rightTitleCol;
     private boolean isShowLine;
+    private boolean isShowRightArrow;
     private int viewBackground;
 
     private ConstraintLayout clRoot;
@@ -72,7 +75,8 @@ public class DoubleTextView extends ConstraintLayout {
         leftTitleCol = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_dt_leftTitleCol, context.getResources().getColor(R.color.dt_color_666666));
         rightTitleCol = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_dt_rightTitleCol, context.getResources().getColor(R.color.dt_color_666666));
         isShowLine = typedArray.getBoolean(R.styleable.dt_DoubleTextViewStyle_dt_isShowLine, false);
-        viewBackground = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_dt_viewBackground, context.getResources().getColor(R.color.dt_color_666666));
+        isShowRightArrow = typedArray.getBoolean(R.styleable.dt_DoubleTextViewStyle_dt_isShowRightArrow, false);
+        viewBackground = typedArray.getColor(R.styleable.dt_DoubleTextViewStyle_dt_viewBackground, context.getResources().getColor(R.color.dt_color_ffffff));
 
         typedArray.recycle();
 
@@ -83,9 +87,10 @@ public class DoubleTextView extends ConstraintLayout {
         tvContent = findViewById(R.id.tv_content);
         vLine = findViewById(R.id.v_line);
 
-        setLeftTitle();
+        setTitle();
         setTitleCol();
         setContentCol();
+        updateShowRightArrow(isShowRightArrow);
         setShowLine();
         setViewBackground();
     }
@@ -98,7 +103,7 @@ public class DoubleTextView extends ConstraintLayout {
         tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, sp);
     }
 
-    public void setLeftTitle() {
+    private void setTitle() {
         tvTitle.setText(leftTitleStr);
     }
 
@@ -107,19 +112,42 @@ public class DoubleTextView extends ConstraintLayout {
     }
 
 
-    public void setTitleCol() {
+    private void setTitleCol() {
         tvTitle.setTextColor(leftTitleCol);
     }
 
-    public void setContentCol() {
+    private void setContentCol() {
         tvContent.setTextColor(rightTitleCol);
     }
 
-    public void setShowLine() {
+    /**
+     * 更新文本的颜色
+     * @param color int
+     */
+    public void updateContentCol(int color) {
+        rightTitleCol = getResources().getColor(color);
+        setContentCol();
+    }
+
+    /**
+     * 更新文本控件的箭头显示状态
+     * @param flag boolean
+     */
+    public void updateShowRightArrow(boolean flag) {
+        if (flag) {
+            Drawable drawable = getResources().getDrawable(R.mipmap.dt_arrow_right);
+            drawable.setBounds(0, 0, DensityUtils.dpToPx(20), DensityUtils.dpToPx(20));
+            tvContent.setCompoundDrawables(null, null, drawable, null);
+        } else {
+            tvContent.setCompoundDrawables(null, null, null, null);
+        }
+    }
+
+    private void setShowLine() {
         vLine.setVisibility(isShowLine ? View.VISIBLE : View.GONE);
     }
 
-    public void setViewBackground() {
+    private void setViewBackground() {
         this.setBackgroundColor(viewBackground);
     }
 
