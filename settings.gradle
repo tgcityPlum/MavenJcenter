@@ -1,6 +1,6 @@
 include ':app'
 include ':utils:StartActivity', ':utils:Log', ':utils:Toast', ':utils:String', ':utils:Density', ':utils:Screen', ':utils:Date'
-include ':utils:Spannable', ':utils:SharedPreference', ':utils:ContinuousClick', ':utils:ImageLoader'
+include ':utils:Spannable', ':utils:SharedPreference', ':utils:ContinuousClick', ':utils:ImageLoader', ':utils:File'
 include ':widget:RoundCountDownProgress', ':widget:DoubleTextView', ':widget:RoundAngleImageView', ':widget:TitleBar'
 include ':widget:GradientButton'//,':widget:ProgressView'
 include ':xwidget:XTitleBar', ':xwidget:XRefreshView'
