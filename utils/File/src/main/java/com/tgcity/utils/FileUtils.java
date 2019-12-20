@@ -2,17 +2,25 @@ package com.tgcity.utils;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Base64;
 
 import com.tgcity.utils.file.R;
 
+import java.io.BufferedOutputStream;
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -205,6 +213,175 @@ public class FileUtils {
     private static boolean hasExternalStoragePermission(Context context) {
         int perm = context.checkCallingOrSelfPermission("android.permission.WRITE_EXTERNAL_STORAGE");
         return perm == PackageManager.PERMISSION_GRANTED;
+    }
+
+    /**
+     * 保存图片
+     *
+     * @param src      源图片
+     * @param filePath 要保存到的文件路径
+     * @param format   格式
+     * @param recycle  是否回收
+     * @return {@code true}: 成功<br>{@code false}: 失败
+     */
+    public static boolean saveBitmap(Bitmap src, String filePath, Bitmap.CompressFormat format, boolean recycle) {
+        return saveBitmap(src, FileUtils.getFileByPath(filePath), format, recycle);
+    }
+
+    /**
+     * 保存图片
+     *
+     * @param src     源图片
+     * @param file    要保存到的文件
+     * @param format  格式
+     * @param recycle 是否回收
+     * @return {@code true}: 成功<br>{@code false}: 失败
+     */
+    public static boolean saveBitmap(Bitmap src, File file, Bitmap.CompressFormat format, boolean recycle) {
+        if (isEmptyBitmap(src) || !FileUtils.createOrExistsFile(file)) {
+            return false;
+        }
+        System.out.println(src.getWidth() + ", " + src.getHeight());
+        OutputStream os = null;
+        boolean ret = false;
+        try {
+            os = new BufferedOutputStream(new FileOutputStream(file));
+            ret = src.compress(format, 100, os);
+            if (recycle && !src.isRecycled()) {
+                src.recycle();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            closeIO(os);
+        }
+        return ret;
+    }
+
+    /**
+     * 判断bitmap对象是否为空
+     *
+     * @param src 源图片
+     * @return {@code true}: 是<br>{@code false}: 否
+     */
+    private static boolean isEmptyBitmap(Bitmap src) {
+        return src == null || src.getWidth() == 0 || src.getHeight() == 0;
+    }
+
+    /**
+     * 获取特定宽高的bitmap防内存溢出,注意把bitmap回收
+     *
+     * @param filePath 图片文件路径
+     * @param width    压缩后的宽度
+     * @param height   压缩后的高度
+     * @return Bitmap
+     */
+    public static Bitmap compressScaleByWH(String filePath, int width, int height) {
+        Bitmap bitmap;
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, options);
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        options.inSampleSize = myCalculateInSampleSize(options, width, height);
+        options.inJustDecodeBounds = false;
+        try {
+            bitmap = BitmapFactory.decodeFile(filePath, options);
+        } catch (Exception e) {
+            options.inSampleSize = myCalculateInSampleSize(options, width / 2, height / 2);
+            options.inJustDecodeBounds = false;
+            bitmap = BitmapFactory.decodeFile(filePath, options);
+        }
+//        if (null != bitmap && !bitmap.isRecycled()) {
+//            bitmap.recycle();
+//        }
+
+        return reviewPicRotate(bitmap,filePath);
+    }
+
+    /**
+     * 获取图片文件的信息，是否旋转了90度，如果是则反转
+     *
+     * @param bitmap 需要旋转的图片
+     * @param path   图片的路径
+     */
+    public static Bitmap reviewPicRotate(Bitmap bitmap, String path) {
+        int degree = getPicRotate(path);
+        if (degree != 0) {
+            Matrix m = new Matrix();
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            // 旋转angle度
+            m.setRotate(degree);
+            // 从新生成图片
+            bitmap = Bitmap.createBitmap(bitmap, 0, 0, width, height, m, true);
+        }
+        return bitmap;
+    }
+
+    /**
+     * 读取图片文件旋转的角度
+     *
+     * @param path 图片绝对路径
+     * @return 图片旋转的角度
+     */
+    public static int getPicRotate(String path) {
+        int degree = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface(path);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+                default:
+                    break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return degree;
+    }
+
+    /**
+     * 计算缩放比例
+     */
+    private static int myCalculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+            inSampleSize = heightRatio > widthRatio ? heightRatio : widthRatio;
+        }
+        return inSampleSize;
+    }
+
+    /**
+     * 关闭IO
+     *
+     * @param closeables closeables
+     */
+    private static void closeIO(Closeable... closeables) {
+        if (closeables == null) {
+            return;
+        }
+        for (Closeable closeable : closeables) {
+            if (closeable != null) {
+                try {
+                    closeable.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
 }
