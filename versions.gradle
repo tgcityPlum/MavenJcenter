@@ -16,6 +16,7 @@ ext {
     constraintVersion = '1.1.3'
     xRecyclerviewVersion = '1.1.0'
     xMaterialVersion = '1.0.0'
+    fileVersion = '1.0.1'
     xConstraintLayoutVersion = '2.0.0-beta4'
 
     //**************** supportDependencies ****************
@@ -41,6 +42,7 @@ ext {
     //**************** utilsDependencies ****************
     utilDependencies = [
             string          : "com.tgcity.utils:String:latest.release",
+            file            : "com.tgcity.utils:File:${fileVersion}",
             imageLoader     : "com.tgcity.utils:ImageLoader:latest.release",
             density         : "com.tgcity.utils:Density:latest.release",
             log             : "com.tgcity.utils:Log:latest.release"
