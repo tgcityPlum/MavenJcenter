@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 
 /**
  * @author TGCity
- *  字符串相关工具类
+ * 字符串相关工具类
  */
 public final class StringUtils {
 
@@ -19,13 +19,13 @@ public final class StringUtils {
      * @return {@code true}: 空<br> {@code false}: 不为空
      */
     public static boolean isEmpty(CharSequence s) {
-        if (s == null){
+        if (s == null) {
             return true;
-        }else {
-            if (s.length() == 0){
+        } else {
+            if (s.length() == 0) {
                 return true;
-            }else {
-                if ("".equals(s)||"null".equals(s)||"NULL".equals(s)){
+            } else {
+                if ("".equals(s) || "null".equals(s) || "NULL".equals(s)) {
                     return true;
                 }
             }
@@ -35,11 +35,12 @@ public final class StringUtils {
 
     /**
      * 格式化string
+     *
      * @param s String
      * @return String
      */
     public static String dislodgeEmptyToEmpty(String s) {
-        if(isEmpty(s)){
+        if (isEmpty(s)) {
             return "";
         }
         return s;
@@ -47,20 +48,35 @@ public final class StringUtils {
 
     /**
      * 格式化string
+     *
      * @param s String
      * @return String
      */
     public static String dislodgeEmptyToZero(String s) {
-        if(isEmpty(s)){
+        if (isEmpty(s)) {
             return "0";
         }
         return s;
     }
 
     /**
+     * 自定义格式化string的输出样式
+     *
+     * @param message 字符串
+     * @param format 为空时的返回样式
+     * @return String
+     */
+    public static String dislodgeEmptyToCustomize(String message, String format) {
+        if (isEmpty(message)) {
+            return format;
+        }
+        return message;
+    }
+
+    /**
      * 将double转为数值，并最多保留num位小数。例如当num为2时，1.268为1.27，1.2仍为1.2；1仍为1，而非1.00;100.00则返回100。
      *
-     * @param d 数值
+     * @param d   数值
      * @param num 小数位数
      * @return 数值
      */
