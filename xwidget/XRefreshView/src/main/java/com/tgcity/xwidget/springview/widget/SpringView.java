@@ -13,6 +13,8 @@ import android.widget.ListView;
 import android.widget.OverScroller;
 
 import com.google.android.material.appbar.AppBarLayout;
+import com.tgcity.function.network.cache.ErrorMode;
+import com.tgcity.function.network.retrofit.ApiException;
 import com.tgcity.xwidget.springview.R;
 import com.tgcity.xwidget.springview.listener.AppBarStateChangeListener;
 
@@ -878,7 +880,7 @@ public class SpringView extends ViewGroup {
                 callFreshORload();
                 if (give == Give.BOTH || give == Give.BOTTOM) {
                     resetRefreshPosition();
-                } else{
+                } else {
                     resetPosition();
                 }
             } else {
@@ -1192,7 +1194,7 @@ public class SpringView extends ViewGroup {
      *
      * @param o
      */
-    public void setResult(String o) {
+    public void setResult(ErrorMode o) {
         if (_headerHander != null) {
             _headerHander.result(o);
         }
@@ -1213,11 +1215,12 @@ public class SpringView extends ViewGroup {
      * @param e
      */
     public void setResult(Throwable e, OnExceptionEventClickListener onExceptionEventClickListener) {
-        if (null == e) {
+        if (null == e  || !(e instanceof ApiException)) {
             setResult(null);
+        }else {
+            setResult(((ApiException) e).errorMode);
+            setErrorClick(onExceptionEventClickListener);
         }
-        setResult(e.toString());
-        setErrorClick(onExceptionEventClickListener);
     }
 
     /**
@@ -1341,7 +1344,7 @@ public class SpringView extends ViewGroup {
          *
          * @param o
          */
-        void result(String o);
+        void result(ErrorMode o);
 
         /**
          * 设置异常图标

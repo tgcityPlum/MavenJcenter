@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
+import com.tgcity.function.network.cache.ErrorMode;
 import com.tgcity.xwidget.springview.R;
 import com.tgcity.xwidget.springview.widget.SpringView;
 
@@ -200,7 +201,7 @@ public class DefaultHeader extends BaseHeader {
      * 显示刷新结果，obj为空为正常，否则为异常，可执行异常逻辑
      */
     @Override
-    public void result(String o) {
+    public void result(ErrorMode o) {
 
     }
 

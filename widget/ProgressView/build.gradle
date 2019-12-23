@@ -30,6 +30,8 @@ dependencies {
 
     implementation supportDependencies.appcompat
     implementation utilDependencies.imageLoader
+    implementation utilDependencies.intentFlag
+    implementation utilDependencies.toast
     implementation functionDependencies.baseNetwork
     implementation 'com.tgcity.widget:GradientButton:1.0.0'
 }

@@ -1,9 +1,13 @@
 package com.tgcity.widget.progress.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Looper;
 
 import com.tgcity.function.network.cache.ErrorMode;
 import com.tgcity.function.network.retrofit.ApiException;
+import com.tgcity.utils.IntentUtils;
+import com.tgcity.utils.ToastUtils;
 
 /**
  * @author TGCity
@@ -33,45 +37,45 @@ public class ErrorEventOperation {
     }
 
     /**********************************各种错误处理************************************************/
-    public static void operation(Throwable throwable) {
-        operation(false, depositReturnErrorMode(throwable));
+    public static void operation(Context context, Throwable throwable) {
+        operation(context, false, depositReturnErrorMode(throwable));
 
     }
 
-    public static void operation(ErrorMode errorMode) {
-        operation(false, errorMode);
+    public static void operation(Context context, ErrorMode errorMode) {
+        operation(context, false, errorMode);
 
     }
 
-    public static void operation(boolean isShowErrorMsg, Throwable throwable) {
-        operation(isShowErrorMsg, depositReturnErrorMode(throwable));
+    public static void operation(Context context, boolean isShowErrorMsg, Throwable throwable) {
+        operation(context, isShowErrorMsg, depositReturnErrorMode(throwable));
 
     }
 
-    public static void operation(Throwable throwable, OnErrorEventOperationCallBack onErrorEventOperationCallBack) {
-        operation(depositReturnErrorMode(throwable), onErrorEventOperationCallBack);
+    public static void operation(Context context, Throwable throwable, OnErrorEventOperationCallBack onErrorEventOperationCallBack) {
+        operation(context, depositReturnErrorMode(throwable), onErrorEventOperationCallBack);
 
     }
 
-    public static void operation(boolean isShowErrorMsg, ErrorMode errorMode) {
+    public static void operation(Context context, boolean isShowErrorMsg, ErrorMode errorMode) {
         if (errorMode == null) {
             return;
         }
-        /*if (isShowErrorMsg) {
+        if (isShowErrorMsg) {
             if (Looper.getMainLooper() == Looper.getMainLooper() && ErrorMode.API_VISUALIZATION_MESSAGE == errorMode) {
-                ToastUtils.showShortToast(BaseApplication.getInstances(), errorMode.getErrorTitle());
+                ToastUtils.showShortToast(context, errorMode.getErrorTitle());
             }
-        }*/
-        operation(errorMode, null);
+        }
+        operation(context, errorMode, null);
     }
 
     /**
      * 错误处理
      *
-     * @param errorMode ErrorMode
+     * @param errorMode                     ErrorMode
      * @param onErrorEventOperationCallBack 暴露一个接口给调用者手动处理，如果为空，则视为自动处理
      */
-    public static void operation(ErrorMode errorMode, OnErrorEventOperationCallBack onErrorEventOperationCallBack) {
+    public static void operation(Context context, ErrorMode errorMode, OnErrorEventOperationCallBack onErrorEventOperationCallBack) {
         if (errorMode == null) {
             return;
         }
@@ -80,7 +84,7 @@ public class ErrorEventOperation {
                 onErrorEventOperationCallBack.onNoAuthority();
             }
 
-        }else if (ErrorMode.API_VISUALIZATION_MESSAGE == errorMode) {
+        } else if (ErrorMode.API_VISUALIZATION_MESSAGE == errorMode) {
             if (onErrorEventOperationCallBack != null) {
                 onErrorEventOperationCallBack.onVisualizationMsg(errorMode.getErrorTitle());
             }
@@ -97,13 +101,13 @@ public class ErrorEventOperation {
             if (onErrorEventOperationCallBack != null) {
                 onErrorEventOperationCallBack.onNoNetWork();
             } else {
-//                BaseApplication.getInstances().startActivity(IntentUtils.getNetworkIntent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+               context.startActivity(IntentUtils.getNetworkIntent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         } else if (ErrorMode.SIGNATURE_FAILURE_TIME == errorMode) {
             if (onErrorEventOperationCallBack != null) {
                 onErrorEventOperationCallBack.onSignatureFailTime();
             } else {
-//                BaseApplication.getInstances().startActivity(IntentUtils.getDateIntent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                context.startActivity(IntentUtils.getDateIntent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
 
         } else if (ErrorMode.SIGNATURE_FAILURE_SSL == errorMode) {
@@ -145,6 +149,7 @@ public class ErrorEventOperation {
 
         /**
          * visual message
+         *
          * @param msg message
          */
         void onVisualizationMsg(String msg);
@@ -171,6 +176,7 @@ public class ErrorEventOperation {
 
         /**
          * other
+         *
          * @param errorMode1 ErrorMode
          */
         void onOther(ErrorMode errorMode1);

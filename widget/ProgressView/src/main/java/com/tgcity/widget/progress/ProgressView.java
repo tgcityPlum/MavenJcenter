@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.tgcity.function.network.cache.ErrorMode;
+import com.tgcity.utils.IntentUtils;
 import com.tgcity.widget.progress.utils.ErrorEventOperation;
 import com.tgcity.widget.progress.utils.GameCountDownTimerUtils;
 import com.tgcity.widget.progressview.R;
@@ -101,7 +102,7 @@ public class ProgressView extends AbstractProgressLayout {
                 }
             });
         } else {
-            ErrorEventOperation.operation(errorMode, new ErrorEventOperation.OnErrorEventOperationCallBack() {
+            ErrorEventOperation.operation(getContext(), errorMode, new ErrorEventOperation.OnErrorEventOperationCallBack() {
                 @Override
                 public void onNoAuthority() {
                     reset();
@@ -151,7 +152,7 @@ public class ProgressView extends AbstractProgressLayout {
                     showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_NO_NETWORK_TITLE), getResources().getString(R.string.pv_ERROR_NO_NETWORK_DESC), getResources().getString(R.string.pv_ERROR_NO_NETWORK_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-//                            getContext().startActivity(IntentUtils.getNetworkIntent());
+                            getContext().startActivity(IntentUtils.getNetworkIntent());
                         }
                     });
                 }
@@ -162,7 +163,7 @@ public class ProgressView extends AbstractProgressLayout {
                     showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_SINGNATURE_FAILURE_TIME_TITLE), getResources().getString(R.string.pv_ERROR_SINGNATURE_FAILURE_TIME_DESC), getResources().getString(R.string.pv_ERROR_NO_NETWORK_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-//                            getContext().startActivity(IntentUtils.getDateIntent());
+                            getContext().startActivity(IntentUtils.getDateIntent());
                         }
                     });
                 }
@@ -315,12 +316,12 @@ public class ProgressView extends AbstractProgressLayout {
     public interface OnDataErrorCallBack {
 
         /**
-         *data format error
+         * data format error
          */
         void onDataFormatError();
 
         /**
-         *cast error
+         * cast error
          */
         void onCastError();
     }
