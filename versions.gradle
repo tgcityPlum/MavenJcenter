@@ -18,6 +18,7 @@ ext {
     xMaterialVersion = '1.0.0'
     fileVersion = '1.0.1'
     xConstraintLayoutVersion = '2.0.0-beta4'
+    retrofitSdkVersion = '2.6.2'
 
     //**************** supportDependencies ****************
     supportDependencies = [
@@ -36,7 +37,9 @@ ext {
             // image
             glide                : "com.github.bumptech.glide:glide:${glideVersion}",
             // Gson
-            gson                 : "com.google.code.gson:gson:${gsonVersion}"
+            gson                 : "com.google.code.gson:gson:${gsonVersion}",
+            //retrofit
+            retrofit             : "com.squareup.retrofit2:retrofit:${retrofitSdkVersion}"
     ]
 
     //**************** utilsDependencies ****************

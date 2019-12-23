@@ -4,5 +4,5 @@ include ':utils:Spannable', ':utils:SharedPreference', ':utils:ContinuousClick',
 include ':widget:RoundCountDownProgress', ':widget:DoubleTextView', ':widget:RoundAngleImageView', ':widget:TitleBar'
 include ':widget:GradientButton'//,':widget:ProgressView'
 include ':xwidget:XTitleBar', ':xwidget:XRefreshView'
-include ':function:Resource'
+include ':function:Resource',':function:BaseNetwork'
 include ':profession:MultiImageSelector'
