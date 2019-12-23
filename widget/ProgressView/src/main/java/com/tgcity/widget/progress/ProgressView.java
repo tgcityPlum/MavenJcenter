@@ -7,6 +7,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.tgcity.function.network.cache.ErrorMode;
 import com.tgcity.widget.progress.utils.ErrorEventOperation;
 import com.tgcity.widget.progress.utils.GameCountDownTimerUtils;
 import com.tgcity.widget.progressview.R;
@@ -20,6 +21,11 @@ import com.tgcity.widget.progressview.R;
  */
 
 public class ProgressView extends AbstractProgressLayout {
+
+    //出错重试等待时间（暂时定为10秒）
+    public final static long SERVICE_TRY_WAIT = 10 * 1000;
+    //出错重试时的间隔时间（暂时定为1秒）
+    public final static long SERVICE_TRY_INTERVAL = 1 * 1000;
 
     private int normalErrorButtonTextColor = getResources().getColor(R.color.pv_color_FF6C4B);
     private int stopErrorButtonTextColor = getResources().getColor(R.color.pv_color_aaaaaa);
@@ -85,7 +91,7 @@ public class ProgressView extends AbstractProgressLayout {
     public void errorOperation(final ErrorMode errorMode, final OnProgressViewCallBack callBack, final OnDataErrorCallBack onDataErrorCallBack) {
         if (errorMode == null) {
             reset();
-            showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.ERROR_DEFAULT_TITLE), getResources().getString(R.string.ERROR_DEFAULT_CONTENT), getResources().getString(R.string.ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
+            showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_DEFAULT_TITLE), getResources().getString(R.string.pv_ERROR_DEFAULT_CONTENT), getResources().getString(R.string.pv_ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (callBack != null) {
@@ -99,7 +105,7 @@ public class ProgressView extends AbstractProgressLayout {
                 @Override
                 public void onNoAuthority() {
                     reset();
-                    showError(getResources().getDrawable(R.drawable.icon_authority), errorMode.getErrorTitle(), getResources().getString(R.string.ERROR_API_NO_AUTHORITY_TITLE), getResources().getString(R.string.ERROR_API_NO_AUTHORITY_BUTTON), new View.OnClickListener() {
+                    showError(getResources().getDrawable(R.drawable.icon_authority), errorMode.getErrorTitle(), getResources().getString(R.string.pv_ERROR_API_NO_AUTHORITY_TITLE), getResources().getString(R.string.pv_ERROR_API_NO_AUTHORITY_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 //                            RouteHelper.with(VipIntroduceActivity.class).build();
@@ -110,7 +116,7 @@ public class ProgressView extends AbstractProgressLayout {
                 @Override
                 public void onVisualizationMsg(final String msg) {
                     reset();
-                    showError(getResources().getDrawable(R.drawable.monkey_cry), errorMode.getErrorTitle(), getResources().getString(R.string.ERROR_DEFAULT_TITLE), getResources().getString(R.string.ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
+                    showError(getResources().getDrawable(R.drawable.monkey_cry), errorMode.getErrorTitle(), getResources().getString(R.string.pv_ERROR_DEFAULT_TITLE), getResources().getString(R.string.pv_ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (callBack != null) {
@@ -125,7 +131,7 @@ public class ProgressView extends AbstractProgressLayout {
                 @Override
                 public void onOverLoad() {
                     startCountDown();
-                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.ERROR_OVERLOAD_TITLE), getResources().getString(R.string.ERROR_OVERLOAD_DESC), getResources().getString(R.string.ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
+                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_OVERLOAD_TITLE), getResources().getString(R.string.pv_ERROR_OVERLOAD_DESC), getResources().getString(R.string.pv_ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (!gameCountDownTimerUtils.isFinished()) {
@@ -142,10 +148,10 @@ public class ProgressView extends AbstractProgressLayout {
                 @Override
                 public void onNoNetWork() {
                     reset();
-                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.ERROR_NO_NETWORK_TITLE), getResources().getString(R.string.ERROR_NO_NETWORK_DESC), getResources().getString(R.string.ERROR_NO_NETWORK_BUTTON), new View.OnClickListener() {
+                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_NO_NETWORK_TITLE), getResources().getString(R.string.pv_ERROR_NO_NETWORK_DESC), getResources().getString(R.string.pv_ERROR_NO_NETWORK_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            getContext().startActivity(IntentUtils.getNetworkIntent());
+//                            getContext().startActivity(IntentUtils.getNetworkIntent());
                         }
                     });
                 }
@@ -153,10 +159,10 @@ public class ProgressView extends AbstractProgressLayout {
                 @Override
                 public void onSignatureFailTime() {
                     reset();
-                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.ERROR_SINGNATURE_FAILURE_TIME_TITLE), getResources().getString(R.string.ERROR_SINGNATURE_FAILURE_TIME_DESC), getResources().getString(R.string.ERROR_NO_NETWORK_BUTTON), new View.OnClickListener() {
+                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_SINGNATURE_FAILURE_TIME_TITLE), getResources().getString(R.string.pv_ERROR_SINGNATURE_FAILURE_TIME_DESC), getResources().getString(R.string.pv_ERROR_NO_NETWORK_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            getContext().startActivity(IntentUtils.getDateIntent());
+//                            getContext().startActivity(IntentUtils.getDateIntent());
                         }
                     });
                 }
@@ -164,7 +170,7 @@ public class ProgressView extends AbstractProgressLayout {
                 @Override
                 public void onTimeOut() {
                     reset();
-                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.ERROR_CONNECT_TIME_OUT_TITLE), getResources().getString(R.string.ERROR_NO_NETWORK_DESC), getResources().getString(R.string.ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
+                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_CONNECT_TIME_OUT_TITLE), getResources().getString(R.string.pv_ERROR_NO_NETWORK_DESC), getResources().getString(R.string.pv_ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (callBack != null) {
@@ -179,7 +185,7 @@ public class ProgressView extends AbstractProgressLayout {
                 @Override
                 public void onOther(ErrorMode errorMode1) {
                     reset();
-                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.ERROR_DEFAULT_TITLE), errorMode.getErrorTitle(), getResources().getString(R.string.ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
+                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_DEFAULT_TITLE), errorMode.getErrorTitle(), getResources().getString(R.string.pv_ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (callBack != null) {
@@ -199,7 +205,7 @@ public class ProgressView extends AbstractProgressLayout {
                         onDataErrorCallBack.onDataFormatError();
                     }
                     reset();
-                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.ERROR_FORMATE_DATA_TITLE), errorMode.getErrorTitle(), getResources().getString(R.string.ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
+                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_FORMATE_DATA_TITLE), errorMode.getErrorTitle(), getResources().getString(R.string.pv_ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (callBack != null) {
@@ -218,7 +224,7 @@ public class ProgressView extends AbstractProgressLayout {
                         onDataErrorCallBack.onCastError();
                     }
                     reset();
-                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.ERROR_CLASS_CAST_TITLE), errorMode.getErrorTitle(), getResources().getString(R.string.ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
+                    showError(getResources().getDrawable(R.drawable.monkey_cry), getResources().getString(R.string.pv_ERROR_CLASS_CAST_TITLE), errorMode.getErrorTitle(), getResources().getString(R.string.pv_ERROR_DEFAULT_BUTTON), new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (callBack != null) {
@@ -249,7 +255,7 @@ public class ProgressView extends AbstractProgressLayout {
             gameCountDownTimerUtils.clear();
             gameCountDownTimerUtils = null;
         }
-        gameCountDownTimerUtils = new GameCountDownTimerUtils(BaseConstant.Service.SERVICE_TRY_WAIT, BaseConstant.Service.SERVICE_TRY_INTERVAL) {
+        gameCountDownTimerUtils = new GameCountDownTimerUtils(SERVICE_TRY_WAIT, SERVICE_TRY_INTERVAL) {
             @Override
             public void onTick(long millisUntilFinished, int second) {
                 if (errorStateButton != null) {
@@ -270,7 +276,7 @@ public class ProgressView extends AbstractProgressLayout {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                         errorStateButton.setBackground(normalErrorButtonBackground);
                     }
-                    errorStateButton.setText(getResources().getString(R.string.ERROR_DEFAULT_BUTTON));
+                    errorStateButton.setText(getResources().getString(R.string.pv_ERROR_DEFAULT_BUTTON));
                 }
             }
         };

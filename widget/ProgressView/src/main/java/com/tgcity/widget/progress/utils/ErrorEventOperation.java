@@ -1,7 +1,9 @@
 package com.tgcity.widget.progress.utils;
 
-import android.content.Intent;
 import android.os.Looper;
+
+import com.tgcity.function.network.cache.ErrorMode;
+import com.tgcity.function.network.retrofit.ApiException;
 
 /**
  * @author TGCity
@@ -55,11 +57,11 @@ public class ErrorEventOperation {
         if (errorMode == null) {
             return;
         }
-        if (isShowErrorMsg) {
+        /*if (isShowErrorMsg) {
             if (Looper.getMainLooper() == Looper.getMainLooper() && ErrorMode.API_VISUALIZATION_MESSAGE == errorMode) {
                 ToastUtils.showShortToast(BaseApplication.getInstances(), errorMode.getErrorTitle());
             }
-        }
+        }*/
         operation(errorMode, null);
     }
 
@@ -95,13 +97,13 @@ public class ErrorEventOperation {
             if (onErrorEventOperationCallBack != null) {
                 onErrorEventOperationCallBack.onNoNetWork();
             } else {
-                BaseApplication.getInstances().startActivity(IntentUtils.getNetworkIntent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//                BaseApplication.getInstances().startActivity(IntentUtils.getNetworkIntent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
         } else if (ErrorMode.SIGNATURE_FAILURE_TIME == errorMode) {
             if (onErrorEventOperationCallBack != null) {
                 onErrorEventOperationCallBack.onSignatureFailTime();
             } else {
-                BaseApplication.getInstances().startActivity(IntentUtils.getDateIntent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+//                BaseApplication.getInstances().startActivity(IntentUtils.getDateIntent().addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
             }
 
         } else if (ErrorMode.SIGNATURE_FAILURE_SSL == errorMode) {

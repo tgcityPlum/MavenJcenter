@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 1912190
+        versionCode 1912230
         versionName "1.0.0"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
@@ -22,24 +22,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    resourcePrefix "pv_"   //前缀的名字
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation supportDependencies.appcompat
-    implementation utilDependencies.imageLoader
-    implementation functionDependencies.baseNetwork
-    implementation 'com.tgcity.widget:GradientButton:1.0.0'
 }
+
 
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
 def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地址
-def repoName = 'widget' // 项目的名称
-def moduleName = 'ProgressView' // 项目的名称
-group = 'com.tgcity.widget' // 所在组
+def repoName = 'utils' // 项目的名称
+def module_name = 'IntentFlag' // 项目的名称
+group = 'com.tgcity.utils' // 所在组
 version = "1.0.0" //aar的版本号
 
 install {
@@ -48,7 +46,7 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name moduleName
+                name module_name // 名称
                 url siteUrl
                 licenses {
                     license {
@@ -96,7 +94,7 @@ bintray {
     configurations = ['archives']
     pkg {
         repo = repoName // 你在bintray上创建的库的名称
-        name = moduleName // 在jcenter中的项目名称
+        name = module_name // 在jcenter中的项目名称
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
