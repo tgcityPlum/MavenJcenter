@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode versionConfig.versionCode
-        versionName versionConfig.versionName
+        versionCode 1912260
+        versionName "1.0.0"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -23,20 +23,28 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
+    resourcePrefix "xd_"   //前缀的名字
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation supportDependencies.appcompat
+    implementation supportDependencies.xAppcompat
+    implementation supportDependencies.xConstraintLayout
+    implementation dataDependencies.butterknife
+    implementation utilDependencies.string
+    implementation functionDependencies.resource
 }
-
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
 def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地址
-def repoName = 'utils' // 项目的名称
-def moduleName = 'ContinuousClick' // 项目的名称
-group = 'com.tgcity.utils' // 所在组
+def repoName = 'xwidget' // 项目的名称
+def moduleName = 'XDialog' // 项目的名称
+group = 'com.tgcity.xwidget' // 所在组
 version = "1.0.0" //aar的版本号
 
 install {

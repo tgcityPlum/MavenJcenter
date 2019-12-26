@@ -20,44 +20,48 @@ ext {
     baseNetworkVersion = '1.0.0'
     xConstraintLayoutVersion = '2.0.0-beta4'
     retrofitSdkVersion = '2.6.2'
+    butterKnifeVersion = '10.2.0'
 
     //**************** supportDependencies ****************
     supportDependencies = [
             appcompat        : "com.android.support:appcompat-v7:${androidSupportSdkVersion}",
-            recyclerview        : "com.android.support:recyclerview-v7:${androidSupportSdkVersion}",
+            recyclerview     : "com.android.support:recyclerview-v7:${androidSupportSdkVersion}",
             constraint       : "com.android.support.constraint:constraint-layout:${constraintVersion}",
 
-            xAppcompat        : "androidx.appcompat:appcompat:${xAppcompatVersion}",
-            xRecyclerview     : "androidx.recyclerview:recyclerview:${xRecyclerviewVersion}",
-            xMaterial         : "com.google.android.material:material:${xMaterialVersion}",
-            xConstraintLayout : "androidx.constraintlayout:constraintlayout:${xConstraintLayoutVersion}"
+            xAppcompat       : "androidx.appcompat:appcompat:${xAppcompatVersion}",
+            xRecyclerview    : "androidx.recyclerview:recyclerview:${xRecyclerviewVersion}",
+            xMaterial        : "com.google.android.material:material:${xMaterialVersion}",
+            xConstraintLayout: "androidx.constraintlayout:constraintlayout:${xConstraintLayoutVersion}"
     ]
 
     //**************** dataDependencies ****************
     dataDependencies = [
             // image
-            glide                : "com.github.bumptech.glide:glide:${glideVersion}",
+            glide         : "com.github.bumptech.glide:glide:${glideVersion}",
             // Gson
-            gson                 : "com.google.code.gson:gson:${gsonVersion}",
+            gson          : "com.google.code.gson:gson:${gsonVersion}",
             //retrofit
-            retrofit             : "com.squareup.retrofit2:retrofit:${retrofitSdkVersion}"
+            retrofit      : "com.squareup.retrofit2:retrofit:${retrofitSdkVersion}",
+            // butterKnife
+            butterknife   : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterknifeApt: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
     ]
 
     //**************** utilsDependencies ****************
     utilDependencies = [
-            log             : "com.tgcity.utils:Log:latest.release",
-            file            : "com.tgcity.utils:File:${fileVersion}",
-            toast           : "com.tgcity.utils:Toast:latest.release",
-            string          : "com.tgcity.utils:String:latest.release",
-            density         : "com.tgcity.utils:Density:latest.release",
-            intentFlag      : "com.tgcity.utils:IntentFlag:latest.release",
-            imageLoader     : "com.tgcity.utils:ImageLoader:latest.release"
+            log        : "com.tgcity.utils:Log:latest.release",
+            file       : "com.tgcity.utils:File:${fileVersion}",
+            toast      : "com.tgcity.utils:Toast:latest.release",
+            string     : "com.tgcity.utils:String:latest.release",
+            density    : "com.tgcity.utils:Density:latest.release",
+            intentFlag : "com.tgcity.utils:IntentFlag:latest.release",
+            imageLoader: "com.tgcity.utils:ImageLoader:latest.release"
     ]
 
     //**************** functionDependencies ****************
     functionDependencies = [
-            baseNetwork    : "com.tgcity.function:BaseNetwork:${baseNetworkVersion}",
-            resource    : "com.tgcity.function:Resource:latest.release"
+            baseNetwork: "com.tgcity.function:BaseNetwork:${baseNetworkVersion}",
+            resource   : "com.tgcity.function:Resource:latest.release"
     ]
 
 }
