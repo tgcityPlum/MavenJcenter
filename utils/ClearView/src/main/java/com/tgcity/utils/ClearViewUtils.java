@@ -93,7 +93,7 @@ public class ClearViewUtils {
                     ImageTextView circleIndicator = (ImageTextView) targetGroup.getChildAt(i);
                     circleIndicator.clearImages();
                 } else if (targetGroup.getChildAt(i) instanceof SimpleBanner) {
-                    //TODO banner
+                    //TODO bn_layout_view
                     SimpleBanner simpleBanner = (SimpleBanner) targetGroup.getChildAt(i);
                     simpleBanner.clear();
                 } else if (targetGroup.getChildAt(i) instanceof BGABanner) {
