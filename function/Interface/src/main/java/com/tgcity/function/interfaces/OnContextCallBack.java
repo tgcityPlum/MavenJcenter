@@ -1,4 +1,4 @@
-package com.tgcity.function;
+package com.tgcity.function.interfaces;
 
 import android.content.Context;
 
