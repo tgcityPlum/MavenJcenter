@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/pv_bg_topbar">
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="@dimen/pv_topbar_paddingleft"
+        android:paddingRight="@dimen/pv_topbar_paddingright"
+        android:text="@string/pv_cancel"
+        android:textColor="@drawable/pv_selector_btn"
+        android:textSize="@dimen/pv_topbar_btn_textsize" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/btnSubmit"
+        android:layout_toRightOf="@+id/btnCancel"
+        android:gravity="center"
+        android:textColor="@color/pv_topbar_title"
+        android:textSize="@dimen/pv_topbar_title_textsize" />
+
+    <Button
+        android:id="@id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical|left"
+        android:paddingLeft="@dimen/pv_topbar_paddingright"
+        android:paddingRight="@dimen/pv_topbar_paddingleft"
+        android:text="@string/pv_submit"
+        android:textColor="@drawable/pv_selector_btn"
+        android:textSize="@dimen/pv_topbar_btn_textsize" />
+</RelativeLayout>

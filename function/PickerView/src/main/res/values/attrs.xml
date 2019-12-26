@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="pv_wheelview">
+        <attr name="pv_gravity">
+            <enum name="center" value="17"/>
+            <enum name="left" value="3"/>
+            <enum name="right" value="5"/>
+        </attr>
+        <attr name="pv_textSize" format="dimension"/>
+        <attr name="pv_textColorOut" format="color"/>
+        <attr name="pv_textColorCenter" format="color"/>
+        <attr name="pv_dividerColor" format="color"/>
+    </declare-styleable>
+</resources>
