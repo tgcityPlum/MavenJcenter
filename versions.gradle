@@ -54,6 +54,7 @@ ext {
             toast      : "com.tgcity.utils:Toast:latest.release",
             string     : "com.tgcity.utils:String:latest.release",
             density    : "com.tgcity.utils:Density:latest.release",
+            clearView  : "com.tgcity.utils:ClearView:latest.release",
             intentFlag : "com.tgcity.utils:IntentFlag:latest.release",
             imageLoader: "com.tgcity.utils:ImageLoader:latest.release"
     ]

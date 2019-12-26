@@ -37,6 +37,7 @@ dependencies {
     implementation supportDependencies.xConstraintLayout
     implementation dataDependencies.butterknife
     implementation utilDependencies.string
+    implementation utilDependencies.clearView
     implementation functionDependencies.resource
 }
 

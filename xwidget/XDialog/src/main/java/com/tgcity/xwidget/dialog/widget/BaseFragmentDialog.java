@@ -12,17 +12,19 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-//import com.tgcity.base.utils.ClearViewUtils;
+import com.tgcity.utils.ClearViewUtils;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * @Describe 对话框基类
+ * @author TGCity
+ * @description 对话框基类
  */
 public abstract class BaseFragmentDialog extends DialogFragment {
     private View rootView;
@@ -34,7 +36,7 @@ public abstract class BaseFragmentDialog extends DialogFragment {
 
     private int mGravity = Gravity.BOTTOM;
 
-    Unbinder unBinder;
+    private Unbinder unBinder;
 
     private OnBaseDialogFragmentCallBack onBaseDialogFragmentCallBack;
 
@@ -47,8 +49,7 @@ public abstract class BaseFragmentDialog extends DialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         rootView = inflater.inflate(getLayoutRes(), container, false);
         unBinder = ButterKnife.bind(this, rootView);
@@ -69,13 +70,13 @@ public abstract class BaseFragmentDialog extends DialogFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        ClearViewUtils.clearAll(rootView);
+        ClearViewUtils.clearAll(rootView);
     }
 
     /**
      * 获取布局文件
      *
-     * @return  int
+     * @return int
      */
     @LayoutRes
     public abstract int getLayoutRes();
@@ -90,7 +91,7 @@ public abstract class BaseFragmentDialog extends DialogFragment {
     /**
      * 获取主题
      *
-     * @return  int
+     * @return int
      */
     public abstract int getStyleRes();
 
@@ -148,7 +149,7 @@ public abstract class BaseFragmentDialog extends DialogFragment {
     /**
      * 获取点击其他区域是否关闭
      *
-     * @return  boolean
+     * @return boolean
      */
     public boolean getCancelOutside() {
         return false;
@@ -157,7 +158,7 @@ public abstract class BaseFragmentDialog extends DialogFragment {
     /**
      * 获取遮罩透明度
      *
-     * @return  float
+     * @return float
      */
     public float getDimAmount() {
         return DEFAULT_MASK_TRANS;
@@ -172,7 +173,7 @@ public abstract class BaseFragmentDialog extends DialogFragment {
     /**
      * 获取对齐方式
      *
-     * @return  int
+     * @return int
      */
     public int getGravity() {
         return this.mGravity;
@@ -181,7 +182,7 @@ public abstract class BaseFragmentDialog extends DialogFragment {
     /**
      * 获取tag
      *
-     * @return  String
+     * @return String
      */
     public String getFragmentTag() {
         return TAG;
@@ -190,8 +191,8 @@ public abstract class BaseFragmentDialog extends DialogFragment {
     /**
      * 带回调的显示dialog
      *
-     * @param fragmentManager   FragmentManager
-     * @param onBaseDialogFragmentCallBack  OnBaseDialogFragmentCallBack
+     * @param fragmentManager              FragmentManager
+     * @param onBaseDialogFragmentCallBack OnBaseDialogFragmentCallBack
      */
     public void show(FragmentManager fragmentManager, OnBaseDialogFragmentCallBack onBaseDialogFragmentCallBack) {
         this.onBaseDialogFragmentCallBack = onBaseDialogFragmentCallBack;
@@ -215,7 +216,7 @@ public abstract class BaseFragmentDialog extends DialogFragment {
     /**
      * 显示dialog
      *
-     * @param fragmentManager   FragmentManager
+     * @param fragmentManager FragmentManager
      * @return 显示成功返回true, 失败false
      */
     public boolean show(FragmentManager fragmentManager) {
