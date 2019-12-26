@@ -18,9 +18,12 @@ ext {
     xMaterialVersion = '1.0.0'
     fileVersion = '1.0.1'
     baseNetworkVersion = '1.0.0'
+    interfaceVersion = '1.0.1'
     xConstraintLayoutVersion = '2.0.0-beta4'
     retrofitSdkVersion = '2.6.2'
     butterKnifeVersion = '10.2.0'
+    refreshViewVersion = '1.0.3'
+    progressViewVersion = '1.0.0'
 
     //**************** supportDependencies ****************
     supportDependencies = [
@@ -49,20 +52,31 @@ ext {
 
     //**************** utilsDependencies ****************
     utilDependencies = [
-            log        : "com.tgcity.utils:Log:latest.release",
-            file       : "com.tgcity.utils:File:${fileVersion}",
-            toast      : "com.tgcity.utils:Toast:latest.release",
-            string     : "com.tgcity.utils:String:latest.release",
-            density    : "com.tgcity.utils:Density:latest.release",
-            clearView  : "com.tgcity.utils:ClearView:latest.release",
-            intentFlag : "com.tgcity.utils:IntentFlag:latest.release",
-            imageLoader: "com.tgcity.utils:ImageLoader:latest.release"
+            log            : "com.tgcity.utils:Log:latest.release",
+            file           : "com.tgcity.utils:File:${fileVersion}",
+            toast          : "com.tgcity.utils:Toast:latest.release",
+            string         : "com.tgcity.utils:String:latest.release",
+            density        : "com.tgcity.utils:Density:latest.release",
+            clearView      : "com.tgcity.utils:ClearView:latest.release",
+            intentFlag     : "com.tgcity.utils:IntentFlag:latest.release",
+            imageLoader    : "com.tgcity.utils:ImageLoader:latest.release",
+            continuousClick: "com.tgcity.utils:ContinuousClick:latest.release"
+    ]
+
+    //**************** widgetDependencies ****************
+    widgetDependencies = [
+            progressView: "com.tgcity.widget:ProgressView:${progressViewVersion}"
+    ]
+
+    //**************** xWidgetDependencies ****************
+    xWidgetDependencies = [
+            refreshView: "com.tgcity.xwidget:XRefreshView:${refreshViewVersion}"
     ]
 
     //**************** functionDependencies ****************
     functionDependencies = [
-            baseNetwork: "com.tgcity.function:BaseNetwork:${baseNetworkVersion}",
-            resource   : "com.tgcity.function:Resource:latest.release"
+            resource   : "com.tgcity.function:Resource:latest.release",
+            interface  : "com.tgcity.function:Interface:${interfaceVersion}",
+            baseNetwork: "com.tgcity.function:BaseNetwork:${baseNetworkVersion}"
     ]
-
 }
