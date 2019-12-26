@@ -56,7 +56,8 @@ ext {
 
     //**************** functionDependencies ****************
     functionDependencies = [
-            baseNetwork    : "com.tgcity.function:BaseNetwork:${baseNetworkVersion}"
+            baseNetwork    : "com.tgcity.function:BaseNetwork:${baseNetworkVersion}",
+            resource    : "com.tgcity.function:Resource:latest.release"
     ]
 
 }
