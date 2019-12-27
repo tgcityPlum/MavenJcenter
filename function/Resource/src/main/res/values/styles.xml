@@ -135,6 +135,67 @@
     </style>
     <!--    text and color style ending   -->
 
+    <!--    application theme starting   -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_white</item>
+        <item name="colorPrimaryDark">@color/color_white</item>
+        <item name="colorAccent">@color/title_bag</item>
+        <item name="toolbarStyle">@style/ClubToolbar</item>
+        <item name="android:textColorPrimary">@color/color_context</item>
+        <item name="android:textColorSecondary">@color/color_context</item>
+        <item name="colorButtonNormal">@color/title_bag</item>
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
+    </style>
+
+    <style name="AppBaseThemeWithWindowIsTranslucent" parent="AppBaseTheme">
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
+    <style name="LauncherTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/bg_guide</item> <!-- 需要添加背景 -->
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <!--    application theme ending   -->
+
+    <!--    view style starting   -->
+    <style name="ClubToolbar" parent="Widget.AppCompat.Toolbar">
+        <!-- 设置该属性解决空白部分-->
+        <item name="contentInsetStart">0dp</item>
+    </style>
+    <!--    view style ending   -->
+    <style name="SettingItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/dp_50</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@color/color_white</item>
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/color_6D89AF</item>
+    </style>
+
+    <style name="SettingItemTitle" parent="SettingItem">
+        <item name="android:paddingLeft">@dimen/dp_12</item>
+    </style>
+
+    <style name="SettingItemContent" parent="SettingItem">
+        <item name="android:layout_marginLeft">@dimen/dp_100</item>
+    </style>
+
+    <style name="LakeDetailTitle" parent="@style/size_16_color_2D2D2F">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/dp_60</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/dp_20</item>
+    </style>
+
+    <style name="LakeDetailContent" parent="@style/size_16_color_4D000000">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">@dimen/dp_60</item>
+        <item name="android:gravity">center_vertical|right</item>
+        <item name="android:layout_marginRight">@dimen/dp_20</item>
+    </style>
+
     <!-- view style-->
     <style name="HomeTextViewStyle" parent="@style/size_14_color_101010">
         <item name="android:layout_width">match_parent</item>
