@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 1912270
-        versionName "1.0.0"
+        versionCode 1912271
+        versionName "1.0.1"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -22,12 +22,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation supportDependencies.xAppcompat
+    implementation functionDependencies.baseEventBus
+    implementation dataDependencies.eventBus
+    implementation dataDependencies.immersionbar
+    implementation utilDependencies.clearView
+    implementation utilDependencies.log
+    implementation dataDependencies.glide
+    implementation dataDependencies.butterknife
+    //引入 rxJava
+    implementation dataDependencies.rxJava2
+    implementation dataDependencies.rxAndroid2
+    //引入 rxLifecycle
+    implementation dataDependencies.rxlifecycle
+    implementation dataDependencies.rxlifecycleAndroid
+    implementation functionDependencies.resource
 }
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
@@ -35,7 +53,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'function' // 项目的名称
 def moduleName = 'BaseFragment' // 项目的名称
 group = 'com.tgcity.function' // 所在组
-version = "1.0.0" //aar的版本号
+version = "1.0.1" //aar的版本号
 
 install {
     repositories.mavenInstaller {

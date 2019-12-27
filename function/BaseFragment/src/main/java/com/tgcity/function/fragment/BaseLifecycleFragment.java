@@ -1,4 +1,4 @@
-package com.tgcity.function;
+package com.tgcity.function.fragment;
 
 import android.os.Bundle;
 import android.view.View;

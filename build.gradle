@@ -27,9 +27,9 @@ allprojects {
        /* maven {
             url  "https://dl.bintray.com/tgcity/widget"
         }*/
-        maven {
+        /*maven {
             url  "https://dl.bintray.com/tgcity/utils"
-        }
+        }*/
     }
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet') //忽略javadoc错误

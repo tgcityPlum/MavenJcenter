@@ -6,5 +6,5 @@ include ':widget:RoundCountDownProgress', ':widget:DoubleTextView', ':widget:Rou
 include ':widget:GradientButton',':widget:ProgressView',':widget:LoadDialog'
 include ':xwidget:XTitleBar', ':xwidget:XRefreshView', ':xwidget:XDialog'
 include ':function:Resource',':function:BaseNetwork',':function:Interface',':function:RefreshAdapter',':function:Banner',':function:PickerView'
-include ':function:BaseEventBus'//':function:BaseFragment'
+include ':function:BaseEventBus',':function:BaseFragment'
 include ':profession:MultiImageSelector'

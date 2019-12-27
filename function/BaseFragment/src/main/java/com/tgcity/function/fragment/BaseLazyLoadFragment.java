@@ -1,4 +1,4 @@
-package com.tgcity.function;
+package com.tgcity.function.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.tgcity.base.R;
+import com.tgcity.function.basefragment.R;
 import com.tgcity.utils.ClearViewUtils;
 import com.tgcity.utils.LogUtils;
 
@@ -168,7 +168,7 @@ public abstract class BaseLazyLoadFragment extends BaseLifecycleFragment {
      */
     public void immersionBar(View view, boolean isFitsSystemWindows, boolean isDarkFont) {
 
-        mImmersionBar = ImmersionBar.with(this);
+        mImmersionBar = ImmersionBar.with(getActivity());
 
         if (view != null) {
             mImmersionBar.titleBar(view);

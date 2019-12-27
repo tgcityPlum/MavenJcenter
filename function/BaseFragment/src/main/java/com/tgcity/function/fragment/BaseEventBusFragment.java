@@ -1,4 +1,4 @@
-package com.tgcity.function;
+package com.tgcity.function.fragment;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,7 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.tgcity.base.eventbus.EventBusMessage;
+import com.tgcity.function.eventbus.EventBusMessage;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

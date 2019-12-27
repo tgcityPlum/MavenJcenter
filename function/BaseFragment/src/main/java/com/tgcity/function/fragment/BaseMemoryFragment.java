@@ -1,4 +1,4 @@
-package com.tgcity.function;
+package com.tgcity.function.fragment;
 
 import com.bumptech.glide.Glide;
 import com.tgcity.utils.LogUtils;

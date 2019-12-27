@@ -21,9 +21,13 @@ ext {
     interfaceVersion = '1.0.1'
     xConstraintLayoutVersion = '2.0.0-beta4'
     retrofitSdkVersion = '2.6.2'
+    eventBusVersion = '3.1.1'
     butterKnifeVersion = '10.2.0'
     refreshViewVersion = '1.0.3'
     progressViewVersion = '1.0.0'
+    rxJavaVersion = '2.1.17'
+    rxAndroidVersion = '2.0.2'
+    rxlifecycleSdkVersion = "2.2.2"
 
     //**************** supportDependencies ****************
     supportDependencies = [
@@ -40,14 +44,24 @@ ext {
     //**************** dataDependencies ****************
     dataDependencies = [
             // image
-            glide         : "com.github.bumptech.glide:glide:${glideVersion}",
+            glide             : "com.github.bumptech.glide:glide:${glideVersion}",
             // Gson
-            gson          : "com.google.code.gson:gson:${gsonVersion}",
+            gson              : "com.google.code.gson:gson:${gsonVersion}",
             //retrofit
-            retrofit      : "com.squareup.retrofit2:retrofit:${retrofitSdkVersion}",
+            retrofit          : "com.squareup.retrofit2:retrofit:${retrofitSdkVersion}",
+            // eventBus
+            eventBus          : "org.greenrobot:eventbus:${eventBusVersion}",
             // butterKnife
-            butterknife   : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            butterknifeApt: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+            butterknife       : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterknifeApt    : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+            //android 4.4以上沉浸式状态栏和沉浸式导航栏管理(https://github.com/gyf-dev/ImmersionBar)
+            immersionbar      : "com.gyf.immersionbar:immersionbar:3.0.0-beta05",
+            //rxJava
+            rxJava2           : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid2        : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            //rxLifecycle
+            rxlifecycle       : "com.trello.rxlifecycle2:rxlifecycle:${rxlifecycleSdkVersion}",
+            rxlifecycleAndroid: "com.trello.rxlifecycle2:rxlifecycle-android:${rxlifecycleSdkVersion}",
     ]
 
     //**************** utilsDependencies ****************
@@ -75,8 +89,9 @@ ext {
 
     //**************** functionDependencies ****************
     functionDependencies = [
-            resource   : "com.tgcity.function:Resource:latest.release",
-            interface  : "com.tgcity.function:Interface:${interfaceVersion}",
-            baseNetwork: "com.tgcity.function:BaseNetwork:${baseNetworkVersion}"
+            resource    : "com.tgcity.function:Resource:latest.release",
+            interface   : "com.tgcity.function:Interface:${interfaceVersion}",
+            baseNetwork : "com.tgcity.function:BaseNetwork:${baseNetworkVersion}",
+            baseEventBus: "com.tgcity.function:BaseEventBus:latest.release"
     ]
 }
