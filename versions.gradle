@@ -19,6 +19,7 @@ ext {
     fileVersion = '1.0.1'
     baseNetworkVersion = '1.0.0'
     interfaceVersion = '1.0.1'
+    baseFragmentVersion = '1.0.1'
     xConstraintLayoutVersion = '2.0.0-beta4'
     retrofitSdkVersion = '2.6.2'
     eventBusVersion = '3.1.1'
@@ -65,8 +66,8 @@ ext {
             rxlifecycle       : "com.trello.rxlifecycle2:rxlifecycle:${rxlifecycleSdkVersion}",
             rxlifecycleAndroid: "com.trello.rxlifecycle2:rxlifecycle-android:${rxlifecycleSdkVersion}",
             // alibaba路由
-            routeApi             : "com.alibaba:arouter-api:${routeApiVersion}",
-            routeCompiler        : "com.alibaba:arouter-compiler:${routeCompilerVersion}",
+            routeApi          : "com.alibaba:arouter-api:${routeApiVersion}",
+            routeCompiler     : "com.alibaba:arouter-compiler:${routeCompilerVersion}",
     ]
 
     //**************** utilsDependencies ****************
@@ -104,6 +105,8 @@ ext {
             resource    : "com.tgcity.function:Resource:latest.release",
             interface   : "com.tgcity.function:Interface:${interfaceVersion}",
             baseNetwork : "com.tgcity.function:BaseNetwork:${baseNetworkVersion}",
+            baseFragment: "com.tgcity.function:BaseFragment:${baseFragmentVersion}",
+            baseActivity: "com.tgcity.function:BaseActivity:latest.release",
             baseEventBus: "com.tgcity.function:BaseEventBus:latest.release"
     ]
 }
