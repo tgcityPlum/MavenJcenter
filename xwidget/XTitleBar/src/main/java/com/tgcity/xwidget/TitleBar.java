@@ -30,8 +30,8 @@ import com.tgcity.xwidget.titlebar.R;
  *          android:layout_width="match_parent"
  *          android:layout_height="wrap_content"
  *          android:background="@color/color_white"
- *          app:xtb_rightImgRes="@mipmap/mine_edit"
- *          app:xtb_back="@mipmap/back"
+ *          app:xtb_rightImgRes="@mipmap-xxhdpi/mine_edit"
+ *          app:xtb_back="@mipmap-xxhdpi/back"
  *          app:xtb_title="@string/mine_information" />
  *
  *      2.class file
