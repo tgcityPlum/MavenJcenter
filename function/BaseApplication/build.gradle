@@ -12,7 +12,7 @@ android {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
         versionCode 1912310
-        versionName "1.0.1"
+        versionName "1.0.0"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
 
         javaCompileOptions {
@@ -36,39 +36,22 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation supportDependencies.xAppcompat
-    implementation supportDependencies.xConstraintLayout
-    implementation dataDependencies.glide
-    implementation dataDependencies.eventBus
-    implementation dataDependencies.immersionbar
-    implementation dataDependencies.butterknife
-    //引入 rxJava
-    implementation dataDependencies.rxJava2
-    implementation dataDependencies.rxAndroid2
-    //引入 rxLifecycle
-    implementation dataDependencies.rxlifecycle
-    implementation dataDependencies.rxlifecycleAndroid
-    //alibaba路由
-    implementation dataDependencies.routeApi
-    annotationProcessor dataDependencies.routeCompiler
-
+    implementation supportDependencies.appcompat
+    implementation supportDependencies.multidex
+    //引入 尺寸适配
+    implementation dataDependencies.autosize
+    //引入 system
+    implementation utilDependencies.system
+    //引入 log
     implementation utilDependencies.log
-    implementation utilDependencies.clearView
-    //fragmentNavigator
-    implementation xutilDependencies.fragmentNavigator
-    implementation widgetDependencies.loadDialog
-    implementation xWidgetDependencies.titleBar
-    implementation functionDependencies.resource
-    implementation functionDependencies.baseEventBus
-    implementation files('libs/umeng-analytics-v5.6.3.jar')
 }
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
 def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地址
 def repoName = 'function' // 项目的名称
-def moduleName = 'BaseActivity' // 项目的名称
+def moduleName = 'BaseApplication' // 项目的名称
 group = 'com.tgcity.function' // 所在组
-version = "1.0.1" //aar的版本号
+version = "1.0.0" //aar的版本号
 
 install {
     repositories.mavenInstaller {

@@ -25,6 +25,8 @@ ext {
     rxlifecycleSdkVersion = "2.2.2"
     routeApiVersion = '1.3.1'
     routeCompilerVersion = '1.1.4'
+    multidexVersion = '2.0.1'
+    autoSizeVersion = '0.9.5'
 
     //**************** supportDependencies ****************
     supportDependencies = [
@@ -35,7 +37,8 @@ ext {
             xAppcompat       : "androidx.appcompat:appcompat:${xAppcompatVersion}",
             xRecyclerview    : "androidx.recyclerview:recyclerview:${xRecyclerviewVersion}",
             xMaterial        : "com.google.android.material:material:${xMaterialVersion}",
-            xConstraintLayout: "androidx.constraintlayout:constraintlayout:${xConstraintLayoutVersion}"
+            xConstraintLayout: "androidx.constraintlayout:constraintlayout:${xConstraintLayoutVersion}",
+            multidex         : "androidx.multidex:multidex:${multidexVersion}"
     ]
 
     //**************** dataDependencies ****************
@@ -62,6 +65,8 @@ ext {
             // alibaba路由
             routeApi          : "com.alibaba:arouter-api:${routeApiVersion}",
             routeCompiler     : "com.alibaba:arouter-compiler:${routeCompilerVersion}",
+            //屏幕适配方案  https://github.com/JessYanCoding/AndroidAutoSize
+            autosize          : "me.jessyan:autosize:${autoSizeVersion}",
     ]
 
     //**************** utilsDependencies ****************
