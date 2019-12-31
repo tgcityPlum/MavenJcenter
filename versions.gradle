@@ -27,6 +27,8 @@ ext {
     routeCompilerVersion = '1.1.4'
     multidexVersion = '2.0.1'
     autoSizeVersion = '0.9.5'
+    disklrucacheVersion = '2.0.2'
+    greenDaoVersion = '3.2.2'
 
     //**************** supportDependencies ****************
     supportDependencies = [
@@ -44,29 +46,35 @@ ext {
     //**************** dataDependencies ****************
     dataDependencies = [
             // image
-            glide             : "com.github.bumptech.glide:glide:${glideVersion}",
+            glide                : "com.github.bumptech.glide:glide:${glideVersion}",
             // Gson
-            gson              : "com.google.code.gson:gson:${gsonVersion}",
+            gson                 : "com.google.code.gson:gson:${gsonVersion}",
             //retrofit
-            retrofit          : "com.squareup.retrofit2:retrofit:${retrofitSdkVersion}",
+            retrofit             : "com.squareup.retrofit2:retrofit:${retrofitSdkVersion}",
+            retrofitConverterGson: "com.squareup.retrofit2:converter-gson:${retrofitSdkVersion}",
+            retrofitAdapterRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofitSdkVersion}",
             // eventBus
-            eventBus          : "org.greenrobot:eventbus:${eventBusVersion}",
+            eventBus             : "org.greenrobot:eventbus:${eventBusVersion}",
             // butterKnife
-            butterknife       : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            butterknifeApt    : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+            butterknife          : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterknifeApt       : "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             //android 4.4以上沉浸式状态栏和沉浸式导航栏管理(https://github.com/gyf-dev/ImmersionBar)
-            immersionbar      : "com.gyf.immersionbar:immersionbar:3.0.0-beta05",
+            immersionbar         : "com.gyf.immersionbar:immersionbar:3.0.0-beta05",
             //rxJava
-            rxJava2           : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxAndroid2        : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            rxJava2              : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid2           : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             //rxLifecycle
-            rxlifecycle       : "com.trello.rxlifecycle2:rxlifecycle:${rxlifecycleSdkVersion}",
-            rxlifecycleAndroid: "com.trello.rxlifecycle2:rxlifecycle-android:${rxlifecycleSdkVersion}",
+            rxlifecycle          : "com.trello.rxlifecycle2:rxlifecycle:${rxlifecycleSdkVersion}",
+            rxlifecycleAndroid   : "com.trello.rxlifecycle2:rxlifecycle-android:${rxlifecycleSdkVersion}",
             // alibaba路由
-            routeApi          : "com.alibaba:arouter-api:${routeApiVersion}",
-            routeCompiler     : "com.alibaba:arouter-compiler:${routeCompilerVersion}",
+            routeApi             : "com.alibaba:arouter-api:${routeApiVersion}",
+            routeCompiler        : "com.alibaba:arouter-compiler:${routeCompilerVersion}",
             //屏幕适配方案  https://github.com/JessYanCoding/AndroidAutoSize
-            autosize          : "me.jessyan:autosize:${autoSizeVersion}",
+            autosize             : "me.jessyan:autosize:${autoSizeVersion}",
+            //缓存
+            disklrucache         : "com.jakewharton:disklrucache:${disklrucacheVersion}",
+            // database
+            greendao             : "org.greenrobot:greendao:${greenDaoVersion}",
     ]
 
     //**************** utilsDependencies ****************
@@ -102,11 +110,12 @@ ext {
 
     //**************** functionDependencies ****************
     functionDependencies = [
-            resource    : "com.tgcity.function:Resource:latest.release",
-            interface   : "com.tgcity.function:Interface:latest.release",
-            baseNetwork : "com.tgcity.function:BaseNetwork:latest.release",
-            baseFragment: "com.tgcity.function:BaseFragment:latest.release",
-            baseActivity: "com.tgcity.function:BaseActivity:latest.release",
-            baseEventBus: "com.tgcity.function:BaseEventBus:latest.release"
+            resource       : "com.tgcity.function:Resource:latest.release",
+            interface      : "com.tgcity.function:Interface:latest.release",
+            baseNetwork    : "com.tgcity.function:BaseNetwork:latest.release",
+            baseFragment   : "com.tgcity.function:BaseFragment:latest.release",
+            baseActivity   : "com.tgcity.function:BaseActivity:latest.release",
+            baseEventBus   : "com.tgcity.function:BaseEventBus:latest.release",
+            baseApplication: "com.tgcity.function:BaseApplication:latest.release"
     ]
 }
