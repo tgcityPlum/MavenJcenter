@@ -76,6 +76,7 @@ ext {
             file           : "com.tgcity.utils:File:${fileVersion}",
             toast          : "com.tgcity.utils:Toast:latest.release",
             string         : "com.tgcity.utils:String:latest.release",
+            system         : "com.tgcity.utils:System:latest.release",
             density        : "com.tgcity.utils:Density:latest.release",
             clearView      : "com.tgcity.utils:ClearView:latest.release",
             intentFlag     : "com.tgcity.utils:IntentFlag:latest.release",

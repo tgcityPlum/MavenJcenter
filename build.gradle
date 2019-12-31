@@ -20,19 +20,19 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven {
+        /*maven {
             url  "https://dl.bintray.com/tgcity/function"
-        }
+        }*/
 
        /* maven {
             url  "https://dl.bintray.com/tgcity/widget"
         }*/
-        /*maven {
-            url  "https://dl.bintray.com/tgcity/utils"
-        }*/
         maven {
-            url  "https://dl.bintray.com/tgcity/xutils"
+            url  "https://dl.bintray.com/tgcity/utils"
         }
+        /*maven {
+            url  "https://dl.bintray.com/tgcity/xutils"
+        }*/
     }
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet') //忽略javadoc错误
