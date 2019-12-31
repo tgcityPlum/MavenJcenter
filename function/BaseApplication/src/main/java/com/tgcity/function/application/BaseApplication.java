@@ -16,7 +16,8 @@ import me.jessyan.autosize.AutoSizeConfig;
 
 /**
  * @author TGCity
- * 基础的Application
+ * @date 2019/12/31
+ * @describe
  */
 public class BaseApplication extends MultiDexApplication {
     /**

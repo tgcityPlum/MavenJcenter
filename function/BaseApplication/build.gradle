@@ -11,15 +11,9 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 1912310
-        versionName "1.0.0"
+        versionCode 1912313
+        versionName "1.0.3"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
-            }
-        }
     }
 
     buildTypes {
@@ -29,13 +23,11 @@ android {
         }
     }
 
-    lintOptions {
-        abortOnError false
-    }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation supportDependencies.appcompat
     implementation supportDependencies.multidex
     //引入 尺寸适配
@@ -51,7 +43,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'function' // 项目的名称
 def moduleName = 'BaseApplication' // 项目的名称
 group = 'com.tgcity.function' // 所在组
-version = "1.0.0" //aar的版本号
+version = "1.0.3" //aar的版本号
 
 install {
     repositories.mavenInstaller {
