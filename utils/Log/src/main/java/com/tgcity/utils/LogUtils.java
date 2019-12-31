@@ -93,7 +93,7 @@ public class LogUtils {
     public static boolean logSwitch = false;
 
     public static void init(Context context) {
-        logSwitch = isApkDebug(context);
+        logSwitch = SystemUtils.isApkDebug(context);
     }
 
     public static Config getConfig() {
@@ -609,16 +609,6 @@ public class LogUtils {
             e.printStackTrace();
         }
         Log.e("LogUtils", "log to " + filePath + " failed!");
-    }
-
-    private static boolean isApkDebug(Context context) {
-        try {
-            ApplicationInfo info = context.getApplicationInfo();
-            return (info.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
-        } catch (Exception e) {
-
-        }
-        return false;
     }
 
     public static class Config {
