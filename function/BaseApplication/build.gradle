@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 1912313
-        versionName "1.0.3"
+        versionCode 1912315
+        versionName "1.0.5"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -43,7 +43,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'function' // 项目的名称
 def moduleName = 'BaseApplication' // 项目的名称
 group = 'com.tgcity.function' // 所在组
-version = "1.0.3" //aar的版本号
+version = "1.0.5" //aar的版本号
 
 install {
     repositories.mavenInstaller {
