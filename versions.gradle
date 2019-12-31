@@ -16,16 +16,10 @@ ext {
     constraintVersion = '1.1.3'
     xRecyclerviewVersion = '1.1.0'
     xMaterialVersion = '1.0.0'
-    fileVersion = '1.0.1'
-    baseNetworkVersion = '1.0.0'
-    interfaceVersion = '1.0.1'
-    baseFragmentVersion = '1.0.1'
     xConstraintLayoutVersion = '2.0.0-beta4'
     retrofitSdkVersion = '2.6.2'
     eventBusVersion = '3.1.1'
     butterKnifeVersion = '10.2.0'
-    refreshViewVersion = '1.0.3'
-    progressViewVersion = '1.0.0'
     rxJavaVersion = '2.1.17'
     rxAndroidVersion = '2.0.2'
     rxlifecycleSdkVersion = "2.2.2"
@@ -73,7 +67,7 @@ ext {
     //**************** utilsDependencies ****************
     utilDependencies = [
             log            : "com.tgcity.utils:Log:latest.release",
-            file           : "com.tgcity.utils:File:${fileVersion}",
+            file           : "com.tgcity.utils:File:latest.release",
             toast          : "com.tgcity.utils:Toast:latest.release",
             string         : "com.tgcity.utils:String:latest.release",
             system         : "com.tgcity.utils:System:latest.release",
@@ -91,22 +85,22 @@ ext {
 
     //**************** widgetDependencies ****************
     widgetDependencies = [
-            progressView: "com.tgcity.widget:ProgressView:${progressViewVersion}",
+            progressView: "com.tgcity.widget:ProgressView:latest.release",
             loadDialog  : "com.tgcity.widget:LoadDialog:latest.release"
     ]
 
     //**************** xWidgetDependencies ****************
     xWidgetDependencies = [
-            refreshView: "com.tgcity.xwidget:XRefreshView:${refreshViewVersion}",
+            refreshView: "com.tgcity.xwidget:XRefreshView:latest.release",
             titleBar   : "com.tgcity.xwidget:XTitleBar:latest.release",
     ]
 
     //**************** functionDependencies ****************
     functionDependencies = [
             resource    : "com.tgcity.function:Resource:latest.release",
-            interface   : "com.tgcity.function:Interface:${interfaceVersion}",
-            baseNetwork : "com.tgcity.function:BaseNetwork:${baseNetworkVersion}",
-            baseFragment: "com.tgcity.function:BaseFragment:${baseFragmentVersion}",
+            interface   : "com.tgcity.function:Interface:latest.release",
+            baseNetwork : "com.tgcity.function:BaseNetwork:latest.release",
+            baseFragment: "com.tgcity.function:BaseFragment:latest.release",
             baseActivity: "com.tgcity.function:BaseActivity:latest.release",
             baseEventBus: "com.tgcity.function:BaseEventBus:latest.release"
     ]
