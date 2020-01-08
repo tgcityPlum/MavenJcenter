@@ -72,7 +72,7 @@ public class StartActivityUtils {
      */
     public StartActivityUtils setActivity(Activity activity) {
         this.activity = activity;
-
+        this.context = activity.getBaseContext();
         return this;
     }
 
