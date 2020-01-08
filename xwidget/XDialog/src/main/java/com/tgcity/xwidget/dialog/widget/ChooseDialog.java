@@ -18,20 +18,19 @@ import com.tgcity.xwidget.dialog.interfaces.OnDialogConfirmCancelCallBack;
  * <pre><code>
  * if (chooseDialog == null) {
  *             chooseDialog =new ChooseDialog.Builder(getContext())
- *                     .setTitle("退出巡河")
- *                     .setMessage("您正在巡河，确定退出吗？")
+ *                     .setTitle("xx")
+ *                     .setMessage("xx，确定退出吗？")
  *                     .setNegativeButton("取消")
  *                     .setPositiveButton("退出")
  *                     .setCallBack(new OnDialogConfirmCancelCallBack() {
  *                         @Override
  *                         public void onConfirm() {
- *                             chooseDialog.dismiss();
- *                             finish();
+ *                             //todo
  *                         }
  *
  *                         @Override
  *                         public void onCancel() {
- *                             chooseDialog.dismiss();
+ *                             //todo
  *                         }
  *                     }).create();
  *         }
@@ -52,6 +51,7 @@ public class ChooseDialog extends Dialog {
         private String positiveButtonText;
         private String negativeButtonText;
         private TextView tvContext;
+        private TextView tvRightChoose;
         private OnDialogConfirmCancelCallBack callBack;
 
         public Builder(Context context) {
@@ -63,6 +63,11 @@ public class ChooseDialog extends Dialog {
             return this;
         }
 
+        /**
+         * 更新内容的描述文案
+         * @param message String
+         * @return Builder
+         */
         public Builder updateMessage(String message) {
             this.message = message;
             if (tvContext != null) {
@@ -71,6 +76,18 @@ public class ChooseDialog extends Dialog {
             return this;
         }
 
+        /**
+         * 更新“确认”按钮文案
+         * @param positiveButtonText String
+         * @return Builder
+         */
+        public Builder updatePositiveButton(String positiveButtonText) {
+            this.positiveButtonText = positiveButtonText;
+            if (tvRightChoose != null) {
+                tvRightChoose.setText(positiveButtonText);
+            }
+            return this;
+        }
 
         public Builder setTitle(String title) {
             this.title = title;
@@ -101,7 +118,7 @@ public class ChooseDialog extends Dialog {
 
             TextView tvTitle = layout.findViewById(R.id.dialog_tv_title);
             tvContext = layout.findViewById(R.id.dialog_tv_context);
-            TextView tvRightChoose = layout.findViewById(R.id.dialog_right_choose);
+            tvRightChoose = layout.findViewById(R.id.dialog_right_choose);
             TextView tvLeftChoose = layout.findViewById(R.id.dialoh_left_choose);
 
             if (StringUtils.isEmpty(title)) {
