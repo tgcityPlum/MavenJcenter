@@ -1,11 +1,13 @@
 package com.tgcity.profession.network.retrofit;
 
 
+import com.tgcity.profession.network.base.NetworkApplication;
 import com.tgcity.profession.network.base.NetworkConstant;
 import com.tgcity.profession.network.bean.NetworkResponseEntity;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.HashSet;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
@@ -38,6 +40,8 @@ public class OkHttp3Utils {
             //同样okhttp3后也使用build设计模式
             mOkHttpClient = new OkHttpClient.Builder()
                     //添加拦截器
+                    .addInterceptor(new CookieReadInterceptor())
+                    .addInterceptor(new CookieSaveInterceptor())
                     .addInterceptor(mTokenInterceptor)
                     .hostnameVerifier(HttpSSLUtils.getHostnameVerifier())
                     //设置请求读写的超时时间
@@ -70,6 +74,41 @@ public class OkHttp3Utils {
             }
         }
     };
+
+    /**
+     * cookie 读取拦截器
+     */
+    private static class CookieReadInterceptor implements Interceptor {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request.Builder builder = chain.request().newBuilder();
+            HashSet<String> stringSet = (HashSet<String>) NetworkApplication.getSharedPreferencesUtils().getStringSet(NetworkConstant.LOGIN_COOKIE, new HashSet<String>());
+            for (String cookie : stringSet) {
+                builder.addHeader("Cookie", cookie);
+            }
+
+            return chain.proceed(builder.build());
+        }
+    }
+
+    /**
+     * 存储Cookie拦截器
+     */
+    private static class CookieSaveInterceptor implements Interceptor {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Response originalResponse = chain.proceed(chain.request());
+
+            if (!originalResponse.headers("Set-Cookie").isEmpty()) {
+
+                HashSet<String> cookies = new HashSet<>(originalResponse.headers("Set-Cookie"));
+
+                NetworkApplication.getSharedPreferencesUtils().put(NetworkConstant.LOGIN_COOKIE, cookies);
+            }
+            return originalResponse;
+        }
+    }
+
 
     /**
      * Response处理

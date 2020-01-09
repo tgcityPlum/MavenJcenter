@@ -102,5 +102,6 @@ public class NetworkConstant {
      * 异常的标准code码
      */
     public static int SUCCEED_CODE = 200;
+    public static String LOGIN_COOKIE = "LOGIN_COOKIE";
 
 }
