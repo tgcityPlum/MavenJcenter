@@ -29,21 +29,60 @@ import static okhttp3.internal.Util.UTF_8;
  */
 
 public class OkHttp3Utils {
-    private static OkHttpClient mOkHttpClient;
+    private static OkHttp3Utils okHttp3Utils;
+    private OkHttpClient mOkHttpClient;
+
+    private boolean isReadCookie = false;
+    private boolean isSaveCookie = false;
+    private boolean isHostname = false;
+
+
+    public static OkHttp3Utils getInstance(){
+        if (okHttp3Utils == null){
+            okHttp3Utils = new OkHttp3Utils();
+        }
+        return okHttp3Utils;
+    }
+
+    OkHttp3Utils setReadCookie(boolean readCookie) {
+        isReadCookie = readCookie;
+
+        return this;
+    }
+
+    OkHttp3Utils setSaveCookie(boolean saveCookie) {
+        isSaveCookie = saveCookie;
+
+        return this;
+    }
+
+    OkHttp3Utils setHostname(boolean hostname) {
+        isHostname = hostname;
+
+        return this;
+    }
 
     /**
      * 获取OkHttpClient对象
      */
-    public static OkHttpClient getOkHttpClient() {
+    OkHttpClient getOkHttpClient() {
         if (null == mOkHttpClient) {
             HttpSSLUtils.SSLParams sslParams = HttpSSLUtils.getSslSocketFactory();
-            //同样okhttp3后也使用build设计模式
-            mOkHttpClient = new OkHttpClient.Builder()
-                    //添加拦截器
-                    .addInterceptor(new CookieReadInterceptor())
-                    .addInterceptor(new CookieSaveInterceptor())
+            //同样okHttp3后也使用build设计模式
+            OkHttpClient.Builder builder = new OkHttpClient.Builder();
+            //添加拦截器
+            if (isReadCookie){
+                builder.addInterceptor(new CookieReadInterceptor());
+            }
+            if (isSaveCookie){
+                builder.addInterceptor(new CookieSaveInterceptor());
+            }
+            if (isHostname){
+                builder.hostnameVerifier(HttpSSLUtils.getHostnameVerifier());
+            }
+
+            mOkHttpClient = builder
                     .addInterceptor(mTokenInterceptor)
-                    .hostnameVerifier(HttpSSLUtils.getHostnameVerifier())
                     //设置请求读写的超时时间
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)

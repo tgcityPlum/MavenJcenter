@@ -12,18 +12,44 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public abstract class AbstractRetrofitUtils {
 
-    private static OkHttpClient mOkHttpClient;
+    private OkHttpClient mOkHttpClient;
+
+    private boolean isReadCookie = false;
+    private boolean isSaveCookie = false;
+    private boolean isHostname = false;
+
+    public AbstractRetrofitUtils setReadCookie(boolean readCookie) {
+        isReadCookie = readCookie;
+
+        return this;
+    }
+
+    public AbstractRetrofitUtils setSaveCookie(boolean saveCookie) {
+        isSaveCookie = saveCookie;
+
+        return this;
+    }
+
+    public AbstractRetrofitUtils setHostname(boolean hostname) {
+        isHostname = hostname;
+
+        return this;
+    }
 
     /**
      * 获取Retrofit对象
      *
      * @return Retrofit
      */
-    protected static Retrofit getRetrofit(String url) {
+    public Retrofit getRetrofit(String url) {
         Retrofit retrofit;
 
         if (null == mOkHttpClient) {
-            mOkHttpClient = OkHttp3Utils.getOkHttpClient();
+            mOkHttpClient = OkHttp3Utils.getInstance()
+                    .setReadCookie(isReadCookie)
+                    .setSaveCookie(isSaveCookie)
+                    .setHostname(isHostname)
+                    .getOkHttpClient();
         }
         //Retrofit2后使用build设计模式
         retrofit = new Retrofit.Builder()
