@@ -85,7 +85,7 @@ public class ApiException extends RuntimeException {
     public static ApiException handleException(Throwable e) {
         ApiException ex;
         if (e instanceof HttpException) {
-            ex = new ApiException(e.getMessage(), ErrorMode.HTTP_OTHER_ERROR);
+            ex = new ApiException(e.getMessage(), ErrorMode.HTTP_OTHER_ERROR.setErrorCode(((HttpException)e).code()));
             return ex;
         } else if (e instanceof JsonParseException
                 || e instanceof JSONException
