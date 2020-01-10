@@ -1,6 +1,7 @@
 package com.tgcity.profession.network.greendao;
 
 import com.tgcity.profession.network.greendao.model.HttpRequestLog;
+import com.tgcity.profession.network.greendao.model.SearchRecordModel;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.AbstractDaoSession;
@@ -18,28 +19,52 @@ import java.util.Map;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig collegeDetailsCollegeContrastSchoolDtoDaoConfig;
     private final DaoConfig httpRequestLogDaoConfig;
+    private final DaoConfig searchRecordModelDaoConfig;
 
+    private final CollegeDetailsCollegeContrastSchoolDtoDao collegeDetailsCollegeContrastSchoolDtoDao;
     private final HttpRequestLogDao httpRequestLogDao;
+    private final SearchRecordModelDao searchRecordModelDao;
 
     public DaoSession(Database db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
 
+        collegeDetailsCollegeContrastSchoolDtoDaoConfig = daoConfigMap.get(CollegeDetailsCollegeContrastSchoolDtoDao.class).clone();
+        collegeDetailsCollegeContrastSchoolDtoDaoConfig.initIdentityScope(type);
+
+
         httpRequestLogDaoConfig = daoConfigMap.get(HttpRequestLogDao.class).clone();
         httpRequestLogDaoConfig.initIdentityScope(type);
 
+        searchRecordModelDaoConfig = daoConfigMap.get(SearchRecordModelDao.class).clone();
+        searchRecordModelDaoConfig.initIdentityScope(type);
+
+        collegeDetailsCollegeContrastSchoolDtoDao = new CollegeDetailsCollegeContrastSchoolDtoDao(collegeDetailsCollegeContrastSchoolDtoDaoConfig, this);
         httpRequestLogDao = new HttpRequestLogDao(httpRequestLogDaoConfig, this);
+        searchRecordModelDao = new SearchRecordModelDao(searchRecordModelDaoConfig, this);
 
         registerDao(HttpRequestLog.class, httpRequestLogDao);
+        registerDao(SearchRecordModel.class, searchRecordModelDao);
+    }
+    
+    public void clear() {
+        collegeDetailsCollegeContrastSchoolDtoDaoConfig.clearIdentityScope();
+        httpRequestLogDaoConfig.clearIdentityScope();
+        searchRecordModelDaoConfig.clearIdentityScope();
     }
 
-    public void clear() {
-        httpRequestLogDaoConfig.clearIdentityScope();
+    public CollegeDetailsCollegeContrastSchoolDtoDao getCollegeDetailsCollegeContrastSchoolDtoDao() {
+        return collegeDetailsCollegeContrastSchoolDtoDao;
     }
 
     public HttpRequestLogDao getHttpRequestLogDao() {
         return httpRequestLogDao;
+    }
+
+    public SearchRecordModelDao getSearchRecordModelDao() {
+        return searchRecordModelDao;
     }
 
 }

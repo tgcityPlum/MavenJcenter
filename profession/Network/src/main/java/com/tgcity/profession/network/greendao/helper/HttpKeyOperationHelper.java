@@ -84,7 +84,7 @@ public class HttpKeyOperationHelper {
         httpRequestLog.setCreateTime(System.currentTimeMillis());
         httpRequestLog.setType(0);
 
-//        GreenDaoHelper.getInstance().getSession().insert(httpRequestLog);
+        GreenDaoHelper.getInstance().getSession().insert(httpRequestLog);
 
     }
 

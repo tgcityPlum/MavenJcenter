@@ -75,12 +75,12 @@ public class NetworkConstant {
     /**
      * Disk Cache Dir name
      */
-    public static String UNIQUE_NAME = "uzerme-cache";
+    public static String UNIQUE_NAME = "network-cache";
 
     /**
      * green dao name
      */
-    public static String GREEN_DAO_NAME = "uzerme-db";
+    public static String GREEN_DAO_NAME = "network-db";
 
     /**
      * 用户信息
