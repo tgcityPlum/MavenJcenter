@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="CrashTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/cr_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/cr_colorPrimaryDark</item>
+        <item name="colorAccent">@color/cr_colorAccent</item>
+        <item name="android:windowBackground">@null</item>
+    </style>
+
+    <style name="CrashTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+</resources>
