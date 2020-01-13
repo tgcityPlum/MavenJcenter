@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cr_colorPrimary">#F1332C</color>
+    <color name="cr_colorPrimaryDark">#F1332C</color>
+    <color name="cr_colorAccent">#F1332C</color>
+    <color name="cr_background">#FFFFFF</color>
+    <color name="cr_textColor">#FFFFFF</color>
+</resources>
