@@ -97,11 +97,19 @@ public class NetworkConstant {
      */
     public static int CACHE_PATROL = 2;
 
-
     /**
      * 异常的标准code码
      */
     public static int SUCCEED_CODE = 200;
+
+    /**
+     * 登录失效标识
+     */
+    public static int LOGIN_INVALID_CODE = 401;
+
+    /**
+     * 登录cookie标识
+     */
     public static String LOGIN_COOKIE = "LOGIN_COOKIE";
 
 }

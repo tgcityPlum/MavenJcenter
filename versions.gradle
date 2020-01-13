@@ -113,7 +113,7 @@ ext {
     functionDependencies = [
             resource       : "com.tgcity.function:Resource:latest.release",
             interface      : "com.tgcity.function:Interface:latest.release",
-            baseNetwork    : "com.tgcity.function:BaseNetwork:1.0.1",
+            baseNetwork    : "com.tgcity.function:BaseNetwork:latest.release",
             baseFragment   : "com.tgcity.function:BaseFragment:latest.release",
             baseActivity   : "com.tgcity.function:BaseActivity:latest.release",
             baseEventBus   : "com.tgcity.function:BaseEventBus:latest.release",
