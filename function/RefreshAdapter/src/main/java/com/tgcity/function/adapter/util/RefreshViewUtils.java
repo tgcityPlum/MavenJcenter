@@ -1,7 +1,9 @@
 package com.tgcity.function.adapter.util;
 
 import android.content.Context;
+import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tgcity.function.adapter.BaseQuickAdapter;
@@ -190,4 +192,50 @@ public class RefreshViewUtils {
         }
         return defaultHeader;
     }
+
+    /**
+     * 全局通用的普通绑定RecyclerView和适配器
+     *
+     * @param layoutManager 布局管理器
+     * @param recyclerView  列表
+     * @param adapter       适配器
+     * @return 缓存池
+     */
+    public static RecyclerView.RecycledViewPool bindRecyclerViewAndAdapter(RecyclerView.LayoutManager layoutManager, RecyclerView recyclerView, BaseQuickAdapter adapter) {
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        /*******以下是对RecyclerView的一键优化*******/
+        if (layoutManager instanceof LinearLayoutManager) {
+            //当LayoutManager和RecyclerView脱离关系的时候是否会回收Item
+            ((LinearLayoutManager) layoutManager).setRecycleChildrenOnDetach(true);
+        }
+        //取消动画
+        recyclerView.setItemAnimator(null);
+        //将 Item 的高度固定大小，这样可以减少测量次数，尤其是对于 GridLayoutManager。
+        recyclerView.setHasFixedSize(true);
+        //控制需要缓存的ViewHolder数量
+        recyclerView.getRecycledViewPool().setMaxRecycledViews(0, 10);
+        //设置所需要的ViewHolder数量
+        recyclerView.setItemViewCacheSize(10);
+        recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+        return recyclerView.getRecycledViewPool();
+    }
+
+    /**
+     * 清除recyclerView的缓存
+     *
+     * @param recyclerView RecyclerView
+     * @param adapter      BaseQuickAdapter
+     */
+    public static void clearRecyclerViewContext(RecyclerView recyclerView, BaseQuickAdapter adapter) {
+        if (recyclerView != null) {
+            recyclerView.getRecycledViewPool().clear();
+        }
+        recyclerView = null;
+        if (adapter != null) {
+            adapter.removeAll();
+        }
+        adapter = null;
+    }
+
 }
