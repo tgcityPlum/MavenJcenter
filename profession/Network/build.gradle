@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 2001131
-        versionName "1.0.7"
+        versionCode 2001151
+        versionName "1.0.8"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -52,6 +52,8 @@ dependencies {
     implementation dataDependencies.greendao
     //引入 log
     implementation utilDependencies.log
+    //引入 string
+    implementation utilDependencies.string
     //引入 Resource
     //引入 baseNetwork
     implementation functionDependencies.baseNetwork
@@ -69,7 +71,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'profession' // 项目的名称
 def moduleName = 'Network' // 项目的名称
 group = 'com.tgcity.profession' // 所在组
-version = "1.0.7" //aar的版本号
+version = "1.0.8" //aar的版本号
 
 install {
     repositories.mavenInstaller {

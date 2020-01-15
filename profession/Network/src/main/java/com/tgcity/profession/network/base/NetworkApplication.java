@@ -3,6 +3,7 @@ package com.tgcity.profession.network.base;
 import com.tgcity.function.application.BaseApplication;
 import com.tgcity.profession.network.greendao.helper.GreenDaoHelper;
 import com.tgcity.utils.SharedPreferencesUtils;
+import com.tgcity.utils.StringUtils;
 
 /**
  * @author TGCity
@@ -14,6 +15,8 @@ public class NetworkApplication extends BaseApplication {
     private static NetworkApplication instances;
 
     private static SharedPreferencesUtils sharedPreferencesUtils;
+
+    private String spName;
 
     @Override
     public void onCreate() {
@@ -33,12 +36,24 @@ public class NetworkApplication extends BaseApplication {
     }
 
     /**
+     * 设置SP的name
+     */
+    public NetworkApplication initSharedPreferencesName(String spName) {
+        this.spName = spName;
+        return instances;
+    }
+
+    /**
      * 获取缓存的utils
+     *
      * @return SharedPreferencesUtils
      */
-    public static SharedPreferencesUtils getSharedPreferencesUtils(){
-        if (sharedPreferencesUtils == null){
-            sharedPreferencesUtils = new SharedPreferencesUtils(getInstances(), "network_cfg");
+    public SharedPreferencesUtils getSharedPreferencesUtils() {
+        if (sharedPreferencesUtils == null) {
+            if (StringUtils.isEmpty(spName)) {
+                spName = NetworkConstant.SP_NAME;
+            }
+            sharedPreferencesUtils = new SharedPreferencesUtils(getInstances(), spName);
         }
         return sharedPreferencesUtils;
     }

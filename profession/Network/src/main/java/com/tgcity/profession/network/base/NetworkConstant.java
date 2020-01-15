@@ -19,36 +19,6 @@ public class NetworkConstant {
         public final static boolean IS_PRINT_NETWORK_LOG = IS_DEBUG && true;
     }
 
-    /**
-     * 服务器域名
-     */
-    public class Service {
-        //开发 测试 运营域名
-        public final static String SERVICE_ALPHA = "http://192.168.15.66:8080";
-        public final static String SERVICE_BETA = "http://113.143.100.157:18095";
-        public final static String SERVICE_RELEASE = "https://uzer.me";
-
-        public final static String SERVICE_DEFAULT = SERVICE_BETA;
-    }
-
-    /**
-     * 服务器初始化标识
-     */
-    public class ServiceFlag {
-        //服务器API分支 alpha、beta、Release
-
-        //开发版本API地址
-        public static final int SERVER_ALPHA = 0;
-        //测试版本API地址
-        public static final int SERVER_BETA = 1;
-        //运营版本API地址
-        public static final int SERVER_RELEASE = 2;
-
-        public static final int SERVER_DEFAULT = SERVER_BETA;
-
-    }
-
-    public final static String SYSTEM_TAG = "系统逻辑跟踪标签";
     //本字段出现的原因是在于区分TZY_URL这个地址
     public final static String API_SERVICE_TZY = "service_tzy";
 
@@ -76,6 +46,11 @@ public class NetworkConstant {
      * Disk Cache Dir name
      */
     public static String UNIQUE_NAME = "network-cache";
+
+    /**
+     * SharedPreferencesUtils name
+     */
+    public static String SP_NAME = "network_spu";
 
     /**
      * green dao name

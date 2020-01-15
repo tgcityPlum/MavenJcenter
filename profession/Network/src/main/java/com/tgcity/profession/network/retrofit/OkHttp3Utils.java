@@ -37,8 +37,8 @@ public class OkHttp3Utils {
     private boolean isHostname = false;
 
 
-    public static OkHttp3Utils getInstance(){
-        if (okHttp3Utils == null){
+    public static OkHttp3Utils getInstance() {
+        if (okHttp3Utils == null) {
             okHttp3Utils = new OkHttp3Utils();
         }
         return okHttp3Utils;
@@ -71,13 +71,13 @@ public class OkHttp3Utils {
             //同样okHttp3后也使用build设计模式
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             //添加拦截器
-            if (isReadCookie){
+            if (isReadCookie) {
                 builder.addInterceptor(new CookieReadInterceptor());
             }
-            if (isSaveCookie){
+            if (isSaveCookie) {
                 builder.addInterceptor(new CookieSaveInterceptor());
             }
-            if (isHostname){
+            if (isHostname) {
                 builder.hostnameVerifier(HttpSSLUtils.getHostnameVerifier());
             }
 
@@ -121,7 +121,7 @@ public class OkHttp3Utils {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Request.Builder builder = chain.request().newBuilder();
-            HashSet<String> stringSet = (HashSet<String>) NetworkApplication.getSharedPreferencesUtils().getStringSet(NetworkConstant.LOGIN_COOKIE, new HashSet<String>());
+            HashSet<String> stringSet = (HashSet<String>) NetworkApplication.getInstances().getSharedPreferencesUtils().getStringSet(NetworkConstant.LOGIN_COOKIE, new HashSet<String>());
             for (String cookie : stringSet) {
                 builder.addHeader("Cookie", cookie);
             }
@@ -142,7 +142,7 @@ public class OkHttp3Utils {
 
                 HashSet<String> cookies = new HashSet<>(originalResponse.headers("Set-Cookie"));
 
-                NetworkApplication.getSharedPreferencesUtils().put(NetworkConstant.LOGIN_COOKIE, cookies);
+                NetworkApplication.getInstances().getSharedPreferencesUtils().put(NetworkConstant.LOGIN_COOKIE, cookies);
             }
             return originalResponse;
         }
