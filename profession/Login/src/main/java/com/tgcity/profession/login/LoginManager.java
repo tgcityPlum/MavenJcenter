@@ -15,7 +15,7 @@ import com.tgcity.utils.StartActivityUtils;
  *     <code>
  *         //跳转登录页--不需要返回 type：0，4，8
  *         LoginManager.getInstance()
- *                     .setGotoLoginType(0)
+ *                     .setType(0)
  *                     .setContext(context)
  *                     .setLoginClassName(class)
  *                     .setCallBack(...)
@@ -23,7 +23,7 @@ import com.tgcity.utils.StartActivityUtils;
  *
  *         //跳转登录页--需要返回 type：1，5
  *         LoginManager.getInstance()
- *                     .setGotoLoginType(1)
+ *                     .setType(1)
  *                     .setActivity(activity)
  *                     .setLoginClassName(class)
  *                     .setCallBack(...)
@@ -57,7 +57,7 @@ public class LoginManager {
      * 3、退出登录
      * 8 点击退出登录按钮
      */
-    private int gotoLoginType = DigitalUtils.LEVEL_0;
+    private int type = DigitalUtils.LEVEL_0;
 
     /**
      * 传入的context
@@ -106,10 +106,10 @@ public class LoginManager {
     /**
      * 设置登录类型
      *
-     * @param gotoLoginType int
+     * @param type int
      */
-    public LoginManager setGotoLoginType(int gotoLoginType) {
-        this.gotoLoginType = gotoLoginType;
+    public LoginManager setType(int type) {
+        this.type = type;
 
         return loginManager;
     }
@@ -119,15 +119,15 @@ public class LoginManager {
      */
     public void create() {
         //先判断是哪种情况
-        if (gotoLoginType == DigitalUtils.LEVEL_0) {
+        if (type == DigitalUtils.LEVEL_0) {
             gotoLoginFromSplash();
-        } else if (gotoLoginType == DigitalUtils.LEVEL_1) {
+        } else if (type == DigitalUtils.LEVEL_1) {
             gotoLoginFromUserInfo();
-        } else if (gotoLoginType == DigitalUtils.LEVEL_4) {
+        } else if (type == DigitalUtils.LEVEL_4) {
             tokenInvalidFromSplash();
-        } else if (gotoLoginType == DigitalUtils.LEVEL_5) {
+        } else if (type == DigitalUtils.LEVEL_5) {
             tokenInvalidFromUserInfo();
-        } else if (gotoLoginType == DigitalUtils.LEVEL_8) {
+        } else if (type == DigitalUtils.LEVEL_8) {
             exitLogin();
         }
 
@@ -283,6 +283,10 @@ public class LoginManager {
         if (loginAction != null) {
             loginAction.onFinish();
         }
+    }
+
+    public int getType() {
+        return type;
     }
 
 }
