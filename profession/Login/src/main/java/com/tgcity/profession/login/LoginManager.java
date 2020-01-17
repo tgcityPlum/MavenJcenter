@@ -147,7 +147,7 @@ public class LoginManager {
      * 调用某个接口发现用户登录失效
      */
     private void tokenInvalidFromUserInfo() {
-        gotoLoginFromUserInfo();
+        setResult();
     }
 
     /**
@@ -163,7 +163,13 @@ public class LoginManager {
      * 需要的数据：context和loginClassName
      */
     private void gotoLoginFromUserInfo() {
-        //处理返回
+        setResult();
+    }
+
+    /**
+     * 处理返回
+     */
+    private void setResult() {
         getActivity().setResult(Activity.RESULT_OK);
     }
 
