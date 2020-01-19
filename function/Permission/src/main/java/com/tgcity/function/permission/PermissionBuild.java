@@ -1,9 +1,12 @@
 package com.tgcity.function.permission;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 
 import com.tgcity.utils.DigitalUtils;
@@ -42,6 +45,9 @@ public class PermissionBuild {
         return this;
     }
 
+    /**
+     * 调用系统权限弹框
+     */
     public void setPermissions(Activity activity, String[] permissions) {
 
         registerPermissions(permissions);
@@ -193,6 +199,17 @@ public class PermissionBuild {
             }
         }
         return list.toArray(new String[0]);
+    }
+
+    /**
+     * 跳转系统设置界面
+     */
+    public void gotoSystemSetting(Activity activity, int requestCode) {
+        Intent settingIntent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        //注意就是"package",不用改成自己的包名
+        Uri uri = Uri.fromParts("package", activity.getPackageName(), null);
+        settingIntent.setData(uri);
+        activity.startActivityForResult(settingIntent, requestCode);
     }
 
 }
