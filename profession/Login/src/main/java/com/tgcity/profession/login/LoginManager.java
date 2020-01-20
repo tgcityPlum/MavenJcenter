@@ -2,6 +2,7 @@ package com.tgcity.profession.login;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import com.tgcity.utils.DigitalUtils;
 import com.tgcity.utils.StartActivityUtils;
@@ -84,6 +85,8 @@ public class LoginManager {
     private LoginAction loginAction;
 
     private static volatile LoginManager loginManager;
+
+    private boolean isUseNewTaskFlag = false;
 
     /**
      * 初始化方法
@@ -186,10 +189,14 @@ public class LoginManager {
      * 跳转新界面
      */
     private void gotoClass() {
-        StartActivityUtils.getInstance()
+        StartActivityUtils startActivityUtils = StartActivityUtils.getInstance()
                 .setContext(getContext())
-                .setClass(getGotoClassName())
-                .startActivity();
+                .setClass(getGotoClassName());
+
+        if (isUseNewTaskFlag) {
+            startActivityUtils.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        startActivityUtils.startActivity();
     }
 
     private Class<?> getLoginClass() {
@@ -266,10 +273,15 @@ public class LoginManager {
      * 跳转登录界面
      */
     public void gotoLogin() {
-        StartActivityUtils.getInstance()
+
+        StartActivityUtils startActivityUtils = StartActivityUtils.getInstance()
                 .setContext(getContext())
-                .setClass(getLoginClass())
-                .startActivity();
+                .setClass(getLoginClass());
+
+        if (isUseNewTaskFlag) {
+            startActivityUtils.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        startActivityUtils.startActivity();
 
         if (loginAction != null) {
             loginAction.onFinish();
@@ -293,6 +305,11 @@ public class LoginManager {
 
     public int getType() {
         return type;
+    }
+
+    public LoginManager setUseNewTaskFlag(boolean useNewTaskFlag) {
+        isUseNewTaskFlag = useNewTaskFlag;
+        return loginManager;
     }
 
 }

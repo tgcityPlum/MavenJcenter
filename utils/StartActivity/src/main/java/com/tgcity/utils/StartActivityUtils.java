@@ -88,6 +88,21 @@ public class StartActivityUtils {
     }
 
     /**
+     * 设置 Flag
+     *
+     * @param flags int
+     * @return StartActivityUtils
+     */
+    public StartActivityUtils setFlags(int flags) {
+        if (intent != null) {
+            intent.setFlags(flags);
+        } else {
+            throw new RuntimeException("intent is null");
+        }
+        return this;
+    }
+
+    /**
      * 设置传参
      *
      * @param name  String
