@@ -6,7 +6,7 @@ import androidx.annotation.Nullable;
 
 import com.tgcity.function.fragment.BaseMemoryFragment;
 import com.tgcity.profession.mvp.model.OnPresenterTaskCallBack;
-import com.tgcity.profession.mvp.present.CommonPresenter;
+import com.tgcity.profession.mvp.present.BasePresenterImpl;
 
 
 /**
@@ -14,7 +14,7 @@ import com.tgcity.profession.mvp.present.CommonPresenter;
  * Created by Administrator on 2018/7/23.
  */
 
-public abstract class BaseMVPFragment<V, P extends CommonPresenter<V>> extends BaseMemoryFragment {
+public abstract class BaseMVPFragment<V, P extends BasePresenterImpl<V>> extends BaseMemoryFragment {
     public P presenter;
 
     @Override

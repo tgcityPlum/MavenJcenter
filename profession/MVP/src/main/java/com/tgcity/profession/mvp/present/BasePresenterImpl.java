@@ -7,10 +7,10 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
 
 /**
  * @author TGCitY
- * CommonPresenter,自动绑定解绑View接口
+ * BasePresenterImpl,自动绑定解绑View接口
  */
 
-public abstract class CommonPresenter<V> {
+public abstract class BasePresenterImpl<V> {
     public LifecycleTransformer lifecycleTransformer;
     public V view;
     /**

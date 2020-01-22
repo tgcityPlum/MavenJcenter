@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.tgcity.function.activity.BaseLauncherTimeActivity;
 import com.tgcity.profession.mvp.model.OnPresenterTaskCallBack;
-import com.tgcity.profession.mvp.present.CommonPresenter;
+import com.tgcity.profession.mvp.present.BasePresenterImpl;
 
 
 /**
@@ -13,7 +13,7 @@ import com.tgcity.profession.mvp.present.CommonPresenter;
  * @author TGCity
  */
 
-public abstract class MVPCommonActivity<V, P extends CommonPresenter<V>> extends BaseLauncherTimeActivity {
+public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends BaseLauncherTimeActivity {
 
     protected P presenter;
 
