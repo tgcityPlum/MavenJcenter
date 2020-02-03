@@ -104,7 +104,7 @@ public class OkHttp3Utils {
 
             Request authorised = chain.request().newBuilder()
                     .addHeader("Content-Type", "application/json; charset=utf-8")
-//                    .addHeader("User-Agent", "Android-XT-UZ-PHONE")
+                    .addHeader("User-Agent", "Android-XT-Water-Phone")
                     .build();
             if (NetworkConstant.Switch.IS_PRINT_NETWORK_LOG) {
                 return response(chain.proceed(authorised));
