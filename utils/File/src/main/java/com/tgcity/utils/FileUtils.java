@@ -136,7 +136,7 @@ public class FileUtils {
         //处理图片
         List uploadImages = new ArrayList<>();
         for (String imageItem : dragImages) {
-            if (!imageItem.contains(context.getString(R.string.fl_glide_plus_icon_string))) {
+            if (!StringUtils.isEmpty(imageItem) && !imageItem.contains(context.getString(R.string.fl_glide_plus_icon_string))) {
                 uploadImages.add(FileUtils.fileToBase64(new File(imageItem)));
             }
         }
