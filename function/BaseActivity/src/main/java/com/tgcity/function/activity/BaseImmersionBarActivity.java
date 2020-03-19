@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
@@ -52,7 +53,6 @@ public abstract class BaseImmersionBarActivity extends BaseEventLogicActivity {
     public void onInitImmersionBar() {
 
     }
-
 
     /**
      * 全屏显示
@@ -188,10 +188,11 @@ public abstract class BaseImmersionBarActivity extends BaseEventLogicActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy(LifecycleOwner owner) {
         mImmersionBar = null;
         mToolBar = null;
         mTitleBar = null;
-        super.onDestroy();
+        super.onDestroy(owner);
     }
+
 }

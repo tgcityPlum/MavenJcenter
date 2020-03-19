@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.tgcity.function.baseactivity.R;
 import com.tgcity.function.eventbus.EventBusMessage;
@@ -115,8 +116,8 @@ public abstract class BaseBindViewActivity extends BaseOrientationActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroy(LifecycleOwner owner) {
+        super.onDestroy(owner);
         //destroy unBinder
         if (unBind != null) {
             unBind.unbind();
@@ -134,4 +135,5 @@ public abstract class BaseBindViewActivity extends BaseOrientationActivity {
             EventBus.getDefault().unregister(this);
         }
     }
+
 }

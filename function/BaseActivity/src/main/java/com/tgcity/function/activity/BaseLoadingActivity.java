@@ -1,6 +1,6 @@
 package com.tgcity.function.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.tgcity.utils.LogUtils;
 import com.tgcity.widget.BaseLoadingDialog;
@@ -10,7 +10,7 @@ import com.tgcity.widget.BaseLoadingDialog;
  * 基础的activity
  * --处理加载指示器
  */
-public class BaseLoadingActivity extends AppCompatActivity {
+public abstract class BaseLoadingActivity extends BaseLifecycleActivity {
     /**
      * BaseLoadingDialog
      */
@@ -40,12 +40,13 @@ public class BaseLoadingActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroy(LifecycleOwner owner) {
+        super.onDestroy(owner);
         //destroy loading
         dismissLoadingDialog();
         if (mBaseLoadingDialog != null) {
             mBaseLoadingDialog.clear();
         }
     }
+
 }

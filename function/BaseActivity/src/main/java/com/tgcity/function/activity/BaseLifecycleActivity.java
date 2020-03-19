@@ -1,87 +1,65 @@
 package com.tgcity.function.activity;
 
-import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LifecycleOwner;
 
-import androidx.annotation.CheckResult;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.RxLifecycle;
-import com.trello.rxlifecycle2.android.ActivityEvent;
-import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
-
-import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
+import com.tgcity.function.baseactivity.R;
+import com.tgcity.profession.lifecycler.BaseLifecycleObserver;
+import com.tgcity.utils.LogUtils;
 
 /**
  * @author TGCity
  * 基础的activity
  * --管理activity的生命周期
  */
-public abstract class BaseLifecycleActivity extends BaseMemoryActivity implements LifecycleProvider<ActivityEvent> {
+public abstract class BaseLifecycleActivity extends AppCompatActivity implements BaseLifecycleObserver {
+
+    @Override
+    public void onCreate(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onCreate)));
+    }
+
+    @Override
+    public void onStart(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onStart)));
+    }
+
+    @Override
+    public void onResume(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onResume)));
+    }
+
+    @Override
+    public void onPause(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onPause)));
+    }
+
+    @Override
+    public void onStop(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onStop)));
+    }
+
+    @Override
+    public void onDestroy(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onDestroy)));
+    }
 
     /**
-     * BehaviorSubject
+     * 输出当前界面调用方法的日志
      */
-    private BehaviorSubject<ActivityEvent> mBehaviorSubject = BehaviorSubject.create();
-
-    @Override
-    @NonNull
-    @CheckResult
-    public final Observable<ActivityEvent> lifecycle() {
-        return mBehaviorSubject.hide();
+    protected void logActivity(String message) {
+        LogUtils.d(message);
     }
 
-    @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
-        return RxLifecycle.bindUntilEvent(mBehaviorSubject, event);
+    public String getCurrentPageName(String message) {
+        return getString(R.string.base_memory_activity_current_page_name, getCurrentPage(), getLocalClassName(), message);
     }
 
-    @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindToLifecycle() {
-        return RxLifecycleAndroid.bindActivity(mBehaviorSubject);
-    }
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBehaviorSubject.onNext(ActivityEvent.CREATE);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mBehaviorSubject.onNext(ActivityEvent.START);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        mBehaviorSubject.onNext(ActivityEvent.RESUME);
-    }
-
-    @Override
-    protected void onPause() {
-        mBehaviorSubject.onNext(ActivityEvent.PAUSE);
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        mBehaviorSubject.onNext(ActivityEvent.STOP);
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        mBehaviorSubject.onNext(ActivityEvent.DESTROY);
-        super.onDestroy();
-    }
+    /**
+     * get current activity page
+     *
+     * @return the current activity name
+     */
+    public abstract String getCurrentPage();
 
 }

@@ -2,6 +2,8 @@ package com.tgcity.function.activity;
 
 import android.annotation.SuppressLint;
 
+import androidx.lifecycle.LifecycleOwner;
+
 import com.bumptech.glide.Glide;
 import com.tgcity.function.baseactivity.R;
 import com.tgcity.utils.LogUtils;
@@ -60,7 +62,7 @@ public abstract class BaseMemoryActivity extends BaseLoadingActivity {
      */
     private void onTrimMemoryRunningModerate() {
         //可以适当地清理一些垃圾了
-        logBaseMemoryActivity(getString(R.string.base_memory_activity_running_moderate));
+        logActivity(getString(R.string.base_memory_activity_running_moderate));
     }
 
     /**
@@ -71,7 +73,7 @@ public abstract class BaseMemoryActivity extends BaseLoadingActivity {
      */
     private void onTrimMemoryRunningLow() {
         //强烈建议开始清理垃圾
-        logBaseMemoryActivity(getString(R.string.base_memory_activity_running_low));
+        logActivity(getString(R.string.base_memory_activity_running_low));
     }
 
     /**
@@ -86,7 +88,7 @@ public abstract class BaseMemoryActivity extends BaseLoadingActivity {
      */
     private void onTrimMemoryRunningCritical() {
         //如果不清理垃圾那就GAME OVER了
-        logBaseMemoryActivity(getString(R.string.base_memory_activity_running_critical));
+        logActivity(getString(R.string.base_memory_activity_running_critical));
     }
 
     /**
@@ -97,30 +99,12 @@ public abstract class BaseMemoryActivity extends BaseLoadingActivity {
      */
     private void onTrimMemoryUiHidden() {
         //可以清理一些用户不需要看到但又不重要，显示之后又可以复原的东西
-        logBaseMemoryActivity(getString(R.string.base_memory_activity_ui_hidden));
-    }
-
-    /**
-     * get current activity page
-     *
-     * @return the current activity name
-     */
-    public abstract String getCurrentPage();
-
-    public String getCurrentPageName(String message) {
-        return getString(R.string.base_memory_activity_current_page_name, getCurrentPage(), getLocalClassName(), message);
-    }
-
-    /**
-     * 输出当前界面调用方法的日志
-     */
-    private void logBaseMemoryActivity(String message) {
-        LogUtils.d(message);
+        logActivity(getString(R.string.base_memory_activity_ui_hidden));
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    public void onDestroy(LifecycleOwner owner) {
+        super.onDestroy(owner);
         //Glide clearMemory(must in main thread)
         Glide.get(this).clearMemory();
         //Glide clearDiskCache(must in child thread)
@@ -154,4 +138,5 @@ public abstract class BaseMemoryActivity extends BaseLoadingActivity {
                     }
                 });
     }
+
 }

@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 1912310
-        versionName "1.0.1"
+        versionCode 2003191
+        versionName "1.0.2"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
 
         javaCompileOptions {
@@ -61,6 +61,10 @@ dependencies {
     implementation functionDependencies.resource
     implementation functionDependencies.baseEventBus
     implementation files('libs/umeng-analytics-v5.6.3.jar')
+    //lifecycler
+    implementation professionDependencies.lifecycler
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
 }
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
@@ -68,7 +72,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'function' // 项目的名称
 def moduleName = 'BaseActivity' // 项目的名称
 group = 'com.tgcity.function' // 所在组
-version = "1.0.1" //aar的版本号
+version = "1.0.2" //aar的版本号
 
 install {
     repositories.mavenInstaller {

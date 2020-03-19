@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
  * 基础的activity类
  * --管理Activity的屏幕方向
  */
-public abstract class BaseOrientationActivity extends BaseLifecycleActivity {
+public abstract class BaseOrientationActivity extends BaseMemoryActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

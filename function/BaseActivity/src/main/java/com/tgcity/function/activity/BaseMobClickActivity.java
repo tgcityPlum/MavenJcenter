@@ -1,5 +1,7 @@
 package com.tgcity.function.activity;
 
+import androidx.lifecycle.LifecycleOwner;
+
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -10,16 +12,16 @@ import com.umeng.analytics.MobclickAgent;
 public abstract class BaseMobClickActivity extends BaseImmersionBarActivity {
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    public void onResume(LifecycleOwner owner) {
+        super.onResume(owner);
 
         MobclickAgent.onPageStart(getCurrentPage());
         MobclickAgent.onResume(getAppContext());
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    public void onPause(LifecycleOwner owner) {
+        super.onPause(owner);
 
         MobclickAgent.onPageEnd(getCurrentPage());
         MobclickAgent.onPause(getAppContext());

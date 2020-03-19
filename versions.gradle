@@ -121,4 +121,9 @@ ext {
             baseEventBus   : "com.tgcity.function:BaseEventBus:latest.release",
             baseApplication: "com.tgcity.function:BaseApplication:latest.release"
     ]
+
+    //**************** professionDependencies ****************
+    professionDependencies = [
+            lifecycler       : "com.tgcity.profession:Lifecycler:1.0.0"
+    ]
 }

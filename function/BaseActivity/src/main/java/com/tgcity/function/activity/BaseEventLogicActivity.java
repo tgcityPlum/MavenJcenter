@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.tgcity.function.baseactivity.R;
 import com.tgcity.utils.LogUtils;
@@ -31,7 +32,7 @@ public abstract class BaseEventLogicActivity extends BaseRouterActivity {
             useInstanceState(savedInstanceState);
 
             initView();
-            logBaseEventLogicActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_initView)));
+            logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_initView)));
 
             setListener();
             launched = true;
@@ -71,31 +72,24 @@ public abstract class BaseEventLogicActivity extends BaseRouterActivity {
     }
 
     public void setListener() {
-        logBaseEventLogicActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_setListener)));
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_setListener)));
     }
 
     public abstract void initView();
 
     public void depositParameter() {
-        logBaseEventLogicActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_depositParameter)));
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_depositParameter)));
     }
 
     public boolean depositBeforeAll() {
-        logBaseEventLogicActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_depositBeforeAll)));
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_depositBeforeAll)));
         return true;
     }
 
-    /**
-     * 输出当前界面调用方法的日志
-     */
-    private void logBaseEventLogicActivity(String message) {
-        LogUtils.d(message);
+    @Override
+    public void onDestroy(LifecycleOwner owner) {
+        super.onDestroy(owner);
+        launched = false;
     }
 
-    @Override
-    protected void onDestroy() {
-        launched = false;
-        super.onDestroy();
-        logBaseEventLogicActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onDestroy)));
-    }
 }
