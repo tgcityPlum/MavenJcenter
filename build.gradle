@@ -21,12 +21,16 @@ allprojects {
         google()
         jcenter()
         maven {
-            url  "https://dl.bintray.com/tgcity/function"
+            url "https://dl.bintray.com/tgcity/profession"
         }
 
-       /* maven {
-            url  "https://dl.bintray.com/tgcity/widget"
+        /*maven {
+            url "https://dl.bintray.com/tgcity/function"
         }*/
+
+        /* maven {
+             url  "https://dl.bintray.com/tgcity/widget"
+         }*/
         /*maven {
             url  "https://dl.bintray.com/tgcity/utils"
         }*/
@@ -36,7 +40,7 @@ allprojects {
     }
     tasks.withType(Javadoc) {
         options.addStringOption('Xdoclint:none', '-quiet') //忽略javadoc错误
-        options{
+        options {
             encoding "UTF-8"
             charSet 'UTF-8'
             links "http://docs.oracle.com/javase/7/docs/api"
