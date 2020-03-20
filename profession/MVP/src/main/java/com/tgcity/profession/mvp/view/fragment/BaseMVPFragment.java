@@ -1,8 +1,6 @@
 package com.tgcity.profession.mvp.view.fragment;
 
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.tgcity.function.fragment.BaseMemoryFragment;
 import com.tgcity.profession.mvp.model.OnPresenterTaskCallBack;
@@ -18,8 +16,9 @@ public abstract class BaseMVPFragment<V, P extends BasePresenterImpl<V>> extends
     public P presenter;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate(LifecycleOwner owner) {
+        super.onCreate(owner);
+
         if (presenter == null) {
             presenter = createPresenter();
         }
@@ -29,8 +28,9 @@ public abstract class BaseMVPFragment<V, P extends BasePresenterImpl<V>> extends
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroy(LifecycleOwner owner) {
+        super.onDestroy(owner);
+
         if (presenter != null) {
             presenter.detachView();
         }

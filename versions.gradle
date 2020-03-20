@@ -116,7 +116,7 @@ ext {
             resource       : "com.tgcity.function:Resource:1.0.4",
             interface      : "com.tgcity.function:Interface:latest.release",
             baseNetwork    : "com.tgcity.function:BaseNetwork:latest.release",
-            baseFragment   : "com.tgcity.function:BaseFragment:latest.release",
+            baseFragment   : "com.tgcity.function:BaseFragment:1.0.2",
             baseActivity   : "com.tgcity.function:BaseActivity:1.0.3",
             baseEventBus   : "com.tgcity.function:BaseEventBus:latest.release",
             baseApplication: "com.tgcity.function:BaseApplication:latest.release"

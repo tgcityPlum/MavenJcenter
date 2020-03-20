@@ -3,7 +3,6 @@ package com.tgcity.profession.mvp.present;
 import com.tgcity.function.interfaces.OnPublicRefreshViewCallBack;
 import com.tgcity.function.network.cache.ErrorMode;
 import com.tgcity.function.network.retrofit.ApiException;
-import com.trello.rxlifecycle2.LifecycleTransformer;
 
 /**
  * @author TGCitY
