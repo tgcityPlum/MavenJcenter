@@ -4,7 +4,7 @@ include ':utils:Spannable', ':utils:SharedPreference', ':utils:ContinuousClick',
 include ':utils:IntentFlag', ':utils:ClearView', ':utils:System', ':utils:Digital', ':utils:AMapLocation'
 include ':xutils:FragmentNavigator'
 include ':widget:RoundCountDownProgress', ':widget:DoubleTextView', ':widget:RoundAngleImageView', ':widget:TitleBar'
-include ':widget:GradientButton', ':widget:ProgressView', ':widget:LoadDialog', ':widget:VerificationCode'
+include ':widget:GradientButton', ':widget:ProgressView', ':widget:LoadDialog', ':widget:VerificationCode', ':widget:Handler'
 include ':xwidget:XTitleBar', ':xwidget:XRefreshView', ':xwidget:XDialog'
 include ':function:Resource', ':function:BaseNetwork', ':function:Interface', ':function:RefreshAdapter', ':function:Banner', ':function:PickerView'
 include ':function:BaseEventBus', ':function:BaseFragment', ':function:BaseActivity', ':function:BaseApplication', ':function:Permission'
