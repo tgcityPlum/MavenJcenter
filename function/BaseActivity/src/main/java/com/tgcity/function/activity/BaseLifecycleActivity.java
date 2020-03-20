@@ -16,32 +16,32 @@ public abstract class BaseLifecycleActivity extends AppCompatActivity implements
 
     @Override
     public void onCreate(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onCreate)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onCreate)));
     }
 
     @Override
     public void onStart(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onStart)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onStart)));
     }
 
     @Override
     public void onResume(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onResume)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onResume)));
     }
 
     @Override
     public void onPause(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onPause)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onPause)));
     }
 
     @Override
     public void onStop(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onStop)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onStop)));
     }
 
     @Override
     public void onDestroy(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onDestroy)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onDestroy)));
     }
 
     /**

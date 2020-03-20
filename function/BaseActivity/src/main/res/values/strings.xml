@@ -4,12 +4,6 @@
     <string name="base_event_logic_activity_setListener">正在调用setListener()</string>
     <string name="base_event_logic_activity_depositParameter">正在调用depositParameter()</string>
     <string name="base_event_logic_activity_depositBeforeAll">正在调用depositBeforeAll()</string>
-    <string name="base_event_logic_activity_onDestroy">正在调用onDestroy()</string>
-    <string name="base_event_logic_activity_onCreate">正在调用onCreate()</string>
-    <string name="base_event_logic_activity_onStart">正在调用onStart()</string>
-    <string name="base_event_logic_activity_onResume">正在调用onResume()</string>
-    <string name="base_event_logic_activity_onPause">正在调用onPause()</string>
-    <string name="base_event_logic_activity_onStop">正在调用onStop()</string>
     <string name="base_memory_activity_running_moderate">内存轻微吃紧</string>
     <string name="base_memory_activity_running_low">内存过低</string>
     <string name="base_memory_activity_running_critical">内存极低</string>
