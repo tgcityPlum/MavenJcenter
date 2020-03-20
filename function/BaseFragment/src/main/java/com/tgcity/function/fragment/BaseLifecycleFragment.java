@@ -7,103 +7,64 @@ import androidx.annotation.CheckResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
 
-import com.trello.rxlifecycle2.LifecycleProvider;
-import com.trello.rxlifecycle2.LifecycleTransformer;
-import com.trello.rxlifecycle2.RxLifecycle;
-import com.trello.rxlifecycle2.android.FragmentEvent;
-import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
-
-import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
+import com.tgcity.function.basefragment.R;
+import com.tgcity.profession.lifecycler.BaseLifecycleObserver;
+import com.tgcity.utils.LogUtils;
 
 /**
  * @author TGCity
  * @Describe 生命周期管理
  */
-public abstract class BaseLifecycleFragment extends Fragment implements LifecycleProvider<FragmentEvent> {
-
-    private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
+public abstract class BaseLifecycleFragment extends Fragment implements BaseLifecycleObserver {
 
     @Override
-    @NonNull
-    @CheckResult
-    public final Observable<FragmentEvent> lifecycle() {
-        return lifecycleSubject.hide();
+    public void onCreate(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onCreate)));
     }
 
     @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull FragmentEvent event) {
-        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
+    public void onStart(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onStart)));
     }
 
     @Override
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindToLifecycle() {
-        return RxLifecycleAndroid.bindFragment(lifecycleSubject);
+    public void onResume(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onResume)));
     }
 
     @Override
-    public void onAttach(android.app.Activity activity) {
-        super.onAttach(activity);
-        lifecycleSubject.onNext(FragmentEvent.ATTACH);
+    public void onPause(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onPause)));
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        lifecycleSubject.onNext(FragmentEvent.CREATE);
+    public void onStop(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onStop)));
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        lifecycleSubject.onNext(FragmentEvent.CREATE_VIEW);
+    public void onDestroy(LifecycleOwner owner) {
+        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onDestroy)));
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        lifecycleSubject.onNext(FragmentEvent.START);
+    /**
+     * 输出当前界面调用方法的日志
+     */
+    protected void logActivity(String message) {
+        LogUtils.d(message);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        lifecycleSubject.onNext(FragmentEvent.RESUME);
+    public String getCurrentPageName(String message) {
+        return getString(R.string.base_memory_activity_current_page_name, getCurrentPage(), getLocalClassName(), message);
     }
 
-    @Override
-    public void onPause() {
-        lifecycleSubject.onNext(FragmentEvent.PAUSE);
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        lifecycleSubject.onNext(FragmentEvent.STOP);
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        lifecycleSubject.onNext(FragmentEvent.DESTROY_VIEW);
-        super.onDestroyView();
-    }
-
-    @Override
-    public void onDestroy() {
-        lifecycleSubject.onNext(FragmentEvent.DESTROY);
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDetach() {
-        lifecycleSubject.onNext(FragmentEvent.DETACH);
-        super.onDetach();
-    }
+    /**
+     * get current activity page
+     *
+     * @return the current activity name
+     */
+    public abstract String getCurrentPage();
 
 }

@@ -2,6 +2,9 @@ package com.tgcity.profession.mvp.view.activity;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
+
 import com.tgcity.function.activity.BaseLauncherTimeActivity;
 import com.tgcity.profession.mvp.model.OnPresenterTaskCallBack;
 import com.tgcity.profession.mvp.present.BasePresenterImpl;
@@ -19,12 +22,14 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        presenter = createPresenter();
+        super.onCreate(savedInstanceState);
+
+        if (presenter == null){
+            presenter = createPresenter();
+        }
         if (presenter != null) {
             presenter.attachView((V) this);
-            presenter.bindLifecycle(this.bindToLifecycle());
         }
-        super.onCreate(savedInstanceState);
     }
 
     /**
@@ -48,12 +53,12 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy(LifecycleOwner owner) {
         if (presenter != null) {
             presenter.detachView();
         }
         presenter = null;
-        super.onDestroy();
-    }
 
+        super.onDestroy(owner);
+    }
 }

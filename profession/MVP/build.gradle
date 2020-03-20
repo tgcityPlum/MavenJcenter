@@ -46,6 +46,9 @@ dependencies {
     implementation functionDependencies.baseActivity
     //引入 baseNetwork
     implementation functionDependencies.baseNetwork
+    //lifecycler
+//    implementation professionDependencies.lifecycler
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 }
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页

@@ -25,7 +25,6 @@ public abstract class BaseMVPFragment<V, P extends BasePresenterImpl<V>> extends
         }
         if (presenter != null) {
             presenter.attachView((V) this);
-            presenter.bindLifecycle(this.bindToLifecycle());
         }
     }
 

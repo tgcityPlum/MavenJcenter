@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 1912271
-        versionName "1.0.1"
+        versionCode 2003201
+        versionName "1.0.2"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -43,8 +43,8 @@ dependencies {
     implementation dataDependencies.rxJava2
     implementation dataDependencies.rxAndroid2
     //引入 rxLifecycle
-    implementation dataDependencies.rxlifecycle
-    implementation dataDependencies.rxlifecycleAndroid
+    implementation professionDependencies.lifecycler
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     implementation functionDependencies.resource
 }
 
@@ -53,7 +53,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'function' // 项目的名称
 def moduleName = 'BaseFragment' // 项目的名称
 group = 'com.tgcity.function' // 所在组
-version = "1.0.1" //aar的版本号
+version = "1.0.2" //aar的版本号
 
 install {
     repositories.mavenInstaller {
