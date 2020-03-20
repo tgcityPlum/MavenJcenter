@@ -1,11 +1,5 @@
 package com.tgcity.function.fragment;
 
-import android.os.Bundle;
-import android.view.View;
-
-import androidx.annotation.CheckResult;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -21,32 +15,32 @@ public abstract class BaseLifecycleFragment extends Fragment implements BaseLife
 
     @Override
     public void onCreate(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onCreate)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onCreate)));
     }
 
     @Override
     public void onStart(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onStart)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onStart)));
     }
 
     @Override
     public void onResume(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onResume)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onResume)));
     }
 
     @Override
     public void onPause(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onPause)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onPause)));
     }
 
     @Override
     public void onStop(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onStop)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onStop)));
     }
 
     @Override
     public void onDestroy(LifecycleOwner owner) {
-        logActivity(getCurrentPageName(getString(R.string.base_event_logic_activity_onDestroy)));
+        logActivity(getCurrentPageName(getString(R.string.activity_onDestroy)));
     }
 
     /**
@@ -57,7 +51,11 @@ public abstract class BaseLifecycleFragment extends Fragment implements BaseLife
     }
 
     public String getCurrentPageName(String message) {
-        return getString(R.string.base_memory_activity_current_page_name, getCurrentPage(), getLocalClassName(), message);
+        String className = "fragment";
+        if (getActivity() != null) {
+            className = getActivity().getLocalClassName();
+        }
+        return getString(R.string.activity_current_page_name, getCurrentPage(), className, message);
     }
 
     /**
