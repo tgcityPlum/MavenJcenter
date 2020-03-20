@@ -30,7 +30,7 @@ public abstract class BaseLauncherTimeActivity extends BaseFragmentNavigatorActi
         super.onWindowFocusChanged(hasFocus);
 
         if (hasFocus) {
-            LogUtils.d(getString(R.string.base_memory_activity_current_page_name, getCurrentPage(), getLocalClassName(), transformTime(System.currentTimeMillis() - currentTime)));
+            LogUtils.d(getString(R.string.activity_current_page_name, getCurrentPage(), getLocalClassName(), transformTime(System.currentTimeMillis() - currentTime)));
         }
     }
 

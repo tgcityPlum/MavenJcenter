@@ -76,7 +76,7 @@ public abstract class BaseImmersionBarActivity extends BaseEventLogicActivity {
      * 设置沉浸式
      */
     public void autoImmersionBar() {
-        LogUtils.d(getString(R.string.base_memory_activity_current_page_name, getCurrentPage(), getLocalClassName(), getString(R.string.base_immersion_bar_activity_autoImmersionBar)));
+        LogUtils.d(getString(R.string.activity_current_page_name, getCurrentPage(), getLocalClassName(), getString(R.string.base_immersion_bar_activity_autoImmersionBar)));
         mImmersionBar = ImmersionBar.with(this);
         //根据布局文件中 R.id.titleBar 寻找titleBar对象
         mTitleBar = findViewById(R.id.titleBar);

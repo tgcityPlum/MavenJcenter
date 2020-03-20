@@ -52,7 +52,7 @@ public abstract class BaseLifecycleActivity extends AppCompatActivity implements
     }
 
     public String getCurrentPageName(String message) {
-        return getString(R.string.base_memory_activity_current_page_name, getCurrentPage(), getLocalClassName(), message);
+        return getString(R.string.activity_current_page_name, getCurrentPage(), getLocalClassName(), message);
     }
 
     /**
