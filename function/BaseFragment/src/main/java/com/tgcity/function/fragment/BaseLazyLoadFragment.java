@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.gyf.immersionbar.ImmersionBar;
 import com.tgcity.function.basefragment.R;
@@ -57,14 +58,12 @@ public abstract class BaseLazyLoadFragment extends BaseLifecycleFragment {
         this.context = context;
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(setContent(), container, false);
         return rootView;
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -130,19 +129,6 @@ public abstract class BaseLazyLoadFragment extends BaseLifecycleFragment {
         }
     }
 
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mImmersionBar = null;
-        if (rootView != null) {
-            ClearViewUtils.clearAll(rootView);
-        }
-        rootView = null;
-        context = null;
-    }
-
-
     /**
      * 用户不可见执行
      */
@@ -151,14 +137,21 @@ public abstract class BaseLazyLoadFragment extends BaseLifecycleFragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onDestroy(LifecycleOwner owner) {
+        super.onDestroy(owner);
+
         if (unBinder != null) {
             unBinder.unbind();
             unBinder = null;
         }
-    }
 
+        mImmersionBar = null;
+        if (rootView != null) {
+            ClearViewUtils.clearAll(rootView);
+        }
+        rootView = null;
+        context = null;
+    }
 
     /**
      * 沉浸式状态栏

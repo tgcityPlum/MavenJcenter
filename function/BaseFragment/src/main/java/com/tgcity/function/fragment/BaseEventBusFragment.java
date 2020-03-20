@@ -5,6 +5,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleOwner;
 
 import com.tgcity.function.eventbus.EventBusMessage;
 
@@ -21,8 +22,8 @@ import org.greenrobot.eventbus.ThreadMode;
 public abstract class BaseEventBusFragment extends BaseLazyLoadFragment {
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(LifecycleOwner owner) {
+        super.onCreate(owner);
 
         //是否注册eventBus
         if (isUseEventBus()){
@@ -48,8 +49,8 @@ public abstract class BaseEventBusFragment extends BaseLazyLoadFragment {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroy(LifecycleOwner owner) {
+        super.onDestroy(owner);
         //销毁监听广播
         if (isUseEventBus()){
             EventBus.getDefault().unregister(this);
