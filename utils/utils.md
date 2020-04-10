@@ -39,7 +39,7 @@ utils收集常用的工具类
 [Screen](Screen/Screen.md)封装了处理屏幕的业务
 
 * SharedPreference  
-SharedPreference封装了缓存的业务
+[SharedPreference](SharedPreference/SharedPreference.md)封装了缓存的业务
 
 * Spannable  
 Spannable封装了富文本业务
