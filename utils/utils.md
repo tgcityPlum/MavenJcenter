@@ -18,7 +18,7 @@ utils收集常用的工具类
 [Date](Date/Date.md)封装了对时间格式的转换业业务
 
 * Density  
-Density封装了尺寸的转换业务
+[Density](Density/Density.md)封装了尺寸的转换业务
 
 * Digital  
 Digital封装了常量数字业务
