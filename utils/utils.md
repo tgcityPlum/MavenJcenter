@@ -6,7 +6,7 @@ utils收集常用的工具类
 ## 包含的module
 
 * AMapLocation  
-[AMapLocation](utils/AMapLocation/AMapLocation.md)封装了百度地图的基础业务
+[AMapLocation](AMapLocation/AMapLocation.md)封装了百度地图的基础业务
 
 * ClearView  
 ClearView封装了销毁控件的业务
