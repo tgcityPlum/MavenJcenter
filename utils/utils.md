@@ -12,7 +12,7 @@ utils收集常用的工具类
 [ClearView](ClearView/ClearView.md)封装了销毁控件的业务
 
 * ContinuousClick  
-ContinuousClick封装了控件连续点击的校验业务
+[ContinuousClick](ContinuousClick/ContinuousClick.md)封装了控件连续点击的校验业务
 
 * Date  
 Date封装了对时间格式的转换业业务
