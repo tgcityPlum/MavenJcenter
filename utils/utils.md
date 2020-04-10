@@ -9,7 +9,7 @@ utils收集常用的工具类
 [AMapLocation](AMapLocation/AMapLocation.md)封装了百度地图的基础业务
 
 * ClearView  
-ClearView封装了销毁控件的业务
+[ClearView](ClearView/ClearView.md)封装了销毁控件的业务
 
 * ContinuousClick  
 ContinuousClick封装了控件连续点击的校验业务
