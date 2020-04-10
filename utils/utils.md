@@ -33,7 +33,7 @@ utils收集常用的工具类
 [IntentFlag](IntentFlag/IntentFlag.md)封装了打开intent系统的业务
 
 * Log  
-Log封装了日志处理的业务
+[Log](Log/Log.md)封装了日志处理的业务
 
 * Screen  
 Screen封装了处理屏幕的业务

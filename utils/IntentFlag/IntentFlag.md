@@ -3,7 +3,7 @@
 ## 模块说明
 IntentFlag封装了打开intent系统的业务
 
-##  使用步骤
+## 使用说明
 
 * 判断intent和它的bundle是否为空
 ```
