@@ -42,7 +42,7 @@ utils收集常用的工具类
 [SharedPreference](SharedPreference/SharedPreference.md)封装了缓存的业务
 
 * Spannable  
-Spannable封装了富文本业务
+[Spannable](Spannable/Spannable.md)封装了富文本业务
 
 * StartActivity  
 StartActivity封装了界面跳转的业务
