@@ -15,7 +15,7 @@ utils收集常用的工具类
 [ContinuousClick](ContinuousClick/ContinuousClick.md)封装了控件连续点击的校验业务
 
 * Date  
-Date封装了对时间格式的转换业业务
+[Date](Date/Date.md)封装了对时间格式的转换业业务
 
 * Density  
 Density封装了尺寸的转换业务
