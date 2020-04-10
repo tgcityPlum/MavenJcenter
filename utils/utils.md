@@ -45,7 +45,7 @@ utils收集常用的工具类
 [Spannable](Spannable/Spannable.md)封装了富文本业务
 
 * StartActivity  
-StartActivity封装了界面跳转的业务
+[StartActivity](StartActivity/StartActivity.md)封装了界面跳转的业务
 
 * String  
 String封装了处理字符串的业务
