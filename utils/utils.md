@@ -24,7 +24,7 @@ utils收集常用的工具类
 [Digital](Digital/Digital.md)封装了常量数字业务
 
 * File  
-File封装了处理文件的业务
+[File](File/File.md)封装了处理文件的业务
 
 * ImageLoader  
 ImageLoader封装了图片加载的业务
