@@ -16,6 +16,3 @@ ImageLoader封装了图片加载的业务
 ```
  ImageHelper.getImageLoader().display(ImageView imageView, String path);
 ```
-
-
-

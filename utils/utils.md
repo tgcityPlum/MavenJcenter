@@ -30,7 +30,7 @@ utils收集常用的工具类
 [ImageLoader](ImageLoader/ImageLoader.md)封装了图片加载的业务
 
 * IntentFlag  
-IntentFlag封装了intent跳转的业务
+[IntentFlag](IntentFlag/IntentFlag.md)封装了打开intent系统的业务
 
 * Log  
 Log封装了日志处理的业务
