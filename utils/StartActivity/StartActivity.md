@@ -1,7 +1,7 @@
 # StartActivity
 
 ## 模块说明
-Spannable封装了富文本业务
+Spannable封装了界面跳转的业务
 
 ## 使用说明
 
