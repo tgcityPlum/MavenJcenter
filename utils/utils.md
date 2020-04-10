@@ -48,7 +48,7 @@ utils收集常用的工具类
 [StartActivity](StartActivity/StartActivity.md)封装了界面跳转的业务
 
 * String  
-String封装了处理字符串的业务
+[String](String/String.md)封装了处理字符串的业务
 
 * System  
 System封装了提供获取系统方法的业务
