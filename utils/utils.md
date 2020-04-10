@@ -21,7 +21,7 @@ utils收集常用的工具类
 [Density](Density/Density.md)封装了尺寸的转换业务
 
 * Digital  
-Digital封装了常量数字业务
+[Digital](Digital/Digital.md)封装了常量数字业务
 
 * File  
 File封装了处理文件的业务
