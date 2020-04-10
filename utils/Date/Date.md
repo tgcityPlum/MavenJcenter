@@ -11,9 +11,9 @@ Date是一个日期转换的工具类
 ```
 * 常量
 ```
-    String PATTERN_STYLE_1 = "yyyy年MM月dd日";
-    String PATTERN_STYLE_2 = "HH:mm:ss";
-    String PATTERN_STYLE_3 = "yyyy-MM-dd HH:mm:ss";
+ String PATTERN_STYLE_1 = "yyyy年MM月dd日";
+ String PATTERN_STYLE_2 = "HH:mm:ss";
+ String PATTERN_STYLE_3 = "yyyy-MM-dd HH:mm:ss";
 ```
 
  
