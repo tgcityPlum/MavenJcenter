@@ -27,7 +27,7 @@ utils收集常用的工具类
 [File](File/File.md)封装了处理文件的业务
 
 * ImageLoader  
-ImageLoader封装了图片加载的业务
+[ImageLoader](ImageLoader/ImageLoader.md)封装了图片加载的业务
 
 * IntentFlag  
 IntentFlag封装了intent跳转的业务

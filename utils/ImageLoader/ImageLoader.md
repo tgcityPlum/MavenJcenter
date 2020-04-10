@@ -1,9 +1,21 @@
-##  简介
-这是一个加载图片的工具类
+# ImageLoader
+
+## 模块说明
+ImageLoader封装了图片加载的业务
+
 ##  使用步骤
+
+* 引入依赖
 ```
-ImageHelper.showLruCache(imageView, R.drawable.shape_solid_eeeeee_corners_8, R.drawable.shape_solid_eeeeee_corners_8, url, 1575947101);
+ //glide
+ implementation 'com.github.bumptech.glide:glide:4.9.0'
+ //string
+ implementation 'com.tgcity.utils:String:latest.release'
+```
+* 展示图片
+```
+ ImageHelper.getImageLoader().display(ImageView imageView, String path);
 ```
 
 
- 
+
