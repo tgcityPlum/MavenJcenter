@@ -36,7 +36,7 @@ utils收集常用的工具类
 [Log](Log/Log.md)封装了日志处理的业务
 
 * Screen  
-Screen封装了处理屏幕的业务
+[Screen](Screen/Screen.md)封装了处理屏幕的业务
 
 * SharedPreference  
 SharedPreference封装了缓存的业务
