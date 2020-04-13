@@ -15,4 +15,6 @@ include ':xwidget:XTitleBar', ':xwidget:XRefreshView', ':xwidget:XDialog'
 include ':function:Resource', ':function:BaseNetwork', ':function:Interface', ':function:RefreshAdapter', ':function:Banner', ':function:PickerView'
 include ':function:BaseEventBus', ':function:BaseFragment', ':function:BaseActivity', ':function:BaseApplication', ':function:Permission'
 //profession模块的包
-include ':profession:MultiImageSelector', ':profession:MVP', ':profession:Network', ':profession:Crash', ':profession:Login', ':profession:Lifecycler'
+include ':profession:Crash', ':profession:Lifecycler', ':profession:Login'
+include ':profession:MultiImageSelector', ':profession:MVP', ':profession:Network'
+include ':profession:Update'

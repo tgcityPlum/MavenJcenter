@@ -16,5 +16,5 @@ xwidget收集基于x版本的常用的自定义组件
 function收集常用的功能模块
 
 # profession
-profession收集常用的业务模块
+[profession](profession/profession.md)收集常用的业务模块
 
