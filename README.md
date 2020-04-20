@@ -4,7 +4,7 @@
 [utils](utils/utils.md)收集常用的工具类
 
 # xutils
-xutils收集基于x版本的常用的工具类
+[xutils](xutils/xutils.md)收集基于x版本的常用的工具类
 
 # widget
 widget收集常用的自定义组件
