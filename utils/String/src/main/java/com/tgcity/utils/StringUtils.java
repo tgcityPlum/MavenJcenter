@@ -63,7 +63,7 @@ public final class StringUtils {
      * 自定义格式化string的输出样式
      *
      * @param message 字符串
-     * @param format 为空时的返回样式
+     * @param format  为空时的返回样式
      * @return String
      */
     public static String dislodgeEmptyToCustomize(String message, String format) {
@@ -71,6 +71,26 @@ public final class StringUtils {
             return format;
         }
         return message;
+    }
+
+    /**
+     * 格式化前缀string
+     */
+    public static String dislodgePrefixToEmpty(String message, String prefix) {
+        if (isEmpty(message)) {
+            return prefix;
+        }
+        return prefix + message;
+    }
+
+    /**
+     * 自定义格式化前缀string
+     */
+    public static String dislodgePrefixToCustomize(String message, String prefix, String format) {
+        if (isEmpty(message)) {
+            return prefix + format;
+        }
+        return prefix + message;
     }
 
     /**

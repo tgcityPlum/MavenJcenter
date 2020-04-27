@@ -7,7 +7,7 @@
 [xutils](xutils/xutils.md)收集基于x版本的常用的工具类
 
 # widget
-widget收集常用的自定义组件
+[widget](widget/widget.md)收集常用的自定义组件
 
 # xwidget
 xwidget收集基于x版本的常用的自定义组件

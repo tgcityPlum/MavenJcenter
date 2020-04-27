@@ -7,5 +7,3 @@ profession收集常用的业务模块
 
 * Update  
 [Update](Update/Update.md)封装了自更新业务
-
-
