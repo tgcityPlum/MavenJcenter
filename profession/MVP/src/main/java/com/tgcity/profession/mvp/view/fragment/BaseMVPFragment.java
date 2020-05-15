@@ -1,5 +1,12 @@
 package com.tgcity.profession.mvp.view.fragment;
 
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.tgcity.function.fragment.BaseMemoryFragment;
@@ -16,15 +23,14 @@ public abstract class BaseMVPFragment<V, P extends BasePresenterImpl<V>> extends
     public P presenter;
 
     @Override
-    public void onCreate(LifecycleOwner owner) {
-        super.onCreate(owner);
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         if (presenter == null) {
             presenter = createPresenter();
         }
         if (presenter != null) {
             presenter.attachView((V) this);
         }
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override

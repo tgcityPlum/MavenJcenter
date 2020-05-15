@@ -22,14 +22,15 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
         if (presenter == null){
             presenter = createPresenter();
         }
         if (presenter != null) {
             presenter.attachView((V) this);
         }
+
+        super.onCreate(savedInstanceState);
+
     }
 
     /**
