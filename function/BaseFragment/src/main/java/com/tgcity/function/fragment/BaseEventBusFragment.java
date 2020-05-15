@@ -22,13 +22,12 @@ import org.greenrobot.eventbus.ThreadMode;
 public abstract class BaseEventBusFragment extends BaseLazyLoadFragment {
 
     @Override
-    public void onCreate(LifecycleOwner owner) {
-        super.onCreate(owner);
-
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         //是否注册eventBus
         if (isUseEventBus()){
             EventBus.getDefault().register(this);
         }
+        super.onViewCreated(view, savedInstanceState);
     }
 
     /**
