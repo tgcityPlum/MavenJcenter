@@ -3,10 +3,17 @@ package com.tgcity.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.annotation.Nullable;
+import android.util.Base64;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.StreamCorruptedException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
@@ -243,6 +250,28 @@ public final class SharedPreferencesUtils<T> {
      */
     public Set<String> getStringSet(String key, @Nullable Set<String> defaultValue) {
         return sp.getStringSet(key, defaultValue);
+    }
+
+    /**
+     * 获取object
+     */
+    public <T> T getObject(String key, Class<T> clazz) {
+        if (sp.contains(key)) {
+            String objectVal = sp.getString(key, null);
+
+            Gson gson = new Gson();
+            return gson.fromJson(objectVal,clazz);
+        }
+        return null;
+    }
+
+    /**
+     * 针对复杂类型存储<对象>
+     */
+    public void put(String key, Object object) {
+        Gson gson = new Gson();
+        String data = gson.toJson(object);
+        editor.putString(key, data).apply();
     }
 
     /**
