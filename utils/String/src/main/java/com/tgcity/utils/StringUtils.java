@@ -1,6 +1,12 @@
 package com.tgcity.utils;
 
+import android.text.InputFilter;
+import android.text.Spanned;
+import android.widget.TextView;
+
 import java.text.NumberFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author TGCity
@@ -121,4 +127,69 @@ public final class StringUtils {
         return temp;
     }
 
+    /**
+     * 获取表情限制
+     * @return InputFilter
+     */
+    public static InputFilter getEmojiFilter() {
+        InputFilter emojiFilter = new InputFilter() {
+            Pattern emoji = Pattern.compile("[\ud83c\udc00-\ud83c\udfff]|[\ud83d\udc00-\ud83d\udfff]|[\u2600-\u27ff]", Pattern.UNICODE_CASE | Pattern.CASE_INSENSITIVE);
+
+            @Override
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                Matcher emojiMatcher = emoji.matcher(source);
+                if (emojiMatcher.find()) {
+                    return "";
+                }
+                if (containsEmoji(source.toString())) {
+                    return "";
+                }
+                return null;
+            }
+
+            /**
+             * 检测是否有emoji表情
+             */
+            private boolean containsEmoji(String source) {
+                int len = source.length();
+                for (int i = 0; i < len; i++) {
+                    char codePoint = source.charAt(i);
+                    if (!isEmojiCharacter(codePoint)) { //如果不能匹配,则该字符是Emoji表情
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            /**
+             * 判断是否是Emoji
+             *
+             * @param codePoint 比较的单个字符
+             */
+            private boolean isEmojiCharacter(char codePoint) {
+                return (codePoint == 0x0)
+                        || (codePoint == 0x9)
+                        || (codePoint == 0xA)
+                        || (codePoint == 0xD)
+                        || ((codePoint >= 0x20) && (codePoint <= 0xD7FF))
+                        || ((codePoint >= 0xE000) && (codePoint <= 0xFFFD))
+                        || ((codePoint >= 0x10000) && (codePoint <= 0x10FFFF)
+                );
+            }
+
+        };
+        return emojiFilter;
+    }
+
+    /**
+     * 获取控件上的文案
+     * @param tv TextView
+     * @return String
+     */
+    public static String getStringFromView(TextView tv) {
+        if (tv != null){
+            return tv.getText().toString().trim();
+        }
+        return "";
+    }
 }
