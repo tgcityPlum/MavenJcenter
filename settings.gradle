@@ -2,7 +2,7 @@ include ':app'
 //utils模块的包
 include ':utils:AMapLocation', ':utils:ClearView', ':utils:ContinuousClick', ':utils:Date'
 include ':utils:Density', ':utils:Digital', ':utils:File', ':utils:ImageLoader', ':utils:IntentFlag'
-include ':utils:Log', ':utils:Screen', ':utils:SharedPreference', ':utils:Spannable'
+include ':utils:Log', ':utils:Screen', ':utils:SharedPreference', ':utils:Softhidekeyboard', ':utils:Spannable'
 include ':utils:StartActivity', ':utils:String', ':utils:System', ':utils:Toast'
 //xutils模块的包
 include ':xutils:FragmentNavigator'
