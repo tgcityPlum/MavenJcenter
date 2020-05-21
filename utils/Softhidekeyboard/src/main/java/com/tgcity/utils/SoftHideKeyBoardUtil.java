@@ -1,11 +1,14 @@
 package com.tgcity.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Build;
+import android.os.IBinder;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 
 /**
@@ -23,7 +26,12 @@ public class SoftHideKeyBoardUtil {
     private Activity activity;
     private int statusBarHeight;
 
+    @Deprecated
     public static void assistActivity(Activity activity) {
+        new SoftHideKeyBoardUtil(activity);
+    }
+
+    public static void getInstall(Activity activity) {
         new SoftHideKeyBoardUtil(activity);
     }
 
@@ -34,7 +42,6 @@ public class SoftHideKeyBoardUtil {
         this.activity = activity;
         FrameLayout content = activity.findViewById(android.R.id.content);
         mChildOfContent = content.getChildAt(0);
-
         //界面出现变动都会调用这个监听事件
         mChildOfContent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -93,4 +100,38 @@ public class SoftHideKeyBoardUtil {
         mChildOfContent.getWindowVisibleDisplayFrame(r);
         return (r.bottom - r.top);
     }
+
+    /**
+     * 隐藏输入法键盘
+     */
+    public static void hideInputKeyboard(Activity activity) {
+        if (activity == null) {
+            throw new RuntimeException("activity is null");
+        }
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            return;
+        }
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null && imm.isActive()) {
+            IBinder ibinder = view.getWindowToken();
+            if (ibinder != null) {
+                imm.hideSoftInputFromWindow(ibinder, InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        }
+    }
+
+    /**
+     * 显示输入法键盘
+     */
+    public static void showInputKeyboard(Activity instance) {
+        if (instance == null) {
+            throw new RuntimeException("activity is null");
+        }
+        InputMethodManager imm = (InputMethodManager) instance.getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (imm != null ) {
+            imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
 }
