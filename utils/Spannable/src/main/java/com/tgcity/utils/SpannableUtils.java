@@ -1,10 +1,12 @@
 package com.tgcity.utils;
 
 import android.content.Context;
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
+import android.text.style.StrikethroughSpan;
 
 /**
  * @author TGCity
@@ -68,6 +70,15 @@ public class SpannableUtils {
     public SpannableString setSpannableSize(String message, float proportion, int startLength, int endLength) {
         SpannableString spannableString = new SpannableString(message);
         spannableString.setSpan(new RelativeSizeSpan(proportion), startLength, endLength, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        return spannableString;
+    }
+
+    /**
+     * 在文本内容上加中横线
+     */
+    public SpannableString setSpannableLine(String message) {
+        SpannableString spannableString = new SpannableString(message);
+        spannableString.setSpan(new StrikethroughSpan(), 0, message.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
         return spannableString;
     }
 }

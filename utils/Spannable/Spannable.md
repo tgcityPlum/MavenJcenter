@@ -19,3 +19,9 @@ Spannable封装了富文本业务
     .setProportion(float proportion)
     .setSpannableSize(String message, int partLength, boolean isFromStart);
 ```
+* 设置横线
+```
+ SpannableUtils
+    .getInstance()
+    .setSpannableLine(String message);
+```
