@@ -17,3 +17,11 @@ Screen封装了处理屏幕的业务
 ```
  ScreenUtils.getStatusBarHeight(Context context);
 ```
+* 显示蒙版
+```
+ ScreenUtils.showWindowMask(Window window);
+```
+* 隐藏蒙版
+```
+ ScreenUtils.hideWindowMask(Window window);
+```
