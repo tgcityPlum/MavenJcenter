@@ -19,5 +19,13 @@ System封装了提供获取系统方法的业务
 ```
 * 是否是主线程
 ```
+ SystemUtils.getAppVersionName(Context context);
+```
+* 获取版本名称
+```
+ SystemUtils.getAppVersionCode(Context context);
+```
+* 获取版本号
+```
  SystemUtils.isMainProcess(Context context);
 ```
