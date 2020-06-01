@@ -68,7 +68,7 @@ public class ApiException extends RuntimeException {
                     break;
 
                 default:
-                    apiException = new ApiException(httpResult.getMessage(), ErrorMode.HTTP_OTHER_ERROR);
+                    apiException = new ApiException(httpResult.getMessage(), ErrorMode.HTTP_OTHER_ERROR.setErrorCode(httpResult.getCode()));
             }
 
         }
