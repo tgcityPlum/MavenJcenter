@@ -57,6 +57,11 @@
         <item name="android:textColor">@color/color_2D2D2F</item>
     </style>
 
+    <style name="size_14_color_FFFFFF">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
     <style name="size_15_color_333333">
         <item name="android:textSize">@dimen/sp_15</item>
         <item name="android:textColor">@color/color_333333</item>

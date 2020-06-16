@@ -15,6 +15,7 @@ public class DateUtils {
     public static final String PATTERN_STYLE_1 = "yyyy年MM月dd日";
     public static final String PATTERN_STYLE_2 = "HH:mm:ss";
     public static final String PATTERN_STYLE_3 = "yyyy-MM-dd HH:mm:ss";
+    public static final String PATTERN_STYLE_4 = "yyyy-MM-dd";
 
     /**
      * 将时间戳转化成 pattern 样式
