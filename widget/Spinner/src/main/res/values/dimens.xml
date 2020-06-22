@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <dimen name="ms_padding_left">10dp</dimen>
+  <dimen name="ms_padding_top">5dp</dimen>
+  <dimen name="ms_item_height">30dp</dimen>
+  <dimen name="ms_popup_padding_left">10dp</dimen>
+  <dimen name="ms_popup_padding_top">5dp</dimen>
+</resources>
