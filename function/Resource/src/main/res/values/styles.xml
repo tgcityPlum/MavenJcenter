@@ -62,6 +62,16 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
+    <style name="size_14_color_272727">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_272727</item>
+    </style>
+
+    <style name="size_14_color_000000">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_ff000000</item>
+    </style>
+
     <style name="size_15_color_333333">
         <item name="android:textSize">@dimen/sp_15</item>
         <item name="android:textColor">@color/color_333333</item>
@@ -107,6 +117,11 @@
         <item name="android:textColor">@color/color_view_blue</item>
     </style>
 
+    <style name="size_16_color_272727">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/color_272727</item>
+    </style>
+
     <style name="size_17_color_333333_bold">
         <item name="android:textSize">@dimen/sp_17</item>
         <item name="android:textColor">@color/color_333333</item>
@@ -137,6 +152,16 @@
     <style name="size_18_color_2D2D2F">
         <item name="android:textSize">@dimen/sp_18</item>
         <item name="android:textColor">@color/color_context</item>
+    </style>
+
+    <style name="size_18_color_FFEB3B">
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textColor">#FFEB3B</item>
+    </style>
+
+    <style name="size_26_color_272727">
+        <item name="android:textSize">@dimen/sp_26</item>
+        <item name="android:textColor">@color/color_272727</item>
     </style>
     <!--    text and color style ending   -->
 
