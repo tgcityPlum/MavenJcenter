@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">@color/color_blue</color>
+    <color name="colorPrimaryDark">@color/color_blue</color>
+    <color name="colorAccent">@color/color_blue</color>
+
+    <color name="color_blue">#0F73EE</color>
+    <color name="theme_body">#cc22292c</color>
+    <color name="black">#000000</color>
+    <color name="color_status_bar">#33000000</color>
+    <color name="color_EEEEEE">#eeeeee</color>
+</resources>

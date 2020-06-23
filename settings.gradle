@@ -18,6 +18,6 @@ include ':function:BaseEventBus', ':function:BaseFragment', ':function:BaseNetwo
 include ':function:Interface', ':function:Permission', ':function:PickerView'
 include ':function:RefreshAdapter', ':function:Resource'
 //profession模块的包
-include ':profession:Crash', ':profession:Lifecycler', ':profession:Login'
+include ':profession:Crash', ':profession:ImagePicker', ':profession:Lifecycler', ':profession:Login'
 include ':profession:MultiImageSelector', ':profession:MVP', ':profession:Network'
 include ':profession:Update'

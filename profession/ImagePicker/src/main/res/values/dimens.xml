@@ -1,0 +1,10 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--标题栏统一高度-->
+    <dimen name="title_bar_height">56dp</dimen>
+    <dimen name="title_bar_padding_top">0dp</dimen>
+    <dimen name="dp_110">110dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+
+</resources>
