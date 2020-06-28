@@ -5,8 +5,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.StateListDrawable;
 import android.media.ExifInterface;
 import android.os.Environment;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Base64;
 
@@ -382,6 +384,23 @@ public class FileUtils {
                 }
             }
         }
+    }
+
+    /**
+     * 返回一个Drawable对象，可以根据selected状态改变 图标
+     *
+     * @param context Context
+     * @param normalIcon normal Icon
+     * @param selectedIcon selected Icon
+     * @return StateListDrawable
+     */
+    public static StateListDrawable getStateListDrawable(Context context, int normalIcon, int selectedIcon) {
+        StateListDrawable drawable = new StateListDrawable();
+        //选中之后的drawable
+        drawable.addState(new int[]{android.R.attr.state_selected}, ContextCompat.getDrawable(context, selectedIcon));
+        //正常情况下的drawable
+        drawable.addState(new int[]{}, ContextCompat.getDrawable(context, normalIcon));
+        return drawable;
     }
 
 }
