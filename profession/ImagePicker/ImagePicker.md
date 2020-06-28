@@ -10,14 +10,14 @@ ImagePicker封装了图片选择器
 //设置图片选择器
 ImagePickerManager.init();
 ```
-* class中的配置  
- ** 全局配置
+- class中的配置  
+   - 全局配置
 ```
   private var imageItemList: ArrayList<ImageItem>? = null
   private val limitSize = 3
   private var pictureAdapter: NinePictureAdapter? = null
 ```
-** 配置适配器
+   - 配置适配器
 ```
   override fun init() {
         imageItemList = ArrayList()
@@ -27,7 +27,7 @@ ImagePickerManager.init();
         cgvIcon!!.adapter = pictureAdapter
   }
 ```
-** 选择图片  
+   - 选择图片  
 ```
     private fun selectPicture() {
         ImagePicker.getInstance().isMultiMode = false
@@ -36,7 +36,7 @@ ImagePickerManager.init();
         startActivityForResult(Intent(activity, ImageGridActivity::class.java), DigitalUtils.REQUEST_CODE_CAMERA)
     }
 ```
-** 预览图片
+   - 预览图片
 ```
     private fun previewPicture() {
         if (imageItemList == null || imageItemList!!.size == 0) {
