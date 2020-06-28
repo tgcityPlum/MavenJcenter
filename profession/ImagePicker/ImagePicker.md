@@ -5,12 +5,12 @@ ImagePicker封装了图片选择器
 
 ## 使用说明
 
-1. Application中配置
+* Application中配置
 ```
 //设置图片选择器
 ImagePickerManager.init();
 ```
-2. class中的配置
+* class中的配置
     1. 全局配置
         ```
         private var imageItemList: ArrayList<ImageItem>? = null
