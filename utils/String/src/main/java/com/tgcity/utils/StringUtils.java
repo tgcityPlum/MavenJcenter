@@ -1,9 +1,14 @@
 package com.tgcity.utils;
 
+import android.content.Context;
+import android.content.res.AssetManager;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.NumberFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -191,5 +196,30 @@ public final class StringUtils {
             return tv.getText().toString().trim();
         }
         return "";
+    }
+
+    /**
+     * 获取本地json文件
+     * @param fileName 文件名
+     * @param context Context
+     * @return String
+     */
+    public static String getJson(String fileName, Context context) {
+        //将json数据变成字符串
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            //获取assets资源管理器
+            AssetManager assetManager = context.getAssets();
+            //通过管理器打开文件并读取
+            BufferedReader bf = new BufferedReader(new InputStreamReader(
+                    assetManager.open(fileName)));
+            String line;
+            while ((line = bf.readLine()) != null) {
+                stringBuilder.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return stringBuilder.toString();
     }
 }
