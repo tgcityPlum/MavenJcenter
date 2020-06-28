@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 2001152
-        versionName "1.0.2"
+        versionCode 2006282
+        versionName "1.0.4"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -42,6 +42,8 @@ dependencies {
     implementation functionDependencies.resource
     //引入 interface
     implementation functionDependencies.interface
+    //引入 density
+    implementation utilDependencies.density
 }
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
@@ -49,7 +51,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'function' // 项目的名称
 def moduleName = 'RefreshAdapter' // 项目的名称
 group = 'com.tgcity.function' // 所在组
-version = "1.0.2" //aar的版本号
+version = "1.0.4" //aar的版本号
 
 install {
     repositories.mavenInstaller {

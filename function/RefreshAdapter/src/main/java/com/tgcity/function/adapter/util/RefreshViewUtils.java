@@ -7,11 +7,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tgcity.function.adapter.BaseQuickAdapter;
+import com.tgcity.function.adapter.decoration.SpacesItemDecoration;
 import com.tgcity.function.adapter.helper.BaseRecyclerViewAdapterHelper;
 import com.tgcity.function.adapter.helper.Constant;
 import com.tgcity.function.adapter.loadmore.SimpleLoadMoreView;
 import com.tgcity.function.interfaces.OnDepositRequestCompleteCallBack;
 import com.tgcity.function.interfaces.OnPublicRefreshViewCallBack;
+import com.tgcity.utils.DensityUtils;
 import com.tgcity.widget.progress.ProgressView;
 import com.tgcity.xwidget.springview.container.DefaultHeader;
 import com.tgcity.xwidget.springview.listener.OnDepositRequestPrepareListCallBack;
@@ -194,6 +196,27 @@ public class RefreshViewUtils {
     }
 
     /**
+     * 全局通用的绑定RecyclerView、SpringView和适配器
+     *
+     * @param context
+     * @param layoutManager                       布局管理器
+     * @param recyclerView                        列表
+     * @param space                               间距
+     * @param refresh                             上下拉刷新控件
+     * @param adapter                             适配器
+     * @param onDepositRequestPrepareListCallBack 上下拉回调
+     * @return
+     */
+    public static DefaultHeader bindRecyclerViewWithRefreshAndAdapter(Context context, RecyclerView.LayoutManager layoutManager, RecyclerView recyclerView, float space, SpringView refresh, BaseQuickAdapter adapter, final OnDepositRequestPrepareListCallBack onDepositRequestPrepareListCallBack) {
+        if (recyclerView == null) {
+            return null;
+        }
+        recyclerView.addItemDecoration(new SpacesItemDecoration(DensityUtils.dpToPx(space)));
+
+        return bindRecyclerViewWithRefreshAndAdapter(context, layoutManager, recyclerView, refresh, adapter, onDepositRequestPrepareListCallBack);
+    }
+
+    /**
      * 全局通用的普通绑定RecyclerView和适配器
      *
      * @param layoutManager 布局管理器
@@ -202,6 +225,10 @@ public class RefreshViewUtils {
      * @return 缓存池
      */
     public static RecyclerView.RecycledViewPool bindRecyclerViewAndAdapter(RecyclerView.LayoutManager layoutManager, RecyclerView recyclerView, BaseQuickAdapter adapter) {
+        if (recyclerView == null){
+            return null;
+        }
+
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         /*******以下是对RecyclerView的一键优化*******/
@@ -219,6 +246,22 @@ public class RefreshViewUtils {
         recyclerView.setItemViewCacheSize(10);
         recyclerView.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
         return recyclerView.getRecycledViewPool();
+    }
+
+    /**
+     * 全局通用的普通绑定RecyclerView和适配器
+     *
+     * @param layoutManager 布局管理器
+     * @param recyclerView  列表
+     * @param adapter       适配器
+     * @return 缓存池
+     */
+    public static RecyclerView.RecycledViewPool bindRecyclerViewAndAdapter(RecyclerView.LayoutManager layoutManager, RecyclerView recyclerView, BaseQuickAdapter adapter, float space) {
+        if (recyclerView == null){
+            return null;
+        }
+        recyclerView.addItemDecoration(new SpacesItemDecoration(DensityUtils.dpToPx(space)));
+        return bindRecyclerViewAndAdapter(layoutManager, recyclerView, adapter);
     }
 
     /**
