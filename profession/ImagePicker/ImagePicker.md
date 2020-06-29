@@ -49,3 +49,17 @@ ImagePickerManager.init();
            startActivityForResult(intentPreview, ImagePicker.REQUEST_CODE_PREVIEW)
        }
         ```
+* xml中配置
+```
+<!--添加的列表-->
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/srvPeerPeople"
+    android:layout_width="@dimen/dp_0"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_16"
+    android:overScrollMode="never"
+    android:scrollbars="vertical"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/tvAdd" />
+```
