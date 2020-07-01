@@ -6,6 +6,7 @@ package com.tgcity.utils;
  * @description 数字工具类
  */
 public class DigitalUtils {
+    public static final int LEVEL_N_1 = -1;
     public static final int LEVEL_0 = 0;
     public static final int LEVEL_1 = 1;
     public static final int LEVEL_2 = 2;
