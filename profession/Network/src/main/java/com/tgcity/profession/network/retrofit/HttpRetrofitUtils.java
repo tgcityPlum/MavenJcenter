@@ -92,7 +92,7 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
                 proxy = new AbstractCallBackProxy<HttpResult<T>, T>(abstractSimpleType) {
                 };
             } else {
-                observable = builder.observable;
+                observable = builder.observable.map(new HttpResultFunS<String>());
                 proxy = new AbstractCallBackPrototypeProxy<T, T>(abstractSimpleType) {
                 };
             }
@@ -137,7 +137,7 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
                 };
             } else {
                 // TODO: 2019/11/22 此时未校验code
-                observable = builder.observable;
+                observable = builder.observable.map(new HttpResultFunS<String>());
                 proxy = new AbstractCallBackPrototypeProxy<T, T>(observer) {
                 };
             }
@@ -207,6 +207,23 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
             }
             return httpResult.getResults();
         }
+    }
+
+    public class HttpResultFunS<T> implements Function<HttpResult<String>, String> {
+
+        @Override
+        public String apply(HttpResult<String> httpResult) {
+            //项目抛错根据getCode值进行处理
+            if (httpResult.getCode() != NetworkConstant.SUCCEED_CODE) {
+                throw ApiException.handleException(httpResult);
+            } else {
+                if (httpResult.getResults() == null) {
+                    return "data is null";
+                }
+            }
+            return httpResult.getResults();
+        }
+
     }
 
     /**
