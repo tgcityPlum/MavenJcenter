@@ -6,18 +6,15 @@ package com.tgcity.profession.network.bean.result;
 
 public class HttpCommonResult<T> {
 
-    private String code;
+    private int code;
     private String message;
-    private String fullMessage;
-    private String timestamp;
-    private boolean isSuccess;
-    private T result;
+    private T data;
 
-    public String getCode() {
+    public int getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(int code) {
         this.code = code;
     }
 
@@ -29,36 +26,12 @@ public class HttpCommonResult<T> {
         this.message = message;
     }
 
-    public String getFullMessage() {
-        return fullMessage;
-    }
-
-    public void setFullMessage(String fullMessage) {
-        this.fullMessage = fullMessage;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public boolean isSuccess() {
-        return isSuccess;
-    }
-
-    public void setSuccess(boolean success) {
-        isSuccess = success;
-    }
-
     public T getResult() {
-        return result;
+        return data;
     }
 
     public void setResult(T result) {
-        this.result = result;
+        this.data = result;
     }
 
     @Override
@@ -66,10 +39,7 @@ public class HttpCommonResult<T> {
         return "HttpCommonResult{" +
                 "code='" + code + '\'' +
                 ", message='" + message + '\'' +
-                ", fullMessage='" + fullMessage + '\'' +
-                ", timestamp='" + timestamp + '\'' +
-                ", isSuccess=" + isSuccess +
-                ", result=" + result +
+                ", result=" + data +
                 '}';
     }
 }

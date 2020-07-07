@@ -136,9 +136,9 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
                 proxy = new AbstractCallBackProxy<HttpResult<T>, T>(observer) {
                 };
             } else {
-                // TODO: 2019/11/22 此时未校验code
                 observable = builder.observable.map(new HttpResultFunS<String>());
-                proxy = new AbstractCallBackPrototypeProxy<T, T>(observer) {
+                proxy = new AbstractCallBackProxy<HttpResult<T>, T>(observer) {
+//                proxy = new AbstractCallBackPrototypeProxy<T, T>(observer) {
                 };
             }
         }
@@ -160,20 +160,16 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
 
         @Override
         public T apply(HttpCommonResult<T> httpResult) {
-            if (!httpResult.isSuccess()) {
-                if ("0".equals(httpResult.getCode())) {
-                    throw new ApiException(httpResult.getMessage(), ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(httpResult.getMessage()));
+            if (httpResult.getCode() != 0) {
+                throw new ApiException(httpResult.getMessage(), ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(httpResult.getMessage()));
+            }
+            if (httpResult.getResult() instanceof List) {
+                if (CommonUtils.isEmptyResult((List) httpResult.getResult())) {
+                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL);
                 }
-                throw new ApiException(ErrorMode.HTTP_OTHER_ERROR.getErrorTitle(), ErrorMode.HTTP_OTHER_ERROR);
             } else {
-                if (httpResult.getResult() instanceof List) {
-                    if (CommonUtils.isEmptyResult((List) httpResult.getResult())) {
-                        throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL);
-                    }
-                } else {
-                    if (httpResult.getResult() == null) {
-                        throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL);
-                    }
+                if (httpResult.getResult() == null) {
+                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL);
                 }
             }
             return httpResult.getResult();
