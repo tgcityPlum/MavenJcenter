@@ -17,6 +17,7 @@ public class DigitalUtils {
     public static final int LEVEL_8 = 8;
     public static final int LEVEL_11 = 11;
     public static final int LEVEL_16 = 16;
+    public static final int LEVEL_401 = 401;
 
     public static final int REQUEST_CODE_PERMISSION = 1000;
     public static final int REQUEST_CODE_LOCATION = 1001;
