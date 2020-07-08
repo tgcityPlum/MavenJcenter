@@ -2,7 +2,6 @@ package com.tgcity.profession.mvp.view.activity;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.tgcity.function.activity.BaseLauncherTimeActivity;
@@ -25,7 +24,7 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (presenter == null){
+        if (presenter == null) {
             presenter = createPresenter();
         }
         if (presenter != null) {
@@ -57,7 +56,7 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
     }
 
     public void onGotoLogin(int digital, SharedPreferencesUtils utils, Class<?> cla) {
-        if (utils != null){
+        if (utils != null) {
             utils.clear();
         }
 
@@ -73,6 +72,25 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
                     }
                 })
                 .gotoLogin();
+    }
+
+    public void onGotoLogin(int digital, SharedPreferencesUtils utils, Class<?> cla, int requestCode) {
+        if (utils != null) {
+            utils.clear();
+        }
+
+        LoginManager.getInstance()
+                .setType(digital)
+                .setContext(getContext())
+                .setLoginClassName(cla)
+                .setUseNewTaskFlag(true)
+                .setCallBack(new LoginAction() {
+                    @Override
+                    public void onFinish() {
+
+                    }
+                })
+                .gotoLoginForResult(requestCode);
     }
 
     /**

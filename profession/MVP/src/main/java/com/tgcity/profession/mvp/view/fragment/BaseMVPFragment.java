@@ -84,6 +84,25 @@ public abstract class BaseMVPFragment<V, P extends BasePresenterImpl<V>> extends
                 .gotoLogin();
     }
 
+    public void onGotoLogin(int digital, SharedPreferencesUtils utils,Class<?> cla,int requestCode) {
+        if (utils != null){
+            utils.clear();
+        }
+
+        LoginManager.getInstance()
+                .setType(digital)
+                .setFragment(this)
+                .setLoginClassName(cla)
+                .setUseNewTaskFlag(true)
+                .setCallBack(new LoginAction() {
+                    @Override
+                    public void onFinish() {
+
+                    }
+                })
+                .gotoLoginForResultInFragment(requestCode);
+    }
+
     /**
      * 跳转完成后的回调
      */

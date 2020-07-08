@@ -89,7 +89,7 @@ ext {
             clearView       : "com.tgcity.utils:ClearView:latest.release",
             intentFlag      : "com.tgcity.utils:IntentFlag:latest.release",
             imageLoader     : "com.tgcity.utils:ImageLoader:latest.release",
-            startActivity   : "com.tgcity.utils:StartActivity:1.0.4",
+            startActivity   : "com.tgcity.utils:StartActivity:1.0.6",
             continuousClick : "com.tgcity.utils:ContinuousClick:latest.release",
             sharedPreference: "com.tgcity.utils:SharedPreference:latest.release"
     ]
@@ -124,7 +124,7 @@ ext {
 
     //**************** professionDependencies ****************
     professionDependencies = [
-            login     : "com.tgcity.profession:Login:latest.release",
+            login     : "com.tgcity.profession:Login:1.0.6",
             lifecycler: "com.tgcity.profession:Lifecycler:latest.release"
     ]
 }
