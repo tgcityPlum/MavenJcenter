@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.fragment.app.Fragment;
+
 import com.tgcity.utils.DigitalUtils;
 import com.tgcity.utils.StartActivityUtils;
 
@@ -69,6 +71,11 @@ public class LoginManager {
      * 传入的activity
      */
     private Activity activity;
+
+    /**
+     * 传入的fragment
+     */
+    private Fragment fragment;
 
     /**
      * 登录的类名
@@ -257,6 +264,16 @@ public class LoginManager {
         return loginManager;
     }
 
+    private Fragment getFragment() {
+        return fragment;
+    }
+
+    public LoginManager setFragment(Fragment fragment) {
+        this.fragment = fragment;
+
+        return loginManager;
+    }
+
     /**
      * 设置完成回调
      *
@@ -293,26 +310,32 @@ public class LoginManager {
      */
     public void gotoLoginForResult(int requestCode) {
 
-        StartActivityUtils.getInstance()
+        StartActivityUtils startActivityUtils = StartActivityUtils.getInstance()
                 .setActivity(getActivity())
-                .setClass(getLoginClass())
-                .startActivityForResult(requestCode);
+                .setClass(getLoginClass());
+
+        if (isUseNewTaskFlag) {
+            startActivityUtils.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        startActivityUtils.startActivityForResult(requestCode);
 
         if (loginAction != null) {
             loginAction.onFinish();
         }
     }
 
-
     /**
      * 跳转登录界面
      */
     public void gotoLoginForResultInFragment(int requestCode) {
 
-        StartActivityUtils.getInstance()
-                .setActivity(getActivity())
-                .setClass(getLoginClass())
-                .startActivityForResult(requestCode);
+        StartActivityUtils startActivityUtils = StartActivityUtils.getInstance()
+                .setFragment(getFragment())
+                .setClass(getLoginClass());
+        if (isUseNewTaskFlag) {
+            startActivityUtils.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        startActivityUtils.startFragmentForResult(requestCode);
 
         if (loginAction != null) {
             loginAction.onFinish();

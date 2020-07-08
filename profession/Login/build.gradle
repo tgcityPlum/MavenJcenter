@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 2001201
-        versionName "1.0.2"
+        versionCode 2007083
+        versionName "1.0.6"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -32,7 +32,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation supportDependencies.appcompat
+    implementation supportDependencies.xAppcompat
 
     implementation utilDependencies.digital
     implementation utilDependencies.startActivity
@@ -43,7 +43,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'profession' // 项目的名称
 def moduleName = 'Login' // 项目的名称
 group = 'com.tgcity.profession' // 所在组
-version = "1.0.2" //aar的版本号
+version = "1.0.6" //aar的版本号
 
 install {
     repositories.mavenInstaller {
