@@ -2,6 +2,7 @@ package com.tgcity.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
@@ -32,6 +33,7 @@ public class StartActivityUtils {
      */
     private Context context;
     private Activity activity;
+    private Fragment fragment;
 
     /**
      * Intent
@@ -53,6 +55,17 @@ public class StartActivityUtils {
             }
         }
         return activityUtils;
+    }
+
+    /**
+     * 设置 Context
+     *
+     * @param fragment fragment
+     */
+    public StartActivityUtils setContext(Fragment fragment) {
+        this.fragment = fragment;
+        context = fragment.getContext();
+        return this;
     }
 
     /**
@@ -169,6 +182,18 @@ public class StartActivityUtils {
             }
         } else {
             throw new RuntimeException("activity is null");
+        }
+    }
+
+    public void startFragmentForResult(int requestCode) {
+        if (fragment != null) {
+            if (intent != null) {
+                fragment.startActivityForResult(intent, requestCode);
+            } else {
+                throw new RuntimeException("intent is null");
+            }
+        } else {
+            throw new RuntimeException("context is null");
         }
     }
 

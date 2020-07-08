@@ -303,6 +303,22 @@ public class LoginManager {
         }
     }
 
+
+    /**
+     * 跳转登录界面
+     */
+    public void gotoLoginForResultInFragment(int requestCode) {
+
+        StartActivityUtils.getInstance()
+                .setActivity(getActivity())
+                .setClass(getLoginClass())
+                .startActivityForResult(requestCode);
+
+        if (loginAction != null) {
+            loginAction.onFinish();
+        }
+    }
+
     public int getType() {
         return type;
     }
