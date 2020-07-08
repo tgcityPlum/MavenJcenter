@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 2007081
-        versionName "1.0.4"
+        versionCode 2007083
+        versionName "1.0.6"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -28,7 +28,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation supportDependencies.appcompat
+    implementation supportDependencies.xAppcompat
 }
 
 
@@ -38,7 +38,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'utils' // 项目的名称
 def module_name = 'StartActivity' // 项目的名称
 group = 'com.tgcity.utils' // 所在组
-version = "1.0.4" //aar的版本号
+version = "1.0.6" //aar的版本号
 
 install {
     repositories.mavenInstaller {

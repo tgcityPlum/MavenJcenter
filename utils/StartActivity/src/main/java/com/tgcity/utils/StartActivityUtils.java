@@ -2,10 +2,11 @@ package com.tgcity.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
+
+import androidx.fragment.app.Fragment;
 
 import java.io.Serializable;
 
@@ -62,9 +63,11 @@ public class StartActivityUtils {
      *
      * @param fragment fragment
      */
-    public StartActivityUtils setContext(Fragment fragment) {
+    public StartActivityUtils setFragment(Fragment fragment) {
         this.fragment = fragment;
-        context = fragment.getContext();
+        if (fragment != null){
+            context = fragment.getContext();
+        }
         return this;
     }
 
@@ -85,7 +88,9 @@ public class StartActivityUtils {
      */
     public StartActivityUtils setActivity(Activity activity) {
         this.activity = activity;
-        this.context = activity.getBaseContext();
+        if (activity!= null){
+            this.context = activity.getBaseContext();
+        }
         return this;
     }
 
