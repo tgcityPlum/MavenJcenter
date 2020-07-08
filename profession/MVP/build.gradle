@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 2005152
-        versionName "1.0.5"
+        versionCode 2007082
+        versionName "1.0.7"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -43,6 +43,10 @@ dependencies {
     implementation functionDependencies.baseActivity
     //引入 baseNetwork
     implementation functionDependencies.baseNetwork
+    //引入 sharedPreference
+    implementation utilDependencies.sharedPreference
+    //引入 login
+    implementation professionDependencies.login
     //lifecycler
     implementation professionDependencies.lifecycler
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
@@ -53,7 +57,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'profession' // 项目的名称
 def moduleName = 'MVP' // 项目的名称
 group = 'com.tgcity.profession' // 所在组
-version = "1.0.5" //aar的版本号
+version = "1.0.7" //aar的版本号
 
 install {
     repositories.mavenInstaller {

@@ -6,8 +6,11 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleOwner;
 
 import com.tgcity.function.activity.BaseLauncherTimeActivity;
+import com.tgcity.profession.login.LoginAction;
+import com.tgcity.profession.login.LoginManager;
 import com.tgcity.profession.mvp.model.OnPresenterTaskCallBack;
 import com.tgcity.profession.mvp.present.BasePresenterImpl;
+import com.tgcity.utils.SharedPreferencesUtils;
 
 
 /**
@@ -51,6 +54,32 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
                 onPresenterTaskCallBack.onPresenterTask(presenter);
             }
         }
+    }
+
+    public void onGotoLogin(int digital, SharedPreferencesUtils utils, Class<?> cla) {
+        if (utils != null){
+            utils.clear();
+        }
+
+        LoginManager.getInstance()
+                .setType(digital)
+                .setContext(getContext())
+                .setLoginClassName(cla)
+                .setUseNewTaskFlag(true)
+                .setCallBack(new LoginAction() {
+                    @Override
+                    public void onFinish() {
+                        onJumpFinish();
+                    }
+                })
+                .gotoLogin();
+    }
+
+    /**
+     * 跳转完成后的回调
+     */
+    public void onJumpFinish() {
+        finish();
     }
 
     @Override
