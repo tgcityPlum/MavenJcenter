@@ -35,6 +35,7 @@ public class OkHttp3Utils {
     private boolean isReadCookie = false;
     private boolean isSaveCookie = false;
     private boolean isHostname = false;
+    private String token;
 
 
     public static OkHttp3Utils getInstance() {
@@ -59,6 +60,11 @@ public class OkHttp3Utils {
     OkHttp3Utils setHostname(boolean hostname) {
         isHostname = hostname;
 
+        return this;
+    }
+
+    OkHttp3Utils setToken(String token) {
+        this.token = token;
         return this;
     }
 
@@ -98,14 +104,17 @@ public class OkHttp3Utils {
      * 云端响应头拦截器
      * 用于添加统一请求头  请按照自己的需求添加
      */
-    private static final Interceptor mTokenInterceptor = new Interceptor() {
+    private final Interceptor mTokenInterceptor = new Interceptor() {
+
         @Override
         public Response intercept(Chain chain) throws IOException {
-
-            Request authorised = chain.request().newBuilder()
+            Request.Builder builder = chain.request().newBuilder()
                     .addHeader("Content-Type", "application/json; charset=utf-8")
-                    .addHeader("User-Agent", "Android-XT-Water-Phone")
-                    .build();
+                    .addHeader("User-Agent", "Android-XT-Water-Phone");
+            if (token != null) {
+                builder.addHeader("token", token);
+            }
+            Request authorised = builder.build();
             if (NetworkConstant.Switch.IS_PRINT_NETWORK_LOG) {
                 return response(chain.proceed(authorised));
             } else {

@@ -161,7 +161,7 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
         @Override
         public T apply(HttpCommonResult<T> httpResult) {
             if (httpResult.getCode() != 0) {
-                throw new ApiException(httpResult.getMessage(), ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(httpResult.getMessage()));
+                throw new ApiException(httpResult.getMessage(), ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(httpResult.getMessage()).setErrorCode(httpResult.getCode()));
             }
             if (httpResult.getResult() instanceof List) {
                 if (CommonUtils.isEmptyResult((List) httpResult.getResult())) {

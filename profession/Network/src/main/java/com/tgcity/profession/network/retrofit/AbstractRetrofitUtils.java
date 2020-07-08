@@ -17,6 +17,7 @@ public abstract class AbstractRetrofitUtils {
     private boolean isReadCookie = false;
     private boolean isSaveCookie = false;
     private boolean isHostname = false;
+    private String token;
 
     public AbstractRetrofitUtils setReadCookie(boolean readCookie) {
         isReadCookie = readCookie;
@@ -36,6 +37,12 @@ public abstract class AbstractRetrofitUtils {
         return this;
     }
 
+    public AbstractRetrofitUtils setToken(String token) {
+        this.token = token;
+
+        return this;
+    }
+
     /**
      * 获取Retrofit对象
      *
@@ -43,14 +50,20 @@ public abstract class AbstractRetrofitUtils {
      */
     public Retrofit getRetrofit(String url) {
         Retrofit retrofit;
-
-        if (null == mOkHttpClient) {
+        /*if (null == mOkHttpClient) {
             mOkHttpClient = OkHttp3Utils.getInstance()
                     .setReadCookie(isReadCookie)
                     .setSaveCookie(isSaveCookie)
                     .setHostname(isHostname)
+                    .setToken(token)
                     .getOkHttpClient();
-        }
+        }*/
+        mOkHttpClient = OkHttp3Utils.getInstance()
+                .setReadCookie(isReadCookie)
+                .setSaveCookie(isSaveCookie)
+                .setHostname(isHostname)
+                .setToken(token)
+                .getOkHttpClient();
         //Retrofit2后使用build设计模式
         retrofit = new Retrofit.Builder()
                 //设置服务器路径
