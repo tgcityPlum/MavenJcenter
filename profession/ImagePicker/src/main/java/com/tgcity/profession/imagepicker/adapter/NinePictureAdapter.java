@@ -25,6 +25,8 @@ public class NinePictureAdapter extends BaseAdapter {
     private List<ImageItem> itemList;
     private WeakReference<Activity> activity;
     private int limiteSize = 9;
+    private boolean isShowDelete = true;
+    private boolean isShowAdd = true;
 
     public NinePictureAdapter(Activity activity, List<ImageItem> itemList) {
         this.itemList = itemList;
@@ -32,6 +34,12 @@ public class NinePictureAdapter extends BaseAdapter {
         if (this.itemList == null) {
             this.itemList = new ArrayList<>();
         }
+    }
+
+    public NinePictureAdapter(Activity activity, List<ImageItem> itemList, boolean isShowDelete, boolean isShowAdd) {
+        this(activity, itemList);
+        this.isShowDelete = isShowDelete;
+        this.isShowAdd = isShowAdd;
     }
 
     public void setLimiteSize(int limiteSize) {
@@ -69,7 +77,7 @@ public class NinePictureAdapter extends BaseAdapter {
             holder = (PictureViewHolder) convertView.getTag();
         }
 
-        holder.ivDelete.setVisibility(View.VISIBLE);
+        holder.ivDelete.setVisibility(isShowDelete ? View.VISIBLE : View.GONE);
 
         if (position < itemList.size()) {
             Glide.with(convertView.getContext())
@@ -80,12 +88,17 @@ public class NinePictureAdapter extends BaseAdapter {
                     .into(holder.ivPic);
         } else {
             holder.ivDelete.setVisibility(View.GONE);
-            Glide.with(convertView.getContext())
-                    .load("")
-                    .placeholder(R.mipmap.add_4)
-                    .error(R.mipmap.add_4)
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(holder.ivPic);
+
+            if (isShowAdd){
+                Glide.with(convertView.getContext())
+                        .load("")
+                        .placeholder(R.mipmap.add_4)
+                        .error(R.mipmap.add_4)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(holder.ivPic);
+            }else {
+                holder.ivPic.setVisibility(View.GONE);
+            }
         }
 
         if (position >= limiteSize) {
@@ -99,7 +112,7 @@ public class NinePictureAdapter extends BaseAdapter {
                 if (onPictureDeleteListener != null) {
                     onPictureDeleteListener.onPictureDelete(itemList.get(position));
                 }
-                if(itemList.size() > position){
+                if (itemList.size() > position) {
                     itemList.remove(position);
                     notifyDataSetChanged();
                 }
