@@ -8,5 +8,7 @@
     <string name="activity_onStop">正在调用onStop()</string>
     <string name="activity_current_page_name">当前界面{&#160;%s&#160;} ==>%s&#160;%s</string>
     <!--    Flag in the subclass of activity with ending   -->
+    <string name="media_type_image_jpeg">image/jpeg</string>
+    <string name="media_type_file">file</string>
 
 </resources>
