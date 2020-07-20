@@ -15,8 +15,11 @@ public class DigitalUtils {
     public static final int LEVEL_5 = 5;
     public static final int LEVEL_6 = 6;
     public static final int LEVEL_8 = 8;
+    public static final int LEVEL_10 = 10;
     public static final int LEVEL_11 = 11;
+    public static final int LEVEL_14 = 14;
     public static final int LEVEL_16 = 16;
+    public static final int LEVEL_20 = 20;
     public static final int LEVEL_60 = 60;
     public static final int LEVEL_401 = 401;
 
