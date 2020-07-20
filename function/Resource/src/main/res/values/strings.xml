@@ -10,5 +10,7 @@
     <!--    Flag in the subclass of activity with ending   -->
     <string name="media_type_image_jpeg">image/jpeg</string>
     <string name="media_type_file">file</string>
+    <string name="list_no_data">暂无数据</string>
+
 
 </resources>
