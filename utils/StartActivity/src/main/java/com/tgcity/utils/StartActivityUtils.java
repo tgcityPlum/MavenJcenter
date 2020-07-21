@@ -169,6 +169,7 @@ public class StartActivityUtils {
     public void startActivity() {
         if (context != null) {
             if (intent != null) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             } else {
                 throw new RuntimeException("intent is null");
