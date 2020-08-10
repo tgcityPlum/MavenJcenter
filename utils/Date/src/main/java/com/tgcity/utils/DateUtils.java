@@ -2,6 +2,7 @@ package com.tgcity.utils;
 
 import android.annotation.SuppressLint;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -25,6 +26,27 @@ public class DateUtils {
         Date date = new Date(time);
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         return format.format(date);
+    }
+
+
+    /**
+     * 将时间样式转化成时间戳
+     */
+    @SuppressLint("SimpleDateFormat")
+    public static long getLongFormatPattern(String time, String pattern) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        //设置要读取的时间字符串格式
+        Date date;
+        try {
+            date = format.parse(time);
+            //转换为Date类
+            if (date != null) {
+                return date.getTime();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
 }

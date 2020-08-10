@@ -62,6 +62,7 @@ public abstract class BaseLazyLoadFragment extends BaseLifecycleFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(setContent(), container, false);
+        rootView.setClickable(true);
         return rootView;
     }
 
