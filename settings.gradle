@@ -7,9 +7,9 @@ include ':utils:StartActivity', ':utils:String', ':utils:System', ':utils:Toast'
 //xutils模块的包
 include ':xutils:FragmentNavigator'
 //widget模块的包
-include ':widget:DoubleTextView', ':widget:GradientButton', ':widget:Handler', ':widget:LoadDialog'
-include ':widget:ProgressView', ':widget:RoundAngleImageView', ':widget:RoundCountDownProgress'
-include ':widget:Spinner',':widget:TitleBar', ':widget:VerificationCode'
+include ':widget:DoubleTextView', ':widget:EditViewClear', ':widget:GradientButton', ':widget:Handler'
+include ':widget:LoadDialog', ':widget:ProgressView', ':widget:RoundAngleImageView', ':widget:RoundCountDownProgress'
+include ':widget:Spinner', ':widget:TitleBar', ':widget:VerificationCode'
 //xwidget模块的包
 include ':xwidget:XDialog', ':xwidget:XRefreshView', ':xwidget:XTitleBar'
 //function模块的包
