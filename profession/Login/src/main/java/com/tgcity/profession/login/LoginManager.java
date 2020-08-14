@@ -80,11 +80,14 @@ public class LoginManager {
     /**
      * 登录的类名
      */
-    private Class<?> loginClassName;
+    private Class<?> loginClass;
+
+    private String className;
+
     /**
      * 跳转的类名
      */
-    private Class<?> gotoClassName;
+    private Class<?> gotoClass;
 
     /**
      * 回调接口
@@ -198,7 +201,7 @@ public class LoginManager {
     private void gotoClass() {
         StartActivityUtils startActivityUtils = StartActivityUtils.getInstance()
                 .setContext(getContext())
-                .setClass(getGotoClassName());
+                .setClass(getGotoClass());
 
         if (isUseNewTaskFlag) {
             startActivityUtils.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -207,33 +210,44 @@ public class LoginManager {
     }
 
     private Class<?> getLoginClass() {
-        return loginClassName;
+        return loginClass;
     }
 
     /**
      * 设置登录类名称
      *
-     * @param loginClassName Class
+     * @param loginClass Class
      * @return LoginManager
      */
-    public LoginManager setLoginClassName(Class<?> loginClassName) {
-        this.loginClassName = loginClassName;
+    public LoginManager setLoginClass(Class<?> loginClass) {
+        this.loginClass = loginClass;
 
         return this;
     }
 
-    private Class<?> getGotoClassName() {
-        return gotoClassName;
+    /**
+     * 设置登录类名称
+     *
+     * @param className Class
+     * @return LoginManager
+     */
+    public LoginManager setLoginClassName(String className) {
+        this.className = className;
+        return this;
+    }
+
+    private Class<?> getGotoClass() {
+        return gotoClass;
     }
 
     /**
      * 设置跳转的类
      *
-     * @param gotoClassName Class
+     * @param gotoClass Class
      * @return LoginManager
      */
-    public LoginManager setGotoClassName(Class<?> gotoClassName) {
-        this.gotoClassName = gotoClassName;
+    public LoginManager setGotoClass(Class<?> gotoClass) {
+        this.gotoClass = gotoClass;
 
         return loginManager;
     }

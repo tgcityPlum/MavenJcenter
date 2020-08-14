@@ -106,6 +106,18 @@ public class StartActivityUtils {
     }
 
     /**
+     * 设置 Class
+     *
+     * @param className Class
+     * @return StartActivityUtils
+     */
+    public StartActivityUtils setClassName(String className) {
+        intent = new Intent();
+        intent.setClassName(context,className);
+        return this;
+    }
+
+    /**
      * 设置 Flag
      *
      * @param flags int
