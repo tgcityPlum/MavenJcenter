@@ -63,6 +63,12 @@ public class LoginManager {
     private int type = DigitalUtils.LEVEL_0;
 
     /**
+     * 0 通过class进行跳转
+     * 1 通过class路劲进行跳转
+     */
+    private int classType = DigitalUtils.LEVEL_0;
+
+    /**
      * 传入的context
      */
     private Context context;
@@ -123,6 +129,12 @@ public class LoginManager {
      */
     public LoginManager setType(int type) {
         this.type = type;
+
+        return loginManager;
+    }
+
+    public LoginManager setClassType(int classType) {
+        this.classType = classType;
 
         return loginManager;
     }
@@ -200,8 +212,14 @@ public class LoginManager {
      */
     private void gotoClass() {
         StartActivityUtils startActivityUtils = StartActivityUtils.getInstance()
-                .setContext(getContext())
-                .setClass(getGotoClass());
+                .setContext(getContext());
+
+        if (classType == DigitalUtils.LEVEL_0){
+            startActivityUtils.setClass(getGotoClass());
+        }else {
+            startActivityUtils.setClassName(className);
+        }
+
 
         if (isUseNewTaskFlag) {
             startActivityUtils.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -231,7 +249,7 @@ public class LoginManager {
      * @param className Class
      * @return LoginManager
      */
-    public LoginManager setLoginClassName(String className) {
+    public LoginManager setClassName(String className) {
         this.className = className;
         return this;
     }
@@ -306,8 +324,13 @@ public class LoginManager {
     public void gotoLogin() {
 
         StartActivityUtils startActivityUtils = StartActivityUtils.getInstance()
-                .setContext(getContext())
-                .setClass(getLoginClass());
+                .setContext(getContext());
+
+        if (classType == DigitalUtils.LEVEL_0){
+            startActivityUtils.setClass(getLoginClass());
+        }else {
+            startActivityUtils.setClassName(className);
+        }
 
         if (isUseNewTaskFlag) {
             startActivityUtils.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -325,8 +348,13 @@ public class LoginManager {
     public void gotoLoginForResult(int requestCode) {
 
         StartActivityUtils startActivityUtils = StartActivityUtils.getInstance()
-                .setActivity(getActivity())
-                .setClass(getLoginClass());
+                .setActivity(getActivity());
+
+        if (classType == DigitalUtils.LEVEL_0){
+            startActivityUtils.setClass(getLoginClass());
+        }else {
+            startActivityUtils.setClassName(className);
+        }
 
         if (isUseNewTaskFlag) {
             startActivityUtils.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -344,8 +372,14 @@ public class LoginManager {
     public void gotoLoginForResultInFragment(int requestCode) {
 
         StartActivityUtils startActivityUtils = StartActivityUtils.getInstance()
-                .setFragment(getFragment())
-                .setClass(getLoginClass());
+                .setFragment(getFragment());
+
+        if (classType == DigitalUtils.LEVEL_0){
+            startActivityUtils.setClass(getLoginClass());
+        }else {
+            startActivityUtils.setClassName(className);
+        }
+
         if (isUseNewTaskFlag) {
             startActivityUtils.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
