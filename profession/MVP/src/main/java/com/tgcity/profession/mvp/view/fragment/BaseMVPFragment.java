@@ -1,9 +1,7 @@
 package com.tgcity.profession.mvp.view.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -65,15 +63,15 @@ public abstract class BaseMVPFragment<V, P extends BasePresenterImpl<V>> extends
         }
     }
 
-    public void onGotoLogin(int digital, SharedPreferencesUtils utils,Class<?> cla) {
-        if (utils != null){
+    public void onGotoLogin(int digital, SharedPreferencesUtils utils, Class<?> cla) {
+        if (utils != null) {
             utils.clear();
         }
 
         LoginManager.getInstance()
                 .setType(digital)
                 .setContext(getContext())
-                .setLoginClassName(cla)
+                .setLoginClass(cla)
                 .setUseNewTaskFlag(true)
                 .setCallBack(new LoginAction() {
                     @Override
@@ -84,15 +82,55 @@ public abstract class BaseMVPFragment<V, P extends BasePresenterImpl<V>> extends
                 .gotoLogin();
     }
 
-    public void onGotoLogin(int digital, SharedPreferencesUtils utils,Class<?> cla,int requestCode) {
-        if (utils != null){
+    public void onGotoLogin(int digital, SharedPreferencesUtils utils, String className) {
+        if (utils != null) {
+            utils.clear();
+        }
+
+        LoginManager.getInstance()
+                .setType(digital)
+                .setContext(getContext())
+                .setClassName(className)
+                .setClassType(1)
+                .setUseNewTaskFlag(true)
+                .setCallBack(new LoginAction() {
+                    @Override
+                    public void onFinish() {
+                        onJumpFinish();
+                    }
+                })
+                .gotoLogin();
+    }
+
+    public void onGotoLogin(int digital, SharedPreferencesUtils utils, Class<?> cla, int requestCode) {
+        if (utils != null) {
             utils.clear();
         }
 
         LoginManager.getInstance()
                 .setType(digital)
                 .setFragment(this)
-                .setLoginClassName(cla)
+                .setLoginClass(cla)
+                .setUseNewTaskFlag(true)
+                .setCallBack(new LoginAction() {
+                    @Override
+                    public void onFinish() {
+
+                    }
+                })
+                .gotoLoginForResultInFragment(requestCode);
+    }
+
+    public void onGotoLogin(int digital, SharedPreferencesUtils utils, String className, int requestCode) {
+        if (utils != null) {
+            utils.clear();
+        }
+
+        LoginManager.getInstance()
+                .setType(digital)
+                .setFragment(this)
+                .setClassName(className)
+                .setClassType(1)
                 .setUseNewTaskFlag(true)
                 .setCallBack(new LoginAction() {
                     @Override
@@ -107,7 +145,7 @@ public abstract class BaseMVPFragment<V, P extends BasePresenterImpl<V>> extends
      * 跳转完成后的回调
      */
     public void onJumpFinish() {
-        if (getActivity() != null){
+        if (getActivity() != null) {
             getActivity().finish();
         }
     }

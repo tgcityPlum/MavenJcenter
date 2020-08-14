@@ -124,7 +124,7 @@ ext {
 
     //**************** professionDependencies ****************
     professionDependencies = [
-            login     : "com.tgcity.profession:Login:latest.release",
+            login     : "com.tgcity.profession:Login:1.0.7",
             lifecycler: "com.tgcity.profession:Lifecycler:latest.release"
     ]
 }

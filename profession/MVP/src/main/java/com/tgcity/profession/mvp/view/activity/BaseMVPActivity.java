@@ -63,7 +63,27 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
         LoginManager.getInstance()
                 .setType(digital)
                 .setContext(getContext())
-                .setLoginClassName(cla)
+                .setLoginClass(cla)
+                .setUseNewTaskFlag(true)
+                .setCallBack(new LoginAction() {
+                    @Override
+                    public void onFinish() {
+                        onJumpFinish();
+                    }
+                })
+                .gotoLogin();
+    }
+
+    public void onGotoLogin(int digital, SharedPreferencesUtils utils, String className) {
+        if (utils != null) {
+            utils.clear();
+        }
+
+        LoginManager.getInstance()
+                .setType(digital)
+                .setContext(getContext())
+                .setClassName(className)
+                .setClassType(1)
                 .setUseNewTaskFlag(true)
                 .setCallBack(new LoginAction() {
                     @Override
@@ -82,7 +102,27 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
         LoginManager.getInstance()
                 .setType(digital)
                 .setContext(getContext())
-                .setLoginClassName(cla)
+                .setLoginClass(cla)
+                .setUseNewTaskFlag(true)
+                .setCallBack(new LoginAction() {
+                    @Override
+                    public void onFinish() {
+
+                    }
+                })
+                .gotoLoginForResult(requestCode);
+    }
+
+    public void onGotoLogin(int digital, SharedPreferencesUtils utils, String className, int requestCode) {
+        if (utils != null) {
+            utils.clear();
+        }
+
+        LoginManager.getInstance()
+                .setType(digital)
+                .setContext(getContext())
+                .setClassName(className)
+                .setClassType(1)
                 .setUseNewTaskFlag(true)
                 .setCallBack(new LoginAction() {
                     @Override
