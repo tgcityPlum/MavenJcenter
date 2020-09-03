@@ -11,7 +11,7 @@ include ':widget:DoubleTextView', ':widget:EditViewClear', ':widget:GradientButt
 include ':widget:LoadDialog', ':widget:ProgressView', ':widget:RoundAngleImageView', ':widget:RoundCountDownProgress'
 include ':widget:Spinner', ':widget:TitleBar', ':widget:VerificationCode'
 //xwidget模块的包
-include ':xwidget:XDialog', ':xwidget:XRefreshView', ':xwidget:XTitleBar'
+include ':xwidget:XDialog', ':xwidget:XRefreshView', ':xwidget:XTabLayout', ':xwidget:XTitleBar'
 //function模块的包
 include ':function:Banner', ':function:BaseActivity', ':function:BaseApplication'
 include ':function:BaseEventBus', ':function:BaseFragment', ':function:BaseNetwork'

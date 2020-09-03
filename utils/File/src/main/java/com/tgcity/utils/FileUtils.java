@@ -23,8 +23,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static android.os.Environment.MEDIA_MOUNTED;
 
@@ -297,7 +300,7 @@ public class FileUtils {
 //            bitmap.recycle();
 //        }
 
-        return reviewPicRotate(bitmap,filePath);
+        return reviewPicRotate(bitmap, filePath);
     }
 
     /**
@@ -389,8 +392,8 @@ public class FileUtils {
     /**
      * 返回一个Drawable对象，可以根据selected状态改变 图标
      *
-     * @param context Context
-     * @param normalIcon normal Icon
+     * @param context      Context
+     * @param normalIcon   normal Icon
      * @param selectedIcon selected Icon
      * @return StateListDrawable
      */
@@ -401,6 +404,57 @@ public class FileUtils {
         //正常情况下的drawable
         drawable.addState(new int[]{}, ContextCompat.getDrawable(context, normalIcon));
         return drawable;
+    }
+
+    /**
+     * 保存Bitmap图片为本地文件
+     */
+    public static String saveFile(Context ctx, Bitmap bitmap, String filename, int qulity) {
+        qulity = qulity < 50 ? 50 : qulity;
+        String dirPath;
+        String filePath;
+        FileOutputStream fileOutputStream;
+        try {
+            dirPath = getImageSavedPath(ctx);
+            File file = new File(dirPath);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            filePath = dirPath + File.separator + filename;
+            fileOutputStream = new FileOutputStream(filePath);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, qulity, fileOutputStream);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+        return filePath;
+    }
+
+    public static String getImageSavedPath(Context ctx) {
+        return Environment.getExternalStorageDirectory() + File.separator + getAppEnName(ctx) + File.separator + "image";
+    }
+
+    private static String getAppEnName(Context ctx) {
+        String packageName = ctx.getApplicationContext().getPackageName();
+        String[] split = packageName.split("\\.");
+        if (split.length > 0) {
+            return split[split.length - 1];
+        }
+        return "app应用";
+    }
+
+    /**
+     * 获取自动生成的文件名，按照年月日时分秒生成
+     *
+     * @param suffix 文件后缀
+     * @return String 文件名
+     */
+    public static String generateFilename(String suffix) {
+        String filename = new SimpleDateFormat("yyyyMMddHHmmss", Locale.CHINA).format(new Date());
+        filename = filename + "." + suffix;
+        return filename;
     }
 
 }
