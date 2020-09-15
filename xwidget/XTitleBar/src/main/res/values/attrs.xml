@@ -7,6 +7,7 @@
         <attr name="xtb_leftImgScaleType" format="integer" />
         <attr name="xtb_rightStr" format="string" />
         <attr name="xtb_rightStrColor" format="color" />
+        <attr name="xtb_titleColor" format="color" />
         <attr name="xtb_title" format="string" />
         <attr name="xtb_doubleClickTip" format="string" />
         <attr name="xtb_doubleClickTipValves" format="integer" />

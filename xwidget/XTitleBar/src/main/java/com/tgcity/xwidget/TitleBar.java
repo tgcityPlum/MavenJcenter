@@ -97,6 +97,7 @@ public class TitleBar extends Toolbar {
      * 右侧文字按钮颜色(android default textView textColor)
      */
     private int rightStrColor = Color.parseColor("#8A000000");
+    private int titleColor = Color.parseColor("#ff212121");
     private OnClickListener backListener;
     private OnClickListener rightMenuListener;
     private RecyclerView recyclerView;
@@ -128,6 +129,7 @@ public class TitleBar extends Toolbar {
         backRes = typedArray.getResourceId(R.styleable.xtb_TitleBar_xtb_back, 0);
         rightImgMenuRes = typedArray.getResourceId(R.styleable.xtb_TitleBar_xtb_rightImgRes, 0);
         rightStrColor = typedArray.getColor(R.styleable.xtb_TitleBar_xtb_rightStrColor, 0) == 0 ? rightStrColor : typedArray.getColor(R.styleable.xtb_TitleBar_xtb_rightStrColor, 0);
+        titleColor = typedArray.getColor(R.styleable.xtb_TitleBar_xtb_titleColor, 0) == 0 ? titleColor : typedArray.getColor(R.styleable.xtb_TitleBar_xtb_titleColor, 0);
         titleStr = typedArray.getString(R.styleable.xtb_TitleBar_xtb_title);
         doubleClickTip = typedArray.getString(R.styleable.xtb_TitleBar_xtb_doubleClickTip) == null ? doubleClickTip : typedArray.getString(R.styleable.xtb_TitleBar_xtb_doubleClickTip);
         rightTextMenuStr = typedArray.getString(R.styleable.xtb_TitleBar_xtb_rightStr);
@@ -189,6 +191,7 @@ public class TitleBar extends Toolbar {
             rightTextMenu = findViewById(R.id.rightTextMenu);
             title = findViewById(R.id.title);
             title.setText(titleStr);
+            title.setTextColor(titleColor);
             rightTextMenu.setTextColor(rightStrColor);
             title.setOnClickListener(new OnClickListener() {
                 @Override
