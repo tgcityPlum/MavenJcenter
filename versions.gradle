@@ -29,6 +29,8 @@ ext {
     autoSizeVersion = '0.9.5'
     disklrucacheVersion = '2.0.2'
     greenDaoVersion = '3.2.2'
+    nineoldVersion = '2.4.0'
+    agentwebVersion = '4.0.2'
 
     //**************** supportDependencies ****************
     supportDependencies = [
@@ -75,6 +77,8 @@ ext {
             disklrucache         : "com.jakewharton:disklrucache:${disklrucacheVersion}",
             // database
             greendao             : "org.greenrobot:greendao:${greenDaoVersion}",
+            agentweb             : "com.just.agentweb:agentweb:${agentwebVersion}",
+            nineoldandroids      : "com.nineoldandroids:library:${nineoldVersion}",
     ]
 
     //**************** utilsDependencies ****************
@@ -101,6 +105,7 @@ ext {
 
     //**************** widgetDependencies ****************
     widgetDependencies = [
+            titleBar: "com.tgcity.widget:TitleBar:latest.release",
             progressView: "com.tgcity.widget:ProgressView:latest.release",
             loadDialog  : "com.tgcity.widget:LoadDialog:latest.release"
     ]
