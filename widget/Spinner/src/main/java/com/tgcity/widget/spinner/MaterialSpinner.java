@@ -256,7 +256,7 @@ public class MaterialSpinner extends TextView {
             String longestItem = currentText.toString();
             for (int i = 0; i < adapter.getCount(); i++) {
                 String itemText = adapter.getItemText(i);
-                if (itemText.length() > longestItem.length()) {
+                if (itemText != null && itemText.length() > longestItem.length()) {
                     longestItem = itemText;
                 }
             }

@@ -294,7 +294,7 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
             this.apiName = "apiname";
             this.requestData = "requestData";
             this.cacheTime = -1;
-            this.cacheMode = CacheMode.CACHE_AND_REMOTE_DISTINCT;
+            this.cacheMode = CacheMode.NO_CACHE;
             this.httpResultFormatting = true;
             this.extraRemark = "";
         }
