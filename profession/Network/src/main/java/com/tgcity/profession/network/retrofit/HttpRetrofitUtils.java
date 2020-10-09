@@ -78,7 +78,16 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
              * 所以新增一个判断分支，与原来的互不影响，区分的时候只需要在#{@link Builder.extraRemark}参数填入#{@link com.eagersoft.youzy.youzy.constants.AppConstant.API_SERVICE_TZY}即可
              */
             if (builder.httpResultFormatting) {
-                observable = builder.observable.map(new HttpResultFuncTZY<T>());
+
+                HttpResultFuncTwo httpResultFuncTwo;
+
+                if (builder.responseDataCode == -1){
+                    httpResultFuncTwo = new HttpResultFuncTwo<T>();
+                }else {
+                    httpResultFuncTwo = new HttpResultFuncTwo<T>(builder.responseDataCode);
+                }
+                observable = builder.observable.map(httpResultFuncTwo);
+
                 proxy = new AbstractSimpleCallBackProxy<HttpCommonResult<T>, T>(abstractSimpleType) {
                 };
             } else {
@@ -88,11 +97,25 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
             }
         } else {
             if (builder.httpResultFormatting) {
-                observable = builder.observable.map(new HttpResultFunc<T>());
+                HttpResultFuncOne httpResultFuncOne;
+                if (builder.responseDataCode == -1){
+                    httpResultFuncOne = new HttpResultFuncOne<T>();
+                }else {
+                    httpResultFuncOne = new HttpResultFuncOne<T>(builder.responseDataCode);
+                }
+                observable = builder.observable.map(httpResultFuncOne);
+
                 proxy = new AbstractCallBackProxy<HttpResult<T>, T>(abstractSimpleType) {
                 };
             } else {
-                observable = builder.observable.map(new HttpResultFunS<String>());
+                HttpResultFunThree httpResultFunThree;
+                if (builder.responseDataCode == -1){
+                    httpResultFunThree = new HttpResultFunThree<String>();
+                }else {
+                    httpResultFunThree = new HttpResultFunThree<String>(builder.responseDataCode);
+                }
+                observable = builder.observable.map(httpResultFunThree);
+
                 proxy = new AbstractCallBackPrototypeProxy<T, T>(abstractSimpleType) {
                 };
             }
@@ -122,7 +145,15 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
              * 所以新增一个判断分支，与原来的互不影响，区分的时候只需要在#{@link Builder.extraRemark}参数填入#{@link com.eagersoft.youzy.youzy.constants.AppConstant.API_SERVICE_TZY}即可
              */
             if (builder.httpResultFormatting) {
-                observable = builder.observable.map(new HttpResultFuncTZY<T>());
+                HttpResultFuncTwo httpResultFuncTwo;
+
+                if (builder.responseDataCode == -1){
+                    httpResultFuncTwo = new HttpResultFuncTwo<T>();
+                }else {
+                    httpResultFuncTwo = new HttpResultFuncTwo<T>(builder.responseDataCode);
+                }
+                observable = builder.observable.map(httpResultFuncTwo);
+
                 proxy = new AbstractSimpleCallBackProxy<HttpCommonResult<T>, T>(observer) {
                 };
             } else {
@@ -132,11 +163,25 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
             }
         } else {
             if (builder.httpResultFormatting) {
-                observable = builder.observable.map(new HttpResultFunc<T>());
+                HttpResultFuncOne httpResultFuncOne;
+                if (builder.responseDataCode == -1){
+                    httpResultFuncOne = new HttpResultFuncOne<T>();
+                }else {
+                    httpResultFuncOne = new HttpResultFuncOne<T>(builder.responseDataCode);
+                }
+                observable = builder.observable.map(httpResultFuncOne);
+
                 proxy = new AbstractCallBackProxy<HttpResult<T>, T>(observer) {
                 };
             } else {
-                observable = builder.observable.map(new HttpResultFunS<String>());
+                HttpResultFunThree httpResultFunThree;
+                if (builder.responseDataCode == -1){
+                    httpResultFunThree = new HttpResultFunThree<String>();
+                }else {
+                    httpResultFunThree = new HttpResultFunThree<String>(builder.responseDataCode);
+                }
+                observable = builder.observable.map(httpResultFunThree);
+
                 proxy = new AbstractCallBackProxy<HttpResult<T>, T>(observer) {
 //                proxy = new AbstractCallBackPrototypeProxy<T, T>(observer) {
                 };
@@ -153,14 +198,26 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
      * 因为#{@link com.eagersoft.youzy.youzy.constants.AppConstant.TZY_URL}地址下的接口返回参数是由isSuccess来判断，
      * 所以新增一个剥离类，与原来的互不影响，区分的时候只需要在#{@link Builder.extraRemark}参数填入#{@link com.eagersoft.youzy.youzy.constants.AppConstant.API_SERVICE_TZY}即可
      *
+     * 针对HttpCommonResult<T>模型进行处理
+     *
      * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
      */
     @SuppressWarnings("JavadocReference")
-    public static class HttpResultFuncTZY<T> implements Function<HttpCommonResult<T>, T> {
+    public static class HttpResultFuncTwo<T> implements Function<HttpCommonResult<T>, T> {
+
+        private int responseDataCode = NetworkConstant.SUCCEED_CODE_0;
+
+        public HttpResultFuncTwo() {
+
+        }
+
+        public HttpResultFuncTwo(int code) {
+            this.responseDataCode = code;
+        }
 
         @Override
         public T apply(HttpCommonResult<T> httpResult) {
-            if (httpResult.getCode() != 0) {
+            if (httpResult.getCode() != responseDataCode) {
                 throw new ApiException(httpResult.getMessage(), ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(httpResult.getMessage()).setErrorCode(httpResult.getCode()));
             }
             if (httpResult.getResult() instanceof List) {
@@ -178,15 +235,26 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
 
     /**
      * 用来统一处理Http的resultCode,并将HttpResult的Data部分剥离出来返回给subscriber
+     * 针对HttpResult<T>模型进行处理
      *
      * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
      */
-    public class HttpResultFunc<T> implements Function<HttpResult<T>, T> {
+    public static class HttpResultFuncOne<T> implements Function<HttpResult<T>, T> {
+
+        private int responseDataCode = NetworkConstant.SUCCEED_CODE_200;
+
+        public HttpResultFuncOne() {
+
+        }
+
+        public HttpResultFuncOne(int code) {
+            this.responseDataCode = code;
+        }
 
         @Override
         public T apply(HttpResult<T> httpResult) {
             //项目抛错根据getCode值进行处理
-            if (httpResult.getCode() != NetworkConstant.SUCCEED_CODE) {
+            if (httpResult.getCode() != responseDataCode) {
                 throw ApiException.handleException(httpResult);
             } else {
                 if (httpResult.getResults() instanceof List) {
@@ -205,12 +273,22 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
         }
     }
 
-    public class HttpResultFunS<T> implements Function<HttpResult<String>, String> {
+    public class HttpResultFunThree<T> implements Function<HttpResult<String>, String> {
+
+        private int responseDataCode = NetworkConstant.SUCCEED_CODE_200;
+
+        public HttpResultFunThree() {
+
+        }
+
+        public HttpResultFunThree(int code) {
+            this.responseDataCode = code;
+        }
 
         @Override
         public String apply(HttpResult<String> httpResult) {
             //项目抛错根据getCode值进行处理
-            if (httpResult.getCode() != NetworkConstant.SUCCEED_CODE) {
+            if (httpResult.getCode() != responseDataCode) {
                 throw ApiException.handleException(httpResult);
             } else {
                 if (httpResult.getResults() == null) {
@@ -282,6 +360,7 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
         private CacheMode cacheMode;
         private boolean httpResultFormatting;
         private String extraRemark;
+        private int responseDataCode;
 
         /**
          * 初始化
@@ -297,6 +376,7 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
             this.cacheMode = CacheMode.NO_CACHE;
             this.httpResultFormatting = true;
             this.extraRemark = "";
+            this.responseDataCode = -1;
         }
 
         /**
@@ -357,6 +437,17 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
          */
         public Builder setExtraRemark(String extraRemark) {
             this.extraRemark = extraRemark;
+            return this;
+        }
+
+        /**
+         * 设置数据返回的标准code
+         *
+         * @param code int
+         * @return Builder
+         */
+        public Builder setResponseDataCode(int code) {
+            this.responseDataCode = code;
             return this;
         }
     }

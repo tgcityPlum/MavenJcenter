@@ -8,7 +8,16 @@ public class HttpCommonResult<T> {
 
     private int code;
     private String message;
+    private String msg;
     private T data;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getCode() {
         return code;
@@ -39,6 +48,7 @@ public class HttpCommonResult<T> {
         return "HttpCommonResult{" +
                 "code='" + code + '\'' +
                 ", message='" + message + '\'' +
+                ", msg='" + msg + '\'' +
                 ", result=" + data +
                 '}';
     }

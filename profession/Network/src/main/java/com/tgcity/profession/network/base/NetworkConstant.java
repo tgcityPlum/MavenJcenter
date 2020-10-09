@@ -75,7 +75,12 @@ public class NetworkConstant {
     /**
      * 异常的标准code码
      */
+    @Deprecated
     public static int SUCCEED_CODE = 200;
+
+    public static int SUCCEED_CODE_200 = 200;
+
+    public static int SUCCEED_CODE_0 = 0;
 
     /**
      * 登录失效标识
