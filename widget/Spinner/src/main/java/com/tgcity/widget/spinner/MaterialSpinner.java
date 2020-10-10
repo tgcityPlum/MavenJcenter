@@ -130,7 +130,7 @@ public class MaterialSpinner extends TextView {
             hideArrow = ta.getBoolean(R.styleable.MaterialSpinner_ms_hide_arrow, false);
             hintText = ta.getString(R.styleable.MaterialSpinner_ms_hint) == null ? ""
                     : ta.getString(R.styleable.MaterialSpinner_ms_hint);
-            popupWindowMaxHeight = ta.getDimensionPixelSize(R.styleable.MaterialSpinner_ms_dropdown_max_height, 0);
+            popupWindowMaxHeight = ta.getDimensionPixelSize(R.styleable.MaterialSpinner_ms_dropdown_max_height, 300);
             popupWindowHeight = ta.getLayoutDimension(R.styleable.MaterialSpinner_ms_dropdown_height,
                     WindowManager.LayoutParams.WRAP_CONTENT);
             paddingTop = ta.getDimensionPixelSize(R.styleable.MaterialSpinner_ms_padding_top, defaultPaddingTop);
@@ -603,7 +603,7 @@ public class MaterialSpinner extends TextView {
 
     private int calculatePopupWindowHeight() {
         if (adapter == null) {
-            return WindowManager.LayoutParams.WRAP_CONTENT;
+            return popupWindowMaxHeight;
         }
         float itemHeight = getResources().getDimension(R.dimen.ms_item_height);
         float listViewHeight = adapter.getCount() * itemHeight;
