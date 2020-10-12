@@ -3,7 +3,6 @@ package com.tgcity.profession.network.retrofit;
 import android.content.Context;
 import android.support.annotation.CallSuper;
 
-
 import com.tgcity.function.network.bean.HttpResult;
 import com.tgcity.function.network.cache.ErrorMode;
 import com.tgcity.function.network.retrofit.ApiException;
@@ -20,6 +19,7 @@ import com.tgcity.profession.network.callback.AbstractSimpleType;
 import com.tgcity.profession.network.greendao.helper.HttpKeyOperationHelper;
 import com.tgcity.profession.network.subsciber.CallBackSubsciber;
 import com.tgcity.profession.network.utils.CommonUtils;
+import com.tgcity.utils.StringUtils;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import java.util.List;
@@ -81,9 +81,9 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
 
                 HttpResultFuncTwo httpResultFuncTwo;
 
-                if (builder.responseDataCode == -1){
+                if (builder.responseDataCode == -1) {
                     httpResultFuncTwo = new HttpResultFuncTwo<T>();
-                }else {
+                } else {
                     httpResultFuncTwo = new HttpResultFuncTwo<T>(builder.responseDataCode);
                 }
                 observable = builder.observable.map(httpResultFuncTwo);
@@ -98,9 +98,9 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
         } else {
             if (builder.httpResultFormatting) {
                 HttpResultFuncOne httpResultFuncOne;
-                if (builder.responseDataCode == -1){
+                if (builder.responseDataCode == -1) {
                     httpResultFuncOne = new HttpResultFuncOne<T>();
-                }else {
+                } else {
                     httpResultFuncOne = new HttpResultFuncOne<T>(builder.responseDataCode);
                 }
                 observable = builder.observable.map(httpResultFuncOne);
@@ -109,9 +109,9 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
                 };
             } else {
                 HttpResultFunThree httpResultFunThree;
-                if (builder.responseDataCode == -1){
+                if (builder.responseDataCode == -1) {
                     httpResultFunThree = new HttpResultFunThree<String>();
-                }else {
+                } else {
                     httpResultFunThree = new HttpResultFunThree<String>(builder.responseDataCode);
                 }
                 observable = builder.observable.map(httpResultFunThree);
@@ -147,9 +147,9 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
             if (builder.httpResultFormatting) {
                 HttpResultFuncTwo httpResultFuncTwo;
 
-                if (builder.responseDataCode == -1){
+                if (builder.responseDataCode == -1) {
                     httpResultFuncTwo = new HttpResultFuncTwo<T>();
-                }else {
+                } else {
                     httpResultFuncTwo = new HttpResultFuncTwo<T>(builder.responseDataCode);
                 }
                 observable = builder.observable.map(httpResultFuncTwo);
@@ -164,9 +164,9 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
         } else {
             if (builder.httpResultFormatting) {
                 HttpResultFuncOne httpResultFuncOne;
-                if (builder.responseDataCode == -1){
+                if (builder.responseDataCode == -1) {
                     httpResultFuncOne = new HttpResultFuncOne<T>();
-                }else {
+                } else {
                     httpResultFuncOne = new HttpResultFuncOne<T>(builder.responseDataCode);
                 }
                 observable = builder.observable.map(httpResultFuncOne);
@@ -175,9 +175,9 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
                 };
             } else {
                 HttpResultFunThree httpResultFunThree;
-                if (builder.responseDataCode == -1){
+                if (builder.responseDataCode == -1) {
                     httpResultFunThree = new HttpResultFunThree<String>();
-                }else {
+                } else {
                     httpResultFunThree = new HttpResultFunThree<String>(builder.responseDataCode);
                 }
                 observable = builder.observable.map(httpResultFunThree);
@@ -197,7 +197,7 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
     /**
      * 因为#{@link com.eagersoft.youzy.youzy.constants.AppConstant.TZY_URL}地址下的接口返回参数是由isSuccess来判断，
      * 所以新增一个剥离类，与原来的互不影响，区分的时候只需要在#{@link Builder.extraRemark}参数填入#{@link com.eagersoft.youzy.youzy.constants.AppConstant.API_SERVICE_TZY}即可
-     *
+     * <p>
      * 针对HttpCommonResult<T>模型进行处理
      *
      * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
@@ -218,7 +218,15 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
         @Override
         public T apply(HttpCommonResult<T> httpResult) {
             if (httpResult.getCode() != responseDataCode) {
-                throw new ApiException(httpResult.getMessage(), ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(httpResult.getMessage()).setErrorCode(httpResult.getCode()));
+                String errorContent;
+                if (!StringUtils.isEmpty(httpResult.getMessage())) {
+                    errorContent = httpResult.getMessage();
+                }else if (!StringUtils.isEmpty(httpResult.getMsg())) {
+                    errorContent = httpResult.getMsg();
+                }else {
+                    errorContent = "服务器返回出错";
+                }
+                throw new ApiException(ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(errorContent).setErrorCode(httpResult.getCode()));
             }
             if (httpResult.getResult() instanceof List) {
                 if (CommonUtils.isEmptyResult((List) httpResult.getResult())) {
