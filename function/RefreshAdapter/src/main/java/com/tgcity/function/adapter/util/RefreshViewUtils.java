@@ -108,11 +108,13 @@ public class RefreshViewUtils {
                 if (onPublicRefreshViewCallBack != null) {
                     onPublicRefreshViewCallBack.showEmpty();
                 }
+                adapter.setNewData(list);
                 BaseRecyclerViewAdapterHelper.getInstance().loadStatus(adapter, Constant.AdapterStatus.noMore);
                 return;
             }
 
             if (list == null || list.size() == 0) {
+                adapter.setNewData(list);
                 BaseRecyclerViewAdapterHelper.getInstance().loadStatus(adapter, Constant.AdapterStatus.noMore);
                 return;
             }
