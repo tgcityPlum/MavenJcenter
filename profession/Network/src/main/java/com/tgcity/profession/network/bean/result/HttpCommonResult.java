@@ -6,7 +6,7 @@ package com.tgcity.profession.network.bean.result;
 
 public class HttpCommonResult<T> {
 
-    private int code;
+    private Object code;
     private String message;
     private String msg;
     private T data;
@@ -19,11 +19,11 @@ public class HttpCommonResult<T> {
         this.msg = msg;
     }
 
-    public int getCode() {
+    public Object getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(Object code) {
         this.code = code;
     }
 

@@ -217,16 +217,33 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
 
         @Override
         public T apply(HttpCommonResult<T> httpResult) {
-            if (httpResult.getCode() != responseDataCode) {
-                String errorContent;
-                if (!StringUtils.isEmpty(httpResult.getMessage())) {
-                    errorContent = httpResult.getMessage();
-                }else if (!StringUtils.isEmpty(httpResult.getMsg())) {
-                    errorContent = httpResult.getMsg();
-                }else {
-                    errorContent = "服务器返回出错";
+            Object code = httpResult.getCode();
+            if (code != null) {
+                if (code instanceof Integer) {
+                    if ((Integer) code != responseDataCode) {
+                        String errorContent;
+                        if (!StringUtils.isEmpty(httpResult.getMessage())) {
+                            errorContent = httpResult.getMessage();
+                        } else if (!StringUtils.isEmpty(httpResult.getMsg())) {
+                            errorContent = httpResult.getMsg();
+                        } else {
+                            errorContent = "服务器返回出错";
+                        }
+                        throw new ApiException(ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(errorContent).setErrorCode((Integer) code));
+                    }
+                } else if (code instanceof String) {
+                    if (!code.equals(String.valueOf(responseDataCode))) {
+                        String errorContent;
+                        if (!StringUtils.isEmpty(httpResult.getMessage())) {
+                            errorContent = httpResult.getMessage();
+                        } else if (!StringUtils.isEmpty(httpResult.getMsg())) {
+                            errorContent = httpResult.getMsg();
+                        } else {
+                            errorContent = "服务器返回出错";
+                        }
+                        throw new ApiException(ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(errorContent).setErrorCode(Integer.parseInt((String) code)));
+                    }
                 }
-                throw new ApiException(ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(errorContent).setErrorCode(httpResult.getCode()));
             }
             if (httpResult.getResult() instanceof List) {
                 if (CommonUtils.isEmptyResult((List) httpResult.getResult())) {
