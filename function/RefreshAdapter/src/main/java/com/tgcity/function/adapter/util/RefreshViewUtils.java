@@ -108,13 +108,21 @@ public class RefreshViewUtils {
                 if (onPublicRefreshViewCallBack != null) {
                     onPublicRefreshViewCallBack.showEmpty();
                 }
-                adapter.setNewData(list);
+                if (pageIndex == 1) {
+                    adapter.setNewData(list);
+                } else {
+                    adapter.addData(list);
+                }
                 BaseRecyclerViewAdapterHelper.getInstance().loadStatus(adapter, Constant.AdapterStatus.noMore);
                 return;
             }
 
             if (list == null || list.size() == 0) {
-                adapter.setNewData(list);
+                if (pageIndex == 1) {
+                    adapter.setNewData(list);
+                } else {
+                    adapter.addData(list);
+                }
                 BaseRecyclerViewAdapterHelper.getInstance().loadStatus(adapter, Constant.AdapterStatus.noMore);
                 return;
             }
