@@ -82,6 +82,8 @@ public class NetworkConstant {
 
     public static int SUCCEED_CODE_0 = 0;
 
+    public static int ERROR_CODE_N_1 = -1;
+
     /**
      * 登录失效标识
      */

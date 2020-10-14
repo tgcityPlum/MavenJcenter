@@ -217,41 +217,41 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
 
         @Override
         public T apply(HttpCommonResult<T> httpResult) {
+            //待校验的code码
+            int tempCode = NetworkConstant.ERROR_CODE_N_1;
             Object code = httpResult.getCode();
             if (code != null) {
                 if (code instanceof Integer) {
-                    if ((Integer) code != responseDataCode) {
-                        String errorContent;
-                        if (!StringUtils.isEmpty(httpResult.getMessage())) {
-                            errorContent = httpResult.getMessage();
-                        } else if (!StringUtils.isEmpty(httpResult.getMsg())) {
-                            errorContent = httpResult.getMsg();
-                        } else {
-                            errorContent = "服务器返回出错";
-                        }
-                        throw new ApiException(ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(errorContent).setErrorCode((Integer) code));
-                    }
+                    tempCode = (int) code;
                 } else if (code instanceof String) {
-                    if (!code.equals(String.valueOf(responseDataCode))) {
-                        String errorContent;
-                        if (!StringUtils.isEmpty(httpResult.getMessage())) {
-                            errorContent = httpResult.getMessage();
-                        } else if (!StringUtils.isEmpty(httpResult.getMsg())) {
-                            errorContent = httpResult.getMsg();
-                        } else {
-                            errorContent = "服务器返回出错";
-                        }
-                        throw new ApiException(ErrorMode.API_VISUALIZATION_MESSAGE.setErrorContent(errorContent).setErrorCode(Integer.parseInt((String) code)));
+                    try {
+                        tempCode = Integer.parseInt((String) code);
+                    } catch (Exception e) {
+
                     }
                 }
             }
+            //待使用的信息
+            String tempContent;
+            if (!StringUtils.isEmpty(httpResult.getMessage())) {
+                tempContent = httpResult.getMessage();
+            } else if (!StringUtils.isEmpty(httpResult.getMsg())) {
+                tempContent = httpResult.getMsg();
+            } else {
+                tempContent = "接口未提供默认信息";
+            }
+
+            if (tempCode != responseDataCode) {
+                throw new ApiException(tempContent, ErrorMode.API_VISUALIZATION_MESSAGE.setErrorCode(tempCode));
+            }
+
             if (httpResult.getResult() instanceof List) {
                 if (CommonUtils.isEmptyResult((List) httpResult.getResult())) {
-                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL);
+                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL.setErrorContent(tempContent));
                 }
             } else {
                 if (httpResult.getResult() == null) {
-                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL);
+                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL.setErrorContent(tempContent));
                 }
             }
             return httpResult.getResult();
