@@ -19,8 +19,11 @@ public class HttpCommonResult<T> {
         this.msg = msg;
     }
 
-    public Object getCode() {
-        return code;
+    public String getCode() {
+        if (code == null){
+            return null;
+        }
+        return code.toString();
     }
 
     public void setCode(Object code) {

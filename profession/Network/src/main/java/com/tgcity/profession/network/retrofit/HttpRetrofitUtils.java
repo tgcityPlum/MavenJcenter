@@ -219,16 +219,12 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
         public T apply(HttpCommonResult<T> httpResult) {
             //待校验的code码
             int tempCode = NetworkConstant.ERROR_CODE_N_1;
-            Object code = httpResult.getCode();
+            String code = httpResult.getCode();
             if (code != null) {
-                if (code instanceof Integer) {
-                    tempCode = (int) code;
-                } else if (code instanceof String) {
-                    try {
-                        tempCode = Integer.parseInt((String) code);
-                    } catch (Exception e) {
+                try {
+                    tempCode = (int) (Double.parseDouble(code));
+                } catch (Exception e) {
 
-                    }
                 }
             }
             //待使用的信息
