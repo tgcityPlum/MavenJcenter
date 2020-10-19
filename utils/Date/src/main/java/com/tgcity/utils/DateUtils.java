@@ -17,6 +17,7 @@ public class DateUtils {
     public static final String PATTERN_STYLE_2 = "HH:mm:ss";
     public static final String PATTERN_STYLE_3 = "yyyy-MM-dd HH:mm:ss";
     public static final String PATTERN_STYLE_4 = "yyyy-MM-dd";
+    public static final String PATTERN_STYLE_5 = "HH:mm";
 
     /**
      * 将时间戳转化成 pattern 样式
@@ -47,6 +48,13 @@ public class DateUtils {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    /**
+     * 将字符串 转化成 pattern 样式
+     */
+    public static String getSimpleDateFormatDate(String time, String pattern1, String pattern2) {
+        return getSimpleDateFormatDate(getLongFormatPattern(time, pattern1), pattern2);
     }
 
 }
