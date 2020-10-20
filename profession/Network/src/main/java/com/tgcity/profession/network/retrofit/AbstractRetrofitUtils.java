@@ -18,6 +18,7 @@ public abstract class AbstractRetrofitUtils {
     private boolean isSaveCookie = false;
     private boolean isHostname = false;
     private String token;
+    private String authorization;
 
     public AbstractRetrofitUtils setReadCookie(boolean readCookie) {
         isReadCookie = readCookie;
@@ -43,6 +44,12 @@ public abstract class AbstractRetrofitUtils {
         return this;
     }
 
+    public AbstractRetrofitUtils setAuthorization(String authorization) {
+        this.authorization = authorization;
+
+        return this;
+    }
+
     /**
      * 获取Retrofit对象
      *
@@ -63,6 +70,7 @@ public abstract class AbstractRetrofitUtils {
                 .setSaveCookie(isSaveCookie)
                 .setHostname(isHostname)
                 .setToken(token)
+                .setAuthorization(authorization)
                 .getOkHttpClient();
         //Retrofit2后使用build设计模式
         retrofit = new Retrofit.Builder()

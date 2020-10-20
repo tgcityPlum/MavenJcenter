@@ -20,8 +20,6 @@ import okio.Buffer;
 
 import static okhttp3.internal.Util.UTF_8;
 
-//import com.xietong.network.utils.HttpSSLUtils;
-
 /**
  * @author TGCity
  * okHttp的配置
@@ -36,6 +34,7 @@ public class OkHttp3Utils {
     private boolean isSaveCookie = false;
     private boolean isHostname = false;
     private String token;
+    private String authorization;
 
 
     public static OkHttp3Utils getInstance() {
@@ -65,6 +64,11 @@ public class OkHttp3Utils {
 
     OkHttp3Utils setToken(String token) {
         this.token = token;
+        return this;
+    }
+
+    OkHttp3Utils setAuthorization(String authorization) {
+        this.authorization = authorization;
         return this;
     }
 
@@ -113,6 +117,9 @@ public class OkHttp3Utils {
                     .addHeader("User-Agent", "Android-XT-Water-Phone");
             if (token != null) {
                 builder.addHeader("token", token);
+            }
+            if (authorization != null) {
+                builder.addHeader("Authorization", authorization);
             }
             Request authorised = builder.build();
             if (NetworkConstant.Switch.IS_PRINT_NETWORK_LOG) {
