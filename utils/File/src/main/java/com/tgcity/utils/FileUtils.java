@@ -137,6 +137,38 @@ public class FileUtils {
         return base64;
     }
 
+    /**
+     * 将Base64编码转换为图片
+     *
+     * @param base64Str
+     * @param path      图片名,例如 avatar
+     * @return String
+     */
+    public static String base64ToFile(Context context, String base64Str, String path) {
+        String imagePath = getImageSavedPath(context).concat(path).concat(String.valueOf(System.currentTimeMillis())).concat(".jpg");
+        byte[] data = Base64.decode(base64Str, Base64.NO_WRAP);
+        for (int i = 0; i < data.length; i++) {
+            if (data[i] < 0) {
+                //调整异常数据
+                data[i] += 256;
+            }
+        }
+        OutputStream os = null;
+        try {
+            os = new FileOutputStream(imagePath);
+            os.write(data);
+            os.flush();
+            os.close();
+            return imagePath;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static List<String> changeFiles(Context context, List<String> dragImages) {
         //处理图片
         List uploadImages = new ArrayList<>();
