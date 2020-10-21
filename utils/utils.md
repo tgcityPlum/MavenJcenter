@@ -35,6 +35,9 @@ utils收集常用的工具类
 * Log  
 [Log](Log/Log.md)封装了日志处理的业务
 
+* Regular
+[Regular](Regular/Regular.md)封装了正则表达校验业务
+
 * Screen  
 [Screen](Screen/Screen.md)封装了处理屏幕的业务
 
