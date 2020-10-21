@@ -19,11 +19,11 @@ public class HttpCommonResult<T> {
         this.msg = msg;
     }
 
-    public String getCode() {
-        if (code == null){
-            return null;
+    public int getCode() {
+        if (code == null) {
+            return -1;
         }
-        return code.toString();
+        return (int) (Double.parseDouble(code.toString()));
     }
 
     public void setCode(Object code) {
