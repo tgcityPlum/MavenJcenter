@@ -145,8 +145,9 @@ public class FileUtils {
      * @return String
      */
     public static String base64ToFile(Context context, String base64Str, String path) {
-        String imagePath = getImageSavedPath(context).concat(path).concat(String.valueOf(System.currentTimeMillis())).concat(".jpg");
-        byte[] data = Base64.decode(base64Str, Base64.NO_WRAP);
+        String imageDirectory = getImageSavedPath(context);
+
+        byte[] data = Base64.decode(base64Str.split(",")[1], Base64.DEFAULT);
         for (int i = 0; i < data.length; i++) {
             if (data[i] < 0) {
                 //调整异常数据
@@ -155,6 +156,11 @@ public class FileUtils {
         }
         OutputStream os = null;
         try {
+            File foder = new File(imageDirectory);
+            if (!foder.exists()) {
+                foder.mkdirs();
+            }
+            String imagePath = (foder.getPath() + "/").concat(path).concat(".jpg");
             os = new FileOutputStream(imagePath);
             os.write(data);
             os.flush();
@@ -164,6 +170,17 @@ public class FileUtils {
             e.printStackTrace();
             return null;
         } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Bitmap getLocalBitmap(String url) {
+        try {
+            FileInputStream fis = new FileInputStream(url);
+            return BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
+
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
             return null;
         }
