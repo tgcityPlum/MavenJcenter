@@ -160,7 +160,7 @@ public class FileUtils {
             if (!foder.exists()) {
                 foder.mkdirs();
             }
-            String imagePath = (foder.getPath() + "/").concat(path).concat(".jpg");
+            String imagePath = (foder.getPath() + "/").concat(path).concat(System.currentTimeMillis()+".jpg");
             os = new FileOutputStream(imagePath);
             os.write(data);
             os.flush();
