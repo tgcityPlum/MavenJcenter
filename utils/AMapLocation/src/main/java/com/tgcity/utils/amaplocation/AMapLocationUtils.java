@@ -161,5 +161,29 @@ public class AMapLocationUtils {
             locationClient = null;
             locationOption = null;
         }
+
+        if (AMapLocationUtils != null) {
+            AMapLocationUtils = null;
+        }
     }
+
+    /**
+     * 经纬度的转换
+     * @param d double
+     * @return string
+     */
+    public static String DtoDMS(Double d) {
+
+        String[] array = d.toString().split("[.]");
+        String degrees = array[0];//得到度
+
+        Double m = Double.parseDouble("0." + array[1]) * 60;
+        String[] array1 = m.toString().split("[.]");
+        String minutes = array1[0];//得到分
+
+        double s = Double.parseDouble("0." + array1[1]) * 60;
+        String seconds = (int)s + "";//得到秒
+        return degrees + "°" + minutes + "'" + seconds + "\"";
+    }
+
 }
