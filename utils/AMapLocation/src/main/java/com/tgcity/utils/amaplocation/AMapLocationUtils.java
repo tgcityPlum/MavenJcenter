@@ -1,6 +1,7 @@
 package com.tgcity.utils.amaplocation;
 
 import android.content.Context;
+import android.location.LocationManager;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -184,6 +185,20 @@ public class AMapLocationUtils {
         double s = Double.parseDouble("0." + array1[1]) * 60;
         String seconds = (int)s + "";//得到秒
         return degrees + "°" + minutes + "'" + seconds + "\"";
+    }
+
+    /**
+     * 手机是否开启位置服务，如果没有开启那么所有app将不能使用定位功能
+     */
+    public static boolean isLocServiceEnable(Context context) {
+        LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean network = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if (gps || network) {
+            return true;
+        }
+        return false;
+
     }
 
 }
