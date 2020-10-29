@@ -13,6 +13,7 @@ import com.tgcity.xwidget.dialog.R;
  * @author TGCity
  * 选择对话框
  */
+@Deprecated
 public class SelectionFragmentDialog extends BaseFragmentDialog {
     private TextView title, content, cancel, fix;
     private OnOperationCallBack onOperationCallBack;

@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 2001081
-        versionName "1.0.1"
+        versionCode 2010291
+        versionName "1.0.2"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -39,6 +39,7 @@ dependencies {
     implementation utilDependencies.string
     implementation utilDependencies.clearView
     implementation functionDependencies.resource
+    implementation utilDependencies.density
 }
 
 def siteUrl = 'https://github.com/tgcityPlum/MavenJcenter' // 项目主页
@@ -46,7 +47,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'xwidget' // 项目的名称
 def moduleName = 'XDialog' // 项目的名称
 group = 'com.tgcity.xwidget' // 所在组
-version = "1.0.1" //aar的版本号
+version = "1.0.2" //aar的版本号
 
 install {
     repositories.mavenInstaller {
