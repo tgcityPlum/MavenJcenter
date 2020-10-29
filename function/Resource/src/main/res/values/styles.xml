@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--    text and color style ending   -->
+    <style name="size_10_color_666666">
+        <item name="android:textSize">@dimen/sp_10</item>
+        <item name="android:textColor">@color/color_666666</item>
+    </style>
+
     <style name="size_12_color_666666">
         <item name="android:textSize">@dimen/sp_12</item>
         <item name="android:textColor">@color/color_666666</item>
@@ -10,7 +15,6 @@
         <item name="android:textSize">@dimen/sp_12</item>
         <item name="android:textColor">@color/color_white</item>
     </style>
-
 
     <style name="size_12_color_1f000000">
         <item name="android:textSize">@dimen/sp_12</item>
@@ -37,29 +41,14 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
+    <style name="size_14_color_000000">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_ff000000</item>
+    </style>
+
     <style name="size_14_color_101010">
         <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:textColor">@color/color_101010</item>
-    </style>
-
-    <style name="size_14_color_666666">
-        <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textColor">@color/color_666666</item>
-    </style>
-
-    <style name="size_14_color_9B9B9B">
-        <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textColor">@color/color_9B9B9B</item>
-    </style>
-
-    <style name="size_14_color_2D2D2F">
-        <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textColor">@color/color_2D2D2F</item>
-    </style>
-
-    <style name="size_14_color_FFFFFF">
-        <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textColor">@color/color_white</item>
     </style>
 
     <style name="size_14_color_272727">
@@ -67,14 +56,34 @@
         <item name="android:textColor">@color/color_272727</item>
     </style>
 
-    <style name="size_14_color_000000">
+    <style name="size_14_color_2D2D2F">
         <item name="android:textSize">@dimen/sp_14</item>
-        <item name="android:textColor">@color/color_ff000000</item>
+        <item name="android:textColor">@color/color_2D2D2F</item>
     </style>
 
-    <style name="size_15_color_333333">
+    <style name="size_14_color_666666">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_666666</item>
+    </style>
+
+    <style name="size_14_color_676767">
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/color_676767</item>
+    </style>
+
+    <style name="size_14_color_9B9B9B">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_9B9B9B</item>
+    </style>
+
+    <style name="size_14_color_FFFFFF">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="size_15_color_000000">
         <item name="android:textSize">@dimen/sp_15</item>
-        <item name="android:textColor">@color/color_333333</item>
+        <item name="android:textColor">@color/color_ff000000</item>
     </style>
 
     <style name="size_15_color_2D2D2F">
@@ -82,9 +91,19 @@
         <item name="android:textColor">@color/color_2D2D2F</item>
     </style>
 
-    <style name="size_15_color_000000">
+    <style name="size_15_color_333333">
         <item name="android:textSize">@dimen/sp_15</item>
-        <item name="android:textColor">@color/color_ff000000</item>
+        <item name="android:textColor">@color/color_333333</item>
+    </style>
+
+    <style name="size_15_color_6B86FF">
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textColor">@color/color_6B86FF</item>
+    </style>
+
+    <style name="size_15_color_838383">
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textColor">@color/color_838383</item>
     </style>
 
     <style name="size_15_color_1f000000">
@@ -97,21 +116,6 @@
         <item name="android:textColor">@color/color_a6000000</item>
     </style>
 
-    <style name="size_16_color_ffffff">
-        <item name="android:textSize">@dimen/sp_16</item>
-        <item name="android:textColor">@color/color_white</item>
-    </style>
-
-    <style name="size_16_color_2D2D2F">
-        <item name="android:textSize">@dimen/sp_16</item>
-        <item name="android:textColor">@color/color_context</item>
-    </style>
-
-    <style name="size_16_color_4D000000">
-        <item name="android:textSize">@dimen/sp_16</item>
-        <item name="android:textColor">@color/color_4D000000</item>
-    </style>
-
     <style name="size_16_color_0076FF">
         <item name="android:textSize">@dimen/sp_16</item>
         <item name="android:textColor">@color/color_view_blue</item>
@@ -122,10 +126,19 @@
         <item name="android:textColor">@color/color_272727</item>
     </style>
 
-    <style name="size_17_color_333333_bold">
-        <item name="android:textSize">@dimen/sp_17</item>
-        <item name="android:textColor">@color/color_333333</item>
-        <item name="android:textStyle">bold</item>
+    <style name="size_16_color_2D2D2F">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/color_context</item>
+    </style>
+
+    <style name="size_16_color_ffffff">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="size_16_color_4D000000">
+        <item name="android:textSize">@dimen/sp_16</item>
+        <item name="android:textColor">@color/color_4D000000</item>
     </style>
 
     <style name="size_17_color_ffffff">
@@ -138,15 +151,22 @@
         <item name="android:textColor">@color/color_ff000000</item>
     </style>
 
-    <style name="size_18_color_212121_bold">
-        <item name="android:textSize">@dimen/sp_18</item>
-        <item name="android:textColor">@color/color_212121</item>
+    <style name="size_17_color_333333">
+        <item name="android:textSize">@dimen/sp_17</item>
+        <item name="android:textColor">@color/color_333333</item>
+    </style>
+
+    <style name="size_17_color_333333_bold" parent="@style/size_17_color_333333">
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="size_18_color_ff000000">
+    <style name="size_18_color_212121">
         <item name="android:textSize">@dimen/sp_18</item>
-        <item name="android:textColor">@color/color_ff000000</item>
+        <item name="android:textColor">@color/color_212121</item>
+    </style>
+
+    <style name="size_18_color_212121_bold" parent="@style/size_18_color_212121">
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="size_18_color_2D2D2F">
@@ -154,14 +174,19 @@
         <item name="android:textColor">@color/color_context</item>
     </style>
 
+    <style name="size_26_color_272727">
+        <item name="android:textSize">@dimen/sp_26</item>
+        <item name="android:textColor">@color/color_272727</item>
+    </style>
+
     <style name="size_18_color_FFEB3B">
         <item name="android:textSize">@dimen/sp_18</item>
         <item name="android:textColor">#FFEB3B</item>
     </style>
 
-    <style name="size_26_color_272727">
-        <item name="android:textSize">@dimen/sp_26</item>
-        <item name="android:textColor">@color/color_272727</item>
+    <style name="size_18_color_ff000000">
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textColor">@color/color_ff000000</item>
     </style>
     <!--    text and color style ending   -->
 
@@ -194,6 +219,7 @@
         <item name="contentInsetStart">0dp</item>
     </style>
     <!--    view style ending   -->
+
     <style name="SettingItem">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">@dimen/dp_50</item>
@@ -226,7 +252,7 @@
         <item name="android:layout_marginRight">@dimen/dp_20</item>
     </style>
 
-    <!-- view style-->
+    <!-- view style starting -->
     <style name="HomeTextViewStyle" parent="@style/size_14_color_101010">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dp_45</item>
@@ -237,5 +263,37 @@
         <item name="android:paddingLeft">@dimen/dp_16</item>
         <item name="android:paddingRight">@dimen/dp_16</item>
     </style>
+    <!-- view style ending -->
+
+    <!--Anim style starting -->
+    <style name="AnimStyleEnterBottomExitBottom">
+        <!-- 指定显示的动画xml -->
+        <item name="android:windowEnterAnimation">@anim/in_from_bottom_duration_200</item>
+        <!-- 指定消失的动画xml -->
+        <item name="android:windowExitAnimation">@anim/out_to_bottom_duration_200</item>
+    </style>
+
+    <style name="AnimStyleEnterBottomExitBottomOpenClose" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/in_from_right_duration_200</item>
+        <item name="android:activityOpenExitAnimation">@anim/out_to_left_duration_200</item>
+        <item name="android:activityCloseEnterAnimation">@anim/in_from_right_close_duration_200
+        </item>
+        <item name="android:activityCloseExitAnimation">@anim/out_to_left_close_duration_200</item>
+    </style>
+
+    <style name="PageAnimalTheme" parent="@style/AppBaseThemeWithWindowIsTranslucent">
+        <!--自定义页面切换动画-->
+        <item name="android:windowAnimationStyle">@style/AnimStyleEnterBottomExitBottomOpenClose
+        </item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+    <!-- Anim style ending -->
+
+    <!-- TextAppearance  style starting -->
+    <style name="TextAppearanceSize15Color666666" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textColor">@color/color_666666</item>
+    </style>
+    <!-- TextAppearance style ending -->
 
 </resources>
