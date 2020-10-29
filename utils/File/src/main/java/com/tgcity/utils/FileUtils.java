@@ -506,4 +506,13 @@ public class FileUtils {
         return filename;
     }
 
+    public static File getCompressFile(Context context, String imgPath) {
+        try {
+            return new Compressor(context.getApplicationContext()).setQuality(60).compressToFile(new File(imgPath));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
