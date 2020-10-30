@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="nc_NCalendar">
+
+        <attr name="nc_solarTextSize" format="dimension" />
+        <attr name="nc_solarTextBold" format="boolean" />
+        <attr name="nc_todayCheckedSolarTextColor" format="color" />
+        <attr name="nc_todayUnCheckedSolarTextColor" format="color" />
+        <attr name="nc_defaultCheckedSolarTextColor" format="color" />
+        <attr name="nc_defaultUnCheckedSolarTextColor" format="color" />
+
+        <attr name="nc_showLunar" format="boolean" />
+        <attr name="nc_todayCheckedLunarTextColor" format="color" />
+        <attr name="nc_todayUnCheckedLunarTextColor" format="color" />
+        <attr name="nc_defaultCheckedLunarTextColor" format="color" />
+        <attr name="nc_defaultUnCheckedLunarTextColor" format="color" />
+        <attr name="nc_lunarTextSize" format="dimension" />
+        <attr name="nc_lunarTextBold" format="boolean" />
+        <attr name="nc_lunarDistance" format="dimension" />
+
+
+        <attr name="nc_pointSize" format="dimension" />
+        <attr name="nc_pointDistance" format="dimension" />
+        <attr name="nc_todayCheckedPoint" format="reference" />
+        <attr name="nc_todayUnCheckedPoint" format="reference" />
+        <attr name="nc_defaultCheckedPoint" format="reference" />
+        <attr name="nc_defaultUnCheckedPoint" format="reference" />
+
+        <attr name="nc_todayCheckedHoliday" format="reference" />
+        <attr name="nc_todayUnCheckedHoliday" format="reference" />
+        <attr name="nc_defaultCheckedHoliday" format="reference" />
+        <attr name="nc_defaultUnCheckedHoliday" format="reference" />
+
+        <attr name="nc_todayCheckedWorkday" format="reference" />
+        <attr name="nc_todayUnCheckedWorkday" format="reference" />
+        <attr name="nc_defaultCheckedWorkday" format="reference" />
+        <attr name="nc_defaultUnCheckedWorkday" format="reference" />
+
+        <attr name="nc_calendarBackground" format="reference" />
+
+
+        <attr name="nc_holidayText" format="string" />
+        <attr name="nc_workdayText" format="string" />
+        <attr name="nc_holidayWorkdayTextBold" format="boolean" />
+        <attr name="nc_holidayWorkdayTextSize" format="dimension" />
+        <attr name="nc_holidayWorkdayDistance" format="dimension" />
+        <attr name="nc_todayCheckedHolidayTextColor" format="color" />
+        <attr name="nc_todayUnCheckedHolidayTextColor" format="color" />
+        <attr name="nc_defaultCheckedHolidayTextColor" format="color" />
+        <attr name="nc_defaultUnCheckedHolidayTextColor" format="color" />
+        <attr name="nc_todayCheckedWorkdayTextColor" format="color" />
+        <attr name="nc_todayUnCheckedWorkdayTextColor" format="color" />
+        <attr name="nc_defaultCheckedWorkdayTextColor" format="color" />
+        <attr name="nc_defaultUnCheckedWorkdayTextColor" format="color" />
+
+
+        <attr name="nc_disabledString" format="string" />
+
+        <attr name="nc_calendarHeight" format="dimension" />
+        <attr name="nc_stretchCalendarHeight" format="dimension" />
+        <attr name="nc_stretchCalendarEnable" format="boolean" />
+        <attr name="nc_animationDuration" format="integer" />
+
+        <attr name="nc_lastNextMothAlphaColor" format="integer" />
+        <attr name="nc_disabledAlphaColor" format="integer" />
+
+
+        <attr name="nc_showHoliday" format="boolean" />
+        <attr name="nc_allMonthSixLine" format="boolean" />
+        <attr name="nc_lastNextMonthClickEnable" format="boolean" />
+        <attr name="nc_disabledColor" format="color" />
+
+        <attr name="nc_defaultCalendar" format="enum">
+            <enum name="week" value="100" />
+            <enum name="month" value="101" />
+        </attr>
+
+        <attr name="nc_pointLocation" format="enum">
+            <enum name="up" value="200" />
+            <enum name="down" value="201" />
+        </attr>
+
+        <attr name="nc_firstDayOfWeek" format="enum">
+            <enum name="sunday" value="300" />
+            <enum name="monday" value="301" />
+        </attr>
+
+        <attr name="nc_holidayWorkdayLocation" format="enum">
+            <enum name="top_right" value="400" />
+            <enum name="top_left" value="401" />
+            <enum name="bottom_right" value="402" />
+            <enum name="bottom_left" value="403" />
+        </attr>
+
+        <attr name="nc_stretchTextSize" format="dimension" />
+        <attr name="nc_stretchTextBold" format="boolean" />
+        <attr name="nc_stretchTextDistance" format="dimension" />
+        <attr name="nc_stretchTextColor" format="color" />
+
+
+        <attr name="nc_showNumberBackground" format="boolean" />
+        <attr name="nc_numberBackgroundTextSize" format="dimension" />
+        <attr name="nc_numberBackgroundTextColor" format="color" />
+        <attr name="nc_numberBackgroundAlphaColor" format="integer" />
+
+
+        <attr name="nc_defaultCheckedBackground" format="reference" />
+        <attr name="nc_todayCheckedBackground" format="reference" />
+
+    </declare-styleable>
+</resources>

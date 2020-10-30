@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="nc_textBold">false</bool>
+    <bool name="nc_showHolidayWorkday">true</bool>
+    <bool name="nc_showLunar">true</bool>
+    <bool name="nc_allMonthSixLine">false</bool>
+    <bool name="nc_showNumberBackground">false</bool>
+    <bool name="nc_lastNextMonthClickEnable">true</bool>
+    <bool name="nc_stretchCalendarEnable">false</bool>
+</resources>

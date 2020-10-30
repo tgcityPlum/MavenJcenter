@@ -15,7 +15,7 @@ include ':xwidget:XDialog', ':xwidget:XRefreshView', ':xwidget:XTabLayout', ':xw
 //function模块的包
 include ':function:Banner', ':function:BaseActivity', ':function:BaseApplication'
 include ':function:BaseEventBus', ':function:BaseFragment', ':function:BaseNetwork'
-include ':function:BaseWebview', ':function:Interface', ':function:Permission'
+include ':function:BaseWebview', ':function:Calendar', ':function:Interface', ':function:Permission'
 include ':function:PickerView', ':function:RefreshAdapter', ':function:Resource'
 //profession模块的包
 include ':profession:Crash', ':profession:ImagePicker', ':profession:Lifecycler', ':profession:Login'

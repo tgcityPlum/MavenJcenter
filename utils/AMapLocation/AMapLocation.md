@@ -1,7 +1,7 @@
 # AMapLocation
 
 ## 模块说明
-AMapLocation封装了百度地图的基础业务
+AMapLocation封装了百度地图的基础业务，并添加地图测距离功能
 
 ## 使用说明
 * 初始化组件

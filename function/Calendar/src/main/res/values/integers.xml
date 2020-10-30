@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="nc_animationDuration">240</integer>
+    <integer name="nc_lastNextMothAlphaColor">90</integer>
+    <integer name="nc_disabledAlphaColor">50</integer>
+    <integer name="nc_numberBackgroundAlphaColor">50</integer>
+</resources>
