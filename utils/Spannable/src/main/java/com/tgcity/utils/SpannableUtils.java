@@ -73,6 +73,13 @@ public class SpannableUtils {
         return spannableString;
     }
 
+    public SpannableString setSpannable(Context context, String message, int color, float proportion, int startLength, int endLength) {
+        SpannableString spannableString = new SpannableString(message);
+        spannableString.setSpan(new ForegroundColorSpan(context.getResources().getColor(color)), startLength, endLength, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(new RelativeSizeSpan(proportion), startLength, endLength, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        return spannableString;
+    }
+
     /**
      * 在文本内容上加中横线
      */
