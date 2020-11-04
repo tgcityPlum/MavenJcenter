@@ -105,10 +105,11 @@ ext {
 
     //**************** widgetDependencies ****************
     widgetDependencies = [
-            spinner     : "com.tgcity.widget:Spinner:latest.release",
-            titleBar    : "com.tgcity.widget:TitleBar:latest.release",
-            progressView: "com.tgcity.widget:ProgressView:latest.release",
-            loadDialog  : "com.tgcity.widget:LoadDialog:latest.release"
+            spinner      : "com.tgcity.widget:Spinner:latest.release",
+            titleBar     : "com.tgcity.widget:TitleBar:latest.release",
+            progressView : "com.tgcity.widget:ProgressView:latest.release",
+            loadDialog   : "com.tgcity.widget:LoadDialog:latest.release",
+            editViewClear: "com.tgcity.widget:EditViewClear:latest.release"
     ]
 
     //**************** xWidgetDependencies ****************

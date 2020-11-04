@@ -3,6 +3,7 @@ package com.tgcity.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
+import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -379,6 +380,15 @@ public class MultifunctionView extends LinearLayout {
     }
 
     /**
+     * 中间edittext的动态变换
+     */
+    public void afterTextChanged(ClearViewTextWatcher clearViewTextWatcher) {
+        if (etCenter != null) {
+            etCenter.addTextChangedListener(clearViewTextWatcher);
+        }
+    }
+
+    /**
      * 设置右侧的文案
      */
     public void setRightText(String message) {
@@ -390,7 +400,7 @@ public class MultifunctionView extends LinearLayout {
     /**
      * 隐藏箭头
      */
-    public void setHideArrow(boolean isHideArrow){
+    public void setHideArrow(boolean isHideArrow) {
         if (msItemType != null) {
             msItemType.setHideArrow(isHideArrow);
         }

@@ -11,8 +11,8 @@ android {
     defaultConfig {
         minSdkVersion versionConfig.minSdkVersion
         targetSdkVersion versionConfig.targetSdkVersion
-        versionCode 2010302
-        versionName "1.0.1"
+        versionCode 2011042
+        versionName "1.0.2"
         testInstrumentationRunner versionConfig.testInstrumentationRunner
     }
 
@@ -31,6 +31,7 @@ dependencies {
     implementation supportDependencies.appcompat
     implementation supportDependencies.constraint
     implementation widgetDependencies.spinner
+    implementation widgetDependencies.editViewClear
     implementation utilDependencies.density
     implementation utilDependencies.digital
     implementation functionDependencies.resource
@@ -41,7 +42,7 @@ def gitUrl = 'https://github.com/tgcityPlum/MavenJcenter.git' // 项目的git地
 def repoName = 'widget' // 项目的名称
 def moduleName = 'MultifunctionView' // 项目的名称
 group = 'com.tgcity.widget' // 所在组
-version = "1.0.1" //aar的版本号
+version = "1.0.2" //aar的版本号
 
 install {
     repositories.mavenInstaller {
