@@ -6,6 +6,11 @@
         <item name="android:textColor">@color/color_666666</item>
     </style>
 
+    <style name="size_12_color_333333">
+        <item name="android:textSize">@dimen/sp_12</item>
+        <item name="android:textColor">@color/color_333333</item>
+    </style>
+
     <style name="size_12_color_666666">
         <item name="android:textSize">@dimen/sp_12</item>
         <item name="android:textColor">@color/color_666666</item>
@@ -61,6 +66,11 @@
         <item name="android:textColor">@color/color_2D2D2F</item>
     </style>
 
+    <style name="size_14_color_333333">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_333333</item>
+    </style>
+
     <style name="size_14_color_666666">
         <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:textColor">@color/color_666666</item>
@@ -71,6 +81,11 @@
         <item name="android:textColor">@color/color_676767</item>
     </style>
 
+    <style name="size_14_color_999999">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_999999</item>
+    </style>
+
     <style name="size_14_color_9B9B9B">
         <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:textColor">@color/color_9B9B9B</item>
@@ -79,6 +94,11 @@
     <style name="size_14_color_FFFFFF">
         <item name="android:textSize">@dimen/sp_14</item>
         <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="size_14_color_F02812">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_F02812</item>
     </style>
 
     <style name="size_15_color_000000">
@@ -104,6 +124,11 @@
     <style name="size_15_color_838383">
         <item name="android:textSize">@dimen/sp_15</item>
         <item name="android:textColor">@color/color_838383</item>
+    </style>
+
+    <style name="size_15_color_D31306">
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textColor">@color/color_D31306</item>
     </style>
 
     <style name="size_15_color_1f000000">
@@ -174,6 +199,16 @@
         <item name="android:textColor">@color/color_context</item>
     </style>
 
+    <style name="size_18_color_333333">
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textColor">@color/color_333333</item>
+    </style>
+
+    <style name="size_18_color_ffffff">
+        <item name="android:textSize">@dimen/sp_18</item>
+        <item name="android:textColor">@color/color_white</item>
+    </style>
+
     <style name="size_26_color_272727">
         <item name="android:textSize">@dimen/sp_26</item>
         <item name="android:textColor">@color/color_272727</item>
@@ -218,52 +253,17 @@
         <!-- 设置该属性解决空白部分-->
         <item name="contentInsetStart">0dp</item>
     </style>
+
+    <style name="TextAppearanceSize15Color666666" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">@dimen/sp_15</item>
+        <item name="android:textColor">@color/color_666666</item>
+    </style>
+
+    <style name="CheckBox_Normal_999999_Activate_D31306" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/color_999999</item>
+        <item name="colorControlActivated">@color/color_D31306</item>
+    </style>
     <!--    view style ending   -->
-
-    <style name="SettingItem">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">@dimen/dp_50</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:background">@color/color_white</item>
-        <item name="android:textSize">@dimen/sp_16</item>
-        <item name="android:textColor">@color/color_6D89AF</item>
-    </style>
-
-    <style name="SettingItemTitle" parent="SettingItem">
-        <item name="android:paddingLeft">@dimen/dp_12</item>
-    </style>
-
-    <style name="SettingItemContent" parent="SettingItem">
-        <item name="android:layout_marginLeft">@dimen/dp_100</item>
-    </style>
-
-    <style name="LakeDetailTitle" parent="@style/size_16_color_2D2D2F">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">@dimen/dp_60</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:layout_marginLeft">@dimen/dp_20</item>
-    </style>
-
-    <style name="LakeDetailContent" parent="@style/size_16_color_4D000000">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">@dimen/dp_60</item>
-        <item name="android:gravity">center_vertical|right</item>
-        <item name="android:layout_marginRight">@dimen/dp_20</item>
-    </style>
-
-    <!-- view style starting -->
-    <style name="HomeTextViewStyle" parent="@style/size_14_color_101010">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/dp_45</item>
-        <item name="android:layout_marginTop">@dimen/dp_10</item>
-        <item name="android:background">@color/color_white</item>
-        <item name="android:drawableRight">@mipmap/arrow_right</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingLeft">@dimen/dp_16</item>
-        <item name="android:paddingRight">@dimen/dp_16</item>
-    </style>
-    <!-- view style ending -->
 
     <!--Anim style starting -->
     <style name="AnimStyleEnterBottomExitBottom">
@@ -288,12 +288,5 @@
         <item name="android:windowActivityTransitions">true</item>
     </style>
     <!-- Anim style ending -->
-
-    <!-- TextAppearance  style starting -->
-    <style name="TextAppearanceSize15Color666666" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textSize">@dimen/sp_15</item>
-        <item name="android:textColor">@color/color_666666</item>
-    </style>
-    <!-- TextAppearance style ending -->
 
 </resources>
