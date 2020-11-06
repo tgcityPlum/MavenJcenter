@@ -20,7 +20,6 @@ import com.tgcity.utils.StartActivityUtils;
  *         LoginManager.getInstance()
  *                     .setType(0)
  *                     .setContext(context)
- *                     .setLoginClassName(class)
  *                     .setCallBack(...)
  *                     .gotoLogin()
  *
@@ -28,7 +27,6 @@ import com.tgcity.utils.StartActivityUtils;
  *         LoginManager.getInstance()
  *                     .setType(1)
  *                     .setActivity(activity)
- *                     .setLoginClassName(class)
  *                     .setCallBack(...)
  *                     .gotoLoginForResult(requestCode)
  *

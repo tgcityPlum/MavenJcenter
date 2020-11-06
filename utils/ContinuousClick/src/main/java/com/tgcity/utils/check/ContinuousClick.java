@@ -40,4 +40,21 @@ public class ContinuousClick {
         queue.offer(clickUtil);
         return clickUtil.check400();
     }
+
+    public static boolean check(Object o,int millisecond) {
+        String flag;
+        if(o == null) {
+            flag = Thread.currentThread().getStackTrace()[2].getMethodName();
+        } else {
+            flag = o.toString();
+        }
+        for (OneClick util : queue.getArrayList()) {
+            if (util.getMethodName().equals(flag)) {
+                return util.check(millisecond);
+            }
+        }
+        OneClick clickUtil = new OneClick(flag);
+        queue.offer(clickUtil);
+        return clickUtil.check400();
+    }
 }

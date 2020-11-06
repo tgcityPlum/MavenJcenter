@@ -37,4 +37,14 @@ public class OneClick {
             return true;
         }
     }
+
+    public boolean check(int millisecond) {
+        long currentTime = Calendar.getInstance().getTimeInMillis();
+        if (currentTime - lastClickTime > millisecond) {
+            lastClickTime = currentTime;
+            return false;
+        } else {
+            return true;
+        }
+    }
 }
