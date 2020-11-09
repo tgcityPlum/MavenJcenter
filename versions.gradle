@@ -31,6 +31,7 @@ ext {
     greenDaoVersion = '3.2.2'
     nineoldVersion = '2.4.0'
     agentwebVersion = '4.0.2'
+    webSocketVersion = '1.4.0'
 
     //**************** supportDependencies ****************
     supportDependencies = [
@@ -79,6 +80,8 @@ ext {
             greendao             : "org.greenrobot:greendao:${greenDaoVersion}",
             agentweb             : "com.just.agentweb:agentweb:${agentwebVersion}",
             nineoldandroids      : "com.nineoldandroids:library:${nineoldVersion}",
+            //WebSocket
+            webSocket              : "org.java-websocket:Java-WebSocket:${webSocketVersion}"
     ]
 
     //**************** utilsDependencies ****************
