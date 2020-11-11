@@ -86,7 +86,7 @@ public class BaseLoadingDialog extends Dialog {
     private void showGIFLoading() {
         try {
             Glide.with(mContext)
-                    .load(R.drawable.ld_loading_dh)
+                    .load(R.drawable.ld_loading_2)
                     .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL))
                     .thumbnail(1.0f)
                     .into(loadingProgress);

@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/loading_pic"
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="@dimen/dp_100" />
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30" />
 
         <TextView
             android:id="@+id/loading_text"
@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp_20"
             android:text="@string/ld_load_message"
             android:textColor="@color/color_context"
             android:textSize="@dimen/sp_16" />

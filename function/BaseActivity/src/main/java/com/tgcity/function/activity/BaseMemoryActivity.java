@@ -139,4 +139,8 @@ public abstract class BaseMemoryActivity extends BaseLoadingActivity {
                 });
     }
 
+    @Override
+    public void setLoadStyle(int loadStyle) {
+        super.setLoadStyle(loadStyle);
+    }
 }

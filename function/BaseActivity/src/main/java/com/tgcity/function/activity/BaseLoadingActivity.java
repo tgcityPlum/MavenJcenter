@@ -11,6 +11,14 @@ import com.tgcity.widget.BaseLoadingDialog;
  * --处理加载指示器
  */
 public abstract class BaseLoadingActivity extends BaseLifecycleActivity {
+
+    /**
+     * 加载方式
+     * 0 gif
+     * 1 加载图片
+     */
+    private int loadStyle = 0;
+
     /**
      * BaseLoadingDialog
      */
@@ -20,23 +28,34 @@ public abstract class BaseLoadingActivity extends BaseLifecycleActivity {
      * showLruCache loading
      */
     public void showLoadingDialog() {
-        if (mBaseLoadingDialog == null) {
-            mBaseLoadingDialog = new BaseLoadingDialog(this);
+
+        if (loadStyle == 0){
+            if (mBaseLoadingDialog == null) {
+                mBaseLoadingDialog = new BaseLoadingDialog(this);
+            }
+
+            if (!mBaseLoadingDialog.isShowing()) {
+                mBaseLoadingDialog.show();
+                LogUtils.i("BaseLoadingDialog is showLruCache");
+            }
         }
 
-        if (!mBaseLoadingDialog.isShowing()) {
-            mBaseLoadingDialog.show();
-            LogUtils.i("BaseLoadingDialog is showLruCache");
-        }
     }
 
     /**
      * dismiss loading
      */
     public void dismissLoadingDialog() {
-        if (mBaseLoadingDialog != null) {
-            mBaseLoadingDialog.dismiss();
+        if (loadStyle == 0){
+            if (mBaseLoadingDialog != null) {
+                mBaseLoadingDialog.dismiss();
+            }
         }
+
+    }
+
+    public void setLoadStyle(int loadStyle) {
+        this.loadStyle = loadStyle;
     }
 
     @Override
