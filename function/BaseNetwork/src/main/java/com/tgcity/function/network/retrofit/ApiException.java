@@ -101,22 +101,22 @@ public class ApiException extends RuntimeException {
             return ex;
         } else if (e instanceof ConnectException) {
             //连接失败
-            ex = new ApiException(ErrorMode.CONNECT_TIME_OUT);
+            ex = new ApiException(e.getMessage(),ErrorMode.CONNECT_TIME_OUT);
             return ex;
         } else if (e instanceof javax.net.ssl.SSLHandshakeException) {
             //证书验证失败
-            ex = new ApiException(ErrorMode.SIGNATURE_FAILURE_SSL);
+            ex = new ApiException(e.getMessage(),ErrorMode.SIGNATURE_FAILURE_SSL);
             return ex;
         } else if (e instanceof ConnectTimeoutException) {
             //连接超时
-            ex = new ApiException(ErrorMode.CONNECT_TIME_OUT);
+            ex = new ApiException(e.getMessage(),ErrorMode.CONNECT_TIME_OUT);
             return ex;
         } else if (e instanceof java.net.SocketTimeoutException) {
-            ex = new ApiException(ErrorMode.CONNECT_TIME_OUT);
+            ex = new ApiException(e.getMessage(),ErrorMode.CONNECT_TIME_OUT);
             return ex;
         } else if (e instanceof UnknownHostException) {
             //无法解析该域名
-            ex = new ApiException(ErrorMode.UNKNOWN_HOST);
+            ex = new ApiException(e.getMessage(),ErrorMode.UNKNOWN_HOST);
             return ex;
         } else {
             ex = new ApiException(e.getMessage(), ErrorMode.HTTP_OTHER_ERROR);
