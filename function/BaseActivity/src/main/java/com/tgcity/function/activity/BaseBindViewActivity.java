@@ -28,7 +28,7 @@ public abstract class BaseBindViewActivity extends BaseOrientationActivity {
     /**
      * 根布局控件
      */
-    private View rootView;
+    protected View rootView;
     /**
      * 空布局，销毁时置空使用
      */
