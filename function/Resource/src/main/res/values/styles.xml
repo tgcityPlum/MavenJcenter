@@ -41,6 +41,11 @@
         <item name="android:textColor">@color/color_666666</item>
     </style>
 
+    <style name="size_13_color_999999">
+        <item name="android:textSize">@dimen/sp_13</item>
+        <item name="android:textColor">@color/color_999999</item>
+    </style>
+
     <style name="size_13_color_ffffff">
         <item name="android:textSize">@dimen/sp_13</item>
         <item name="android:textColor">@color/color_white</item>
@@ -79,6 +84,11 @@
     <style name="size_14_color_676767">
         <item name="android:textSize">@dimen/sp_13</item>
         <item name="android:textColor">@color/color_676767</item>
+    </style>
+
+    <style name="size_14_color_6B86FF">
+        <item name="android:textSize">@dimen/sp_14</item>
+        <item name="android:textColor">@color/color_6B86FF</item>
     </style>
 
     <style name="size_14_color_999999">
@@ -243,7 +253,7 @@
     </style>
 
     <style name="LauncherTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/bg_guide</item> <!-- 需要添加背景 -->
+        <item name="android:windowBackground">@drawable/shape_solid_ffffff</item> <!-- 需要添加背景 -->
         <item name="android:windowFullscreen">true</item>
     </style>
     <!--    application theme ending   -->
@@ -262,6 +272,11 @@
     <style name="CheckBox_Normal_999999_Activate_D31306" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/color_999999</item>
         <item name="colorControlActivated">@color/color_D31306</item>
+    </style>
+
+    <style name="CheckBox_Normal_999999_Activate_6B86FF" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/color_999999</item>
+        <item name="colorControlActivated">@color/color_6B86FF</item>
     </style>
     <!--    view style ending   -->
 
