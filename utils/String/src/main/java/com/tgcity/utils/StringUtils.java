@@ -45,6 +45,47 @@ public final class StringUtils {
     }
 
     /**
+     * 判断字符串是否不为n空
+     *
+     * @param s 待校验字符串
+     * @return {@code true}: 非空<br> {@code false}: 空
+     */
+    public static boolean isNotEmpty(CharSequence s) {
+        if (s == null) {
+            return false;
+        } else {
+            if (s.length() == 0) {
+                return false;
+            } else {
+                if ("".equals(s) || "null".equals(s) || "NULL".equals(s)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 判断控件中的文案是否为空
+     *
+     * @param view 控件
+     * @return {@code true}: 空<br> {@code false}: 不为空
+     */
+    public static boolean isEmpty(TextView view) {
+        return isEmpty(getText(view));
+    }
+
+    /**
+     * 判断控件中的文案是否不为空
+     *
+     * @param view 控件
+     * @return {@code true}: 非空<br> {@code false}: 空
+     */
+    public static boolean isNotEmpty(TextView view) {
+        return isNotEmpty(getText(view));
+    }
+
+    /**
      * 格式化string
      *
      * @param s String
@@ -134,6 +175,7 @@ public final class StringUtils {
 
     /**
      * 获取表情限制
+     *
      * @return InputFilter
      */
     public static InputFilter getEmojiFilter() {
@@ -188,20 +230,33 @@ public final class StringUtils {
 
     /**
      * 获取控件上的文案
+     *
      * @param tv TextView
      * @return String
      */
+    @Deprecated
     public static String getStringFromView(TextView tv) {
-        if (tv != null){
-            return tv.getText().toString().trim();
+        return getText(tv);
+    }
+
+    /**
+     * 获取控件上的文案
+     *
+     * @param view TextView
+     * @return String
+     */
+    public static String getText(TextView view) {
+        if (view != null && view.getText().length() != 0) {
+            return view.getText().toString().trim();
         }
         return "";
     }
 
     /**
      * 获取本地json文件
+     *
      * @param fileName 文件名
-     * @param context Context
+     * @param context  Context
      * @return String
      */
     public static String getJson(String fileName, Context context) {
