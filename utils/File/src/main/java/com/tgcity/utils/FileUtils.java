@@ -108,6 +108,16 @@ public class FileUtils {
         return file != null && (file.exists() ? file.isDirectory() : file.mkdirs());
     }
 
+    /**
+     * 判断目录是否存在，不存在则判断是否创建成功
+     *
+     * @param dirPath 目录路径
+     * @return {@code true}: 存在或创建成功<br>{@code false}: 不存在或创建失败
+     */
+    public static boolean createOrExistsDir(String dirPath) {
+        return createOrExistsDir(getFileByPath(dirPath));
+    }
+
     public static String fileToBase64(File file) {
         String base64 = null;
         InputStream in = null;
