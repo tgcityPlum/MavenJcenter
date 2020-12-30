@@ -1,11 +1,15 @@
 package com.tgcity.profession.network.retrofit;
 
 import android.content.Context;
+import android.os.Environment;
 import android.support.annotation.CallSuper;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.tgcity.function.network.bean.HttpResult;
 import com.tgcity.function.network.cache.ErrorMode;
 import com.tgcity.function.network.retrofit.ApiException;
+import com.tgcity.profession.network.base.DownloadFileApiService;
 import com.tgcity.profession.network.base.NetworkConstant;
 import com.tgcity.profession.network.bean.result.HttpCommonResult;
 import com.tgcity.profession.network.cache.RxCache;
@@ -19,9 +23,17 @@ import com.tgcity.profession.network.callback.AbstractSimpleType;
 import com.tgcity.profession.network.greendao.helper.HttpKeyOperationHelper;
 import com.tgcity.profession.network.subsciber.CallBackSubsciber;
 import com.tgcity.profession.network.utils.CommonUtils;
+import com.tgcity.utils.FileUtils;
+import com.tgcity.utils.LogUtils;
 import com.tgcity.utils.StringUtils;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -29,6 +41,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * @author TGCity
@@ -193,142 +209,6 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
 
     }
 
-
-    /**
-     * 因为#{@link com.eagersoft.youzy.youzy.constants.AppConstant.TZY_URL}地址下的接口返回参数是由isSuccess来判断，
-     * 所以新增一个剥离类，与原来的互不影响，区分的时候只需要在#{@link Builder.extraRemark}参数填入#{@link com.eagersoft.youzy.youzy.constants.AppConstant.API_SERVICE_TZY}即可
-     * <p>
-     * 针对HttpCommonResult<T>模型进行处理
-     *
-     * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
-     */
-    @SuppressWarnings("JavadocReference")
-    public static class HttpResultFuncTwo<T> implements Function<HttpCommonResult<T>, T> {
-
-        private int responseDataCode = NetworkConstant.SUCCEED_CODE_0;
-
-        public HttpResultFuncTwo() {
-
-        }
-
-        public HttpResultFuncTwo(int code) {
-            this.responseDataCode = code;
-        }
-
-        @Override
-        public T apply(HttpCommonResult<T> httpResult) {
-            //待校验的code码
-            int tempCode = httpResult.getCode();
-            //待使用的信息
-            String tempContent;
-            if (!StringUtils.isEmpty(httpResult.getMessage())) {
-                tempContent = httpResult.getMessage();
-            } else if (!StringUtils.isEmpty(httpResult.getMsg())) {
-                tempContent = httpResult.getMsg();
-            } else {
-                tempContent = "接口未提供默认信息";
-            }
-
-            if (tempCode != responseDataCode) {
-                throw new ApiException(tempContent, ErrorMode.API_VISUALIZATION_MESSAGE.setErrorCode(tempCode));
-            }
-
-            if (httpResult.getResult() instanceof List) {
-                if (CommonUtils.isEmptyResult((List) httpResult.getResult())) {
-                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL.setErrorContent(tempContent));
-                }
-            } else {
-                if (httpResult.getResult() == null) {
-                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL.setErrorContent(tempContent));
-                }
-            }
-            return httpResult.getResult();
-        }
-    }
-
-    /**
-     * 用来统一处理Http的resultCode,并将HttpResult的Data部分剥离出来返回给subscriber
-     * 针对HttpResult<T>模型进行处理
-     *
-     * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
-     */
-    public static class HttpResultFuncOne<T> implements Function<HttpResult<T>, T> {
-
-        private int responseDataCode = NetworkConstant.SUCCEED_CODE_200;
-
-        public HttpResultFuncOne() {
-
-        }
-
-        public HttpResultFuncOne(int code) {
-            this.responseDataCode = code;
-        }
-
-        @Override
-        public T apply(HttpResult<T> httpResult) {
-            //项目抛错根据getCode值进行处理
-            if (httpResult.getCode() != responseDataCode) {
-                throw ApiException.handleException(httpResult);
-            } else {
-                if (httpResult.getResults() instanceof List) {
-                    if (CommonUtils.isEmptyResult((List) httpResult.getResults())) {
-//                        httpResult.setCode(ErrorMode.SERVER_NULL.getErrorCode());
-                        throw ApiException.handleException(httpResult);
-                    }
-                } else {
-                    if (httpResult.getResults() == null) {
-//                        httpResult.setCode(ErrorMode.SERVER_NULL.getErrorCode());
-                        throw ApiException.handleException(httpResult);
-                    }
-                }
-            }
-            return httpResult.getResults();
-        }
-    }
-
-    public class HttpResultFunThree<T> implements Function<HttpResult<String>, String> {
-
-        private int responseDataCode = NetworkConstant.SUCCEED_CODE_200;
-
-        public HttpResultFunThree() {
-
-        }
-
-        public HttpResultFunThree(int code) {
-            this.responseDataCode = code;
-        }
-
-        @Override
-        public String apply(HttpResult<String> httpResult) {
-            //项目抛错根据getCode值进行处理
-            if (httpResult.getCode() != responseDataCode) {
-                throw ApiException.handleException(httpResult);
-            } else {
-                if (httpResult.getResults() == null) {
-                    return "data is null";
-                }
-            }
-            return httpResult.getResults();
-        }
-
-    }
-
-    /**
-     * 用来统一处理缓存管理返回的resultCode,并将HttpResult的Data部分剥离出来返回给subscriber
-     *
-     * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
-     */
-    public class HttpResultFuncCache<T> implements Function<CacheResult<T>, T> {
-        @Override
-        public T apply(CacheResult<T> httpResult) throws Exception {
-            if (!httpResult.isFromCache) {
-                //如果不是读取的缓存添加请求记录
-                HttpKeyOperationHelper.getInstance().addKey(httpResult.apiName, httpResult.requestData);
-            }
-            return httpResult.data;
-        }
-    }
-
     /**
      * 插入观察者
      *
@@ -362,6 +242,162 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
                     .subscribe(observer);
         }
 
+    }
+
+    /**
+     * @param url                            下载地址路径
+     * @param apiService                     请求Api
+     * @param subscriberDownloadFileListener 回调
+     */
+    public void toObservableDownloadFile(String url, DownloadFileApiService apiService, SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
+        toObservableDownloadFile(url, 1, "downloadFile", apiService, subscriberDownloadFileListener);
+    }
+
+    /**
+     * @param url                            下载地址路径
+     * @param type                           0  图片  1  视频
+     * @param apiService                     请求Api
+     * @param subscriberDownloadFileListener 回调
+     */
+    public void toObservableDownloadFile(String url, int type, DownloadFileApiService apiService, SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
+        toObservableDownloadFile(url, type, "download", apiService, subscriberDownloadFileListener);
+    }
+
+    /**
+     * @param url                            下载地址
+     * @param type                           0  图片  1  视频
+     * @param fileDirName                    文件名
+     * @param apiService                     请求Api
+     * @param subscriberDownloadFileListener 回调
+     */
+    public void toObservableDownloadFile(String url, int type, String fileDirName, DownloadFileApiService apiService, final SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
+        String fileDir = Environment.getExternalStorageDirectory() + "/" + fileDirName;
+        String filePath = "";
+        //通过Url得到保存到本地的文件名
+        if (FileUtils.createOrExistsDir(fileDir)) {
+            filePath = fileDir + "/" + System.currentTimeMillis() + (type == 0 ? ".jpg" : ".mp4");
+        }
+        if (TextUtils.isEmpty(filePath)) {
+            LogUtils.e("downloadFile: 存储路径为空了");
+            return;
+        }
+        //建立一个文件
+        final File tempFile = new File(filePath);
+        if (FileUtils.createOrExistsFile(tempFile)) {
+            if (apiService == null) {
+                LogUtils.e("downloadFile: BaseApiService为空");
+                return;
+            }
+            Call<ResponseBody> mCall = apiService.downloadFile(url);
+            final String finalFilePath = filePath;
+            mCall.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
+                    //下载文件放在子线程
+                    new Thread() {
+                        @Override
+                        public void run() {
+                            super.run();
+                            //保存到本地
+                            downloadFileToDisk(response, tempFile, finalFilePath, subscriberDownloadFileListener);
+                        }
+                    }.start();
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable throwable) {
+                    subscriberDownloadFileListener.onError(throwable);
+                }
+            });
+        } else {
+            subscriberDownloadFileListener.onNext(filePath);
+        }
+    }
+
+    /**
+     * 保存文件到本地
+     *
+     * @param response         返回的数据response
+     * @param file             文件
+     * @param filePath         文件路径
+     * @param downloadListener 回调
+     */
+    private void downloadFileToDisk(Response<ResponseBody> response, File file, String filePath, SubscriberDownloadFileListener<String> downloadListener) {
+        downloadListener.onStart();
+        long currentLength = 0;
+        OutputStream os = null;
+
+        if (response.body() == null) {
+            ApiException apiException = new ApiException("资源错误！", ErrorMode.DATA_FORMAT_ERROR);
+            downloadListener.onError(apiException);
+            return;
+        }
+        InputStream is = response.body().byteStream();
+        long totalLength = response.body().contentLength();
+        LogUtils.d("totalLength: " + totalLength);
+        //下载装态  0 未开始  1 下载中  2 下载完成
+        int loadStatus = 0;
+        try {
+            os = new FileOutputStream(file);
+            int len;
+            byte[] buff = new byte[1024];
+            while ((len = is.read(buff)) != -1) {
+                if (loadStatus != 1) {
+                    loadStatus = 1;
+                }
+                os.write(buff, 0, len);
+                currentLength += len;
+
+                int temp = (int) (100 * currentLength / totalLength);
+                LogUtils.d("当前进度: " + currentLength + "====进度比例：" + temp);
+                downloadListener.onProgress(temp);
+                if (temp == 100) {
+                    loadStatus = 2;
+                }
+            }
+            if (loadStatus != 2) {
+                loadStatus = 2;
+            }
+        } catch (FileNotFoundException e) {
+            LogUtils.e(e.toString());
+            downloadListener.onError(e);
+            e.printStackTrace();
+        } catch (IOException e) {
+            LogUtils.e(e.toString());
+            downloadListener.onError(e);
+            e.printStackTrace();
+        } finally {
+            if (os != null) {
+                try {
+                    if (loadStatus != 2) {
+                        loadStatus = 2;
+                    }
+                    os.close();
+                    LogUtils.d("os资源关闭");
+                } catch (IOException e) {
+                    LogUtils.e(e.toString());
+                    downloadListener.onError(e);
+                    e.printStackTrace();
+                }
+            }
+            if (is != null) {
+                try {
+                    if (loadStatus != 2) {
+                        loadStatus = 2;
+                    }
+                    is.close();
+                    LogUtils.d("is资源关闭");
+                } catch (IOException e) {
+                    LogUtils.e(e.toString());
+                    downloadListener.onError(e);
+                    e.printStackTrace();
+                }
+            }
+            if (loadStatus == 2) {
+                LogUtils.d("下载完成: " + filePath);
+                downloadListener.onNext(filePath);
+            }
+        }
     }
 
     public static final class Builder {
@@ -464,4 +500,141 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
             return this;
         }
     }
+
+    /**
+     * 用来统一处理接口返回模型的code码字段status,并将HttpResult的Data部分剥离出来返回给subscriber
+     * 针对HttpResult<T>模型进行处理
+     *
+     * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
+     */
+    public static class HttpResultFuncOne<T> implements Function<HttpResult<T>, T> {
+
+        private int responseDataCode = NetworkConstant.SUCCEED_CODE_200;
+
+        public HttpResultFuncOne() {
+
+        }
+
+        public HttpResultFuncOne(int code) {
+            this.responseDataCode = code;
+        }
+
+        @Override
+        public T apply(HttpResult<T> httpResult) {
+            //项目抛错根据getCode值进行处理
+            if (httpResult.getCode() != responseDataCode) {
+                throw ApiException.handleException(httpResult);
+            } else {
+                if (httpResult.getResults() instanceof List) {
+                    if (CommonUtils.isEmptyResult((List) httpResult.getResults())) {
+//                        httpResult.setCode(ErrorMode.SERVER_NULL.getErrorCode());
+                        throw ApiException.handleException(httpResult);
+                    }
+                } else {
+                    if (httpResult.getResults() == null) {
+//                        httpResult.setCode(ErrorMode.SERVER_NULL.getErrorCode());
+                        throw ApiException.handleException(httpResult);
+                    }
+                }
+            }
+            return httpResult.getResults();
+        }
+    }
+
+    /**
+     * 用来统一处理接口返回模型的code码字段code,并将HttpCommonResult的Data部分剥离出来返回给subscriber
+     * 针对HttpCommonResult<T>模型进行处理
+     *
+     * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
+     */
+    public static class HttpResultFuncTwo<T> implements Function<HttpCommonResult<T>, T> {
+
+        private int responseDataCode = NetworkConstant.SUCCEED_CODE_0;
+
+        public HttpResultFuncTwo() {
+
+        }
+
+        public HttpResultFuncTwo(int code) {
+            this.responseDataCode = code;
+        }
+
+        @Override
+        public T apply(HttpCommonResult<T> httpResult) {
+            //待校验的code码
+            int tempCode = httpResult.getCode();
+            //待使用的信息
+            String tempContent;
+            if (!StringUtils.isEmpty(httpResult.getMessage())) {
+                tempContent = httpResult.getMessage();
+            } else if (!StringUtils.isEmpty(httpResult.getMsg())) {
+                tempContent = httpResult.getMsg();
+            } else {
+                tempContent = "接口未提供默认信息";
+            }
+
+            if (tempCode != responseDataCode) {
+                throw new ApiException(tempContent, ErrorMode.API_VISUALIZATION_MESSAGE.setErrorCode(tempCode));
+            }
+
+            if (httpResult.getResult() instanceof List) {
+                if (CommonUtils.isEmptyResult((List) httpResult.getResult())) {
+                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL.setErrorContent(tempContent));
+                }
+            } else {
+                if (httpResult.getResult() == null) {
+                    throw new ApiException(ErrorMode.SERVER_NULL.getErrorTitle(), ErrorMode.SERVER_NULL.setErrorContent(tempContent));
+                }
+            }
+            return httpResult.getResult();
+        }
+    }
+
+    /**
+     * 用来统一处理接口返回模型的code码字段status,并将HttpResult的Data部分剥离出来返回给subscriber
+     * 针对HttpResult<T>模型进行处理
+     *
+     * @param <T> Subscriber真正需要的数据类型，也就是Data部分的数据类型
+     */
+    public static class HttpResultFunThree<T> implements Function<HttpResult<String>, String> {
+
+        private int responseDataCode = NetworkConstant.SUCCEED_CODE_200;
+
+        public HttpResultFunThree() {
+
+        }
+
+        public HttpResultFunThree(int code) {
+            this.responseDataCode = code;
+        }
+
+        @Override
+        public String apply(HttpResult<String> httpResult) {
+            //项目抛错根据getCode值进行处理
+            if (httpResult.getCode() != responseDataCode) {
+                throw ApiException.handleException(httpResult);
+            } else {
+                if (httpResult.getResults() == null) {
+                    return "data is null";
+                }
+            }
+            return httpResult.getResults();
+        }
+
+    }
+
+    /**
+     * 缓存的拦截处理
+     */
+    public static class HttpResultFuncCache<T> implements Function<CacheResult<T>, T> {
+        @Override
+        public T apply(CacheResult<T> httpResult) throws Exception {
+            if (!httpResult.isFromCache) {
+                //如果不是读取的缓存添加请求记录
+                HttpKeyOperationHelper.getInstance().addKey(httpResult.apiName, httpResult.requestData);
+            }
+            return httpResult.data;
+        }
+    }
+
 }

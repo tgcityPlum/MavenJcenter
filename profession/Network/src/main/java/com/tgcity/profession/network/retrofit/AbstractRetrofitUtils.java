@@ -1,5 +1,7 @@
 package com.tgcity.profession.network.retrofit;
 
+import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -19,6 +21,7 @@ public abstract class AbstractRetrofitUtils {
     private boolean isHostname = false;
     private String token;
     private String authorization;
+    private Retrofit downloadFileRetrofit;
 
     public AbstractRetrofitUtils setReadCookie(boolean readCookie) {
         isReadCookie = readCookie;
@@ -84,6 +87,36 @@ public abstract class AbstractRetrofitUtils {
                 .client(mOkHttpClient)
                 .build();
         return retrofit;
+    }
+
+
+    /**
+     * 获取Retrofit对象
+     *
+     * @return Retrofit
+     */
+    public Retrofit getDownloadFileRetrofit(String url) {
+
+        if (downloadFileRetrofit == null){
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
+                    .build();
+            //Retrofit2后使用build设计模式
+            downloadFileRetrofit = new Retrofit.Builder()
+                    //设置服务器路径
+                    .baseUrl(url)
+                    //添加转化库，默认是GSon
+//                .addConverterFactory(GsonConverterFactory.create())
+                    //添加回调库，采用RxJava
+//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    //设置使用okHttp网络请求
+                    .client(okHttpClient)
+                    .build();
+        }
+
+        return downloadFileRetrofit;
     }
 
 }
