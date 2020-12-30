@@ -34,6 +34,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URLDecoder;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -270,48 +271,114 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
      * @param apiService                     请求Api
      * @param subscriberDownloadFileListener 回调
      */
-    public void toObservableDownloadFile(String url, int type, String fileDirName, DownloadFileApiService apiService, final SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
+    public void toObservableDownloadFile(String url, int type, String fileDirName, DownloadFileApiService apiService, SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
+        //校验外部元素是否为空
+        if (checkDownloadFileElement(url, fileDirName, apiService, subscriberDownloadFileListener)) {
+            return;
+        }
+        //校验文件路径是否为空
+        String filePath = onDownloadFilePath(url, type, fileDirName);
+        if (TextUtils.isEmpty(filePath)) {
+            LogUtils.e("downloadFile: 存储路径为空");
+            return;
+        }
+        //校验文件是否存在，不存在走下载流程；已存在直接返回文件路径
+        File tempFile = new File(filePath);
+
+        if (tempFile.exists()) {
+            subscriberDownloadFileListener.onNext(filePath);
+        } else {
+            downloadFile(url, apiService, filePath, tempFile, subscriberDownloadFileListener);
+        }
+    }
+
+    /**
+     * @param url                            下载地址
+     * @param apiService                     请求Api
+     * @param subscriberDownloadFileListener 回调
+     */
+    private void downloadFile(@NonNull String url, @NonNull DownloadFileApiService apiService, @NonNull String filePath, @NonNull final File tempFile, @NonNull final SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
+        Call<ResponseBody> mCall = apiService.downloadFile(url);
+        final String finalFilePath = filePath;
+        mCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
+                //下载文件放在子线程
+                new Thread() {
+                    @Override
+                    public void run() {
+                        super.run();
+                        //保存到本地
+                        downloadFileToDisk(response, tempFile, finalFilePath, subscriberDownloadFileListener);
+                    }
+                }.start();
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable throwable) {
+                subscriberDownloadFileListener.onError(throwable);
+            }
+        });
+    }
+
+    /**
+     * 校验字段
+     *
+     * @param url                            下载地址
+     * @param fileDirName                    文件目录
+     * @param apiService                     接口
+     * @param subscriberDownloadFileListener 回调
+     * @return 是否为空
+     */
+    private boolean checkDownloadFileElement(String url, String fileDirName, DownloadFileApiService apiService, SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
+        if (url == null) {
+            LogUtils.e("url is null in toObservableDownloadFile");
+            return true;
+        }
+        if (fileDirName == null) {
+            LogUtils.e("fileDirName is null in toObservableDownloadFile");
+            return true;
+        }
+        if (apiService == null) {
+            LogUtils.e("BaseApiService is null in toObservableDownloadFile");
+            return true;
+        }
+        if (subscriberDownloadFileListener == null) {
+            LogUtils.e("subscriberDownloadFileListener is null in toObservableDownloadFile");
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 处理文件路径
+     *
+     * @param url         下载地址
+     * @param type        类型
+     * @param fileDirName 文件夹名称
+     * @return 文件路径
+     */
+    private String onDownloadFilePath(String url, int type, String fileDirName) {
         String fileDir = Environment.getExternalStorageDirectory() + "/" + fileDirName;
         String filePath = "";
         //通过Url得到保存到本地的文件名
         if (FileUtils.createOrExistsDir(fileDir)) {
-            filePath = fileDir + "/" + System.currentTimeMillis() + (type == 0 ? ".jpg" : ".mp4");
-        }
-        if (TextUtils.isEmpty(filePath)) {
-            LogUtils.e("downloadFile: 存储路径为空了");
-            return;
-        }
-        //建立一个文件
-        final File tempFile = new File(filePath);
-        if (FileUtils.createOrExistsFile(tempFile)) {
-            if (apiService == null) {
-                LogUtils.e("downloadFile: BaseApiService为空");
-                return;
+            String decodeUrl = URLDecoder.decode(url);
+            //一定是找最后一个'/'出现的位置
+            int i = decodeUrl.lastIndexOf('/');
+            if (i != -1) {
+                decodeUrl = decodeUrl.substring(i);
+                if (type == 1) {
+                    if (decodeUrl.contains(".mp4")) {
+                        String[] temp = decodeUrl.split(".mp4");
+                        decodeUrl = temp[0];
+                    }
+                    decodeUrl = decodeUrl + ".mp4";
+                }
+                filePath = fileDir + decodeUrl;
             }
-            Call<ResponseBody> mCall = apiService.downloadFile(url);
-            final String finalFilePath = filePath;
-            mCall.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
-                    //下载文件放在子线程
-                    new Thread() {
-                        @Override
-                        public void run() {
-                            super.run();
-                            //保存到本地
-                            downloadFileToDisk(response, tempFile, finalFilePath, subscriberDownloadFileListener);
-                        }
-                    }.start();
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-                    subscriberDownloadFileListener.onError(throwable);
-                }
-            });
-        } else {
-            subscriberDownloadFileListener.onNext(filePath);
         }
+        return filePath;
     }
 
     /**
