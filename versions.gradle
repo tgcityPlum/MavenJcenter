@@ -87,7 +87,7 @@ ext {
     //**************** utilsDependencies ****************
     utilDependencies = [
             log             : "com.tgcity.utils:Log:latest.release",
-            file            : "com.tgcity.utils:File:1.0.15",
+            file            : "com.tgcity.utils:File:1.1.1",
             toast           : "com.tgcity.utils:Toast:latest.release",
             string          : "com.tgcity.utils:String:latest.release",
             system          : "com.tgcity.utils:System:latest.release",
