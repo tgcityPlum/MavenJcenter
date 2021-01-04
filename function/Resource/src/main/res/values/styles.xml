@@ -236,30 +236,30 @@
     <!--    text and color style ending   -->
 
     <!--    application theme starting   -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.TGCity.AppCompat.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/color_white</item>
         <item name="colorPrimaryDark">@color/color_white</item>
         <item name="colorAccent">@color/title_bag</item>
-        <item name="toolbarStyle">@style/ClubToolbar</item>
+        <item name="toolbarStyle">@style/Theme.TGCity.Toolbar.Club</item>
         <item name="android:textColorPrimary">@color/color_context</item>
         <item name="android:textColorSecondary">@color/color_context</item>
         <item name="colorButtonNormal">@color/title_bag</item>
         <!--<item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>-->
     </style>
 
-    <style name="AppBaseThemeWithWindowIsTranslucent" parent="AppBaseTheme">
+    <style name="Theme.TGCity.AppCompat.Base.Windows.Translucent" parent="Theme.TGCity.AppCompat.Base">
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
 
-    <style name="LauncherTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.TGCity.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/shape_solid_ffffff</item> <!-- 需要添加背景 -->
         <item name="android:windowFullscreen">true</item>
     </style>
     <!--    application theme ending   -->
 
     <!--    view style starting   -->
-    <style name="ClubToolbar" parent="Widget.AppCompat.Toolbar">
+    <style name="Theme.TGCity.Toolbar.Club" parent="Widget.AppCompat.Toolbar">
         <!-- 设置该属性解决空白部分-->
         <item name="contentInsetStart">0dp</item>
     </style>
@@ -296,7 +296,7 @@
         <item name="android:activityCloseExitAnimation">@anim/out_to_left_close_duration_200</item>
     </style>
 
-    <style name="PageAnimalTheme" parent="@style/AppBaseThemeWithWindowIsTranslucent">
+    <style name="Theme.TGCity.Theme.Animal.Page" parent="@style/Theme.TGCity.AppCompat.Base.Windows.Translucent">
         <!--自定义页面切换动画-->
         <item name="android:windowAnimationStyle">@style/AnimStyleEnterBottomExitBottomOpenClose
         </item>
