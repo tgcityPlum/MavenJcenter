@@ -17,9 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author jeremy
- * @date 2019/5/30
- * @des
+ * @author TGCity
  */
 public class NinePictureAdapter extends BaseAdapter {
     private List<ImageItem> itemList;

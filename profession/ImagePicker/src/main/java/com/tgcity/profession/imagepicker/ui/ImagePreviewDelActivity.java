@@ -13,13 +13,8 @@ import com.tgcity.profession.imagepicker.ImagePicker;
 import com.tgcity.profession.imagepicker.R;
 
 /**
- * ================================================
- * 作    者：jeasonlzy（廖子尧），ikkong （ikkong@163.com）
- * 版    本：1.0
- * 创建日期：2016/5/19
- * 描    述：
- * 修订历史：预览已经选择的图片，并可以删除, 感谢 ikkong 的提交
- * ================================================
+ * @author TGCity
+ * @description 可编辑和删除的图片预览基类
  */
 public class ImagePreviewDelActivity extends ImagePreviewBaseActivity implements View.OnClickListener {
 

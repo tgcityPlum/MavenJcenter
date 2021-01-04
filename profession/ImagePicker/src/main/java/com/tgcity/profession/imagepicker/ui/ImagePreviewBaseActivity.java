@@ -14,15 +14,10 @@ import com.tgcity.profession.imagepicker.view.ViewPagerFixed;
 import java.util.ArrayList;
 
 /**
- * ================================================
- * 作    者：jeasonlzy（廖子尧 Github地址：https://github.com/jeasonlzy0216
- * 版    本：1.0
- * 创建日期：2016/5/19
- * 描    述：
- * 修订历史：图片预览的基类
- * ================================================
+ * @author TGCity
+ * @description 图片预览的基类
  */
-public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
+public class ImagePreviewBaseActivity extends ImageBaseActivity {
 
     protected ImagePicker imagePicker;
     protected ArrayList<ImageItem> mImageItems;      //跳转进ImagePreviewFragment的图片文件夹
@@ -89,7 +84,9 @@ public abstract class ImagePreviewBaseActivity extends ImageBaseActivity {
     }
 
     /** 单击时，隐藏头和尾 */
-    public abstract void onImageSingleTap();
+    public void onImageSingleTap(){
+
+    }
 
     @Override
     protected void onDestroy() {

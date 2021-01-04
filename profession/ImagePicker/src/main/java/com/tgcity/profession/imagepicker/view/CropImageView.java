@@ -34,17 +34,7 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * ================================================
- * 作    者：廖子尧
- * 版    本：1.0
- * 创建日期：2016/1/7
- * 描    述：
- * Matrix 的9个值分别为  缩放  平移  倾斜
- * MSCALE_X	 MSKEW_X	MTRANS_X
- * MSKEW_Y	 MSCALE_Y	MTRANS_Y
- * MPERSP_0  MPERSP_1	MPERSP_2
- * 修订历史：
- * ================================================
+ * @author TGCity
  */
 
 public class CropImageView extends ImageView {

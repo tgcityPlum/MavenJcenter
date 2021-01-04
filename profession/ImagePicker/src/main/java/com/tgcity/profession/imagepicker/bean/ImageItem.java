@@ -3,13 +3,7 @@ package com.tgcity.profession.imagepicker.bean;
 import java.io.Serializable;
 
 /**
- * ================================================
- * 作    者：jeasonlzy（廖子尧 Github地址：https://github.com/jeasonlzy0216
- * 版    本：1.0
- * 创建日期：2016/5/19
- * 描    述：图片信息
- * 修订历史：
- * ================================================
+ * @author TGCity
  */
 public class ImageItem implements Serializable {
 

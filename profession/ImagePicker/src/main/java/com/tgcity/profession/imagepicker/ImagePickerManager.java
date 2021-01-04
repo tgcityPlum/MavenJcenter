@@ -10,8 +10,6 @@ import com.tgcity.profession.imagepicker.view.CropImageView;
 
 /**
  * @author TGCity
- * @date 2020/6/23
- * @description
  */
 public class ImagePickerManager {
 

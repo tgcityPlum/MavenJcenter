@@ -6,7 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * @author TGCity
+ */
 public class DataHolder {
     public static final String DH_CURRENT_IMAGE_FOLDER_ITEMS = "dh_current_image_folder_items";
 

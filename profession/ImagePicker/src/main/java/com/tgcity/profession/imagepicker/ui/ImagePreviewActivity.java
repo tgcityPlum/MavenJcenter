@@ -16,13 +16,8 @@ import com.tgcity.profession.imagepicker.bean.ImageItem;
 import com.tgcity.profession.imagepicker.view.SuperCheckBox;
 
 /**
- * ================================================
- * 作    者：jeasonlzy（廖子尧 Github地址：https://github.com/jeasonlzy0216
- * 版    本：1.0
- * 创建日期：2016/5/19
- * 描    述：
- * 修订历史：
- * ================================================
+ *  * @author TGCity
+ *  * @description 可编辑的图片预览基类
  */
 public class ImagePreviewActivity extends ImagePreviewBaseActivity implements ImagePicker.OnImageSelectedListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 

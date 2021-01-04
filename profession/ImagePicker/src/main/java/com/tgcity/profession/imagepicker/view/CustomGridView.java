@@ -5,9 +5,7 @@ import android.util.AttributeSet;
 import android.widget.GridView;
 
 /**
- * @author jeremy
- * @date 2019/5/30
- * @des
+ * @author TGCity
  */
 public class CustomGridView extends GridView {
     public CustomGridView(Context context) {
