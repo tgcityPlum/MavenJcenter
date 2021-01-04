@@ -97,7 +97,7 @@ public abstract class AbstractRetrofitUtils {
      */
     public Retrofit getDownloadFileRetrofit(String url) {
 
-        if (downloadFileRetrofit == null){
+        if (downloadFileRetrofit == null) {
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .readTimeout(30, TimeUnit.SECONDS)
@@ -110,7 +110,7 @@ public abstract class AbstractRetrofitUtils {
                     //添加转化库，默认是GSon
 //                .addConverterFactory(GsonConverterFactory.create())
                     //添加回调库，采用RxJava
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     //设置使用okHttp网络请求
                     .client(okHttpClient)
                     .build();

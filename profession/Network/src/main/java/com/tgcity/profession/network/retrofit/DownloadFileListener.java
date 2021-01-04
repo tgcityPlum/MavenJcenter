@@ -6,7 +6,7 @@ package com.tgcity.profession.network.retrofit;
  * @author tgcity
  */
 
-public interface SubscriberDownloadFileListener<T> extends SubscriberOnNextListener<T> {
+public interface DownloadFileListener {
 
     /**
      * 开始方法
@@ -18,5 +18,19 @@ public interface SubscriberDownloadFileListener<T> extends SubscriberOnNextListe
      * @param currentLength 进度 0~100
      */
     void onProgress(int currentLength);
+
+    /**
+     * next
+     *
+     * @param filePath String
+     */
+    void onNext(String filePath);
+
+    /**
+     * error
+     *
+     * @param e Throwable
+     */
+    void onError(String e);
 
 }

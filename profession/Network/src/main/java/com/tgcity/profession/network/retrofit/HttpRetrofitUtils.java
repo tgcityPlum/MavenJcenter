@@ -35,17 +35,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLDecoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * @author TGCity
@@ -57,6 +57,7 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
 
     public RxCache.Builder rxCacheBuilder;
     public Context context;
+    public DownloadFileApiService downloadFileApiService;
 
 
     /**
@@ -74,6 +75,10 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
                 .setApiAndRequsEffective(1000, 2)
                 .setApiEffective(1000 * 10, 50)
                 .setAllEffective(1000 * 60, 500);
+
+        if (downloadFileApiService == null) {
+            downloadFileApiService = getDownloadFileRetrofit("https://www.baidu.com/").create(DownloadFileApiService.class);
+        }
 
     }
 
@@ -246,38 +251,25 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
     }
 
     /**
-     * @param url                            下载地址路径
-     * @param apiService                     请求Api
-     * @param subscriberDownloadFileListener 回调
+     * @param url      下载地址路径
+     * @param listener 回调
      */
-    public void toObservableDownloadFile(String url, DownloadFileApiService apiService, SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
-        toObservableDownloadFile(url, 1, "downloadFile", apiService, subscriberDownloadFileListener);
+    public void toObservableDownloadFile(String url, DownloadFileListener listener) {
+        toObservableDownloadFile(url, "downloadFile", listener);
     }
 
     /**
-     * @param url                            下载地址路径
-     * @param type                           0  图片  1  视频
-     * @param apiService                     请求Api
-     * @param subscriberDownloadFileListener 回调
+     * @param url         下载地址
+     * @param fileDirName 文件名
+     * @param listener    回调
      */
-    public void toObservableDownloadFile(String url, int type, DownloadFileApiService apiService, SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
-        toObservableDownloadFile(url, type, "download", apiService, subscriberDownloadFileListener);
-    }
-
-    /**
-     * @param url                            下载地址
-     * @param type                           0  图片  1  视频
-     * @param fileDirName                    文件名
-     * @param apiService                     请求Api
-     * @param subscriberDownloadFileListener 回调
-     */
-    public void toObservableDownloadFile(String url, int type, String fileDirName, DownloadFileApiService apiService, SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
+    public void toObservableDownloadFile(String url, String fileDirName, DownloadFileListener listener) {
         //校验外部元素是否为空
-        if (checkDownloadFileElement(url, fileDirName, apiService, subscriberDownloadFileListener)) {
+        if (checkDownloadFileElement(url, fileDirName, listener)) {
             return;
         }
         //校验文件路径是否为空
-        String filePath = onDownloadFilePath(url, type, fileDirName);
+        String filePath = onDownloadFilePath(url, fileDirName);
         if (TextUtils.isEmpty(filePath)) {
             LogUtils.e("downloadFile: 存储路径为空");
             return;
@@ -286,51 +278,52 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
         File tempFile = new File(filePath);
 
         if (tempFile.exists()) {
-            subscriberDownloadFileListener.onNext(filePath);
+            listener.onNext(filePath);
         } else {
-            downloadFile(url, apiService, filePath, tempFile, subscriberDownloadFileListener);
+            downloadFile(url, filePath, tempFile, listener);
         }
     }
 
     /**
-     * @param url                            下载地址
-     * @param apiService                     请求Api
-     * @param subscriberDownloadFileListener 回调
+     * @param url      下载地址
+     * @param listener 回调
      */
-    private void downloadFile(@NonNull String url, @NonNull DownloadFileApiService apiService, @NonNull String filePath, @NonNull final File tempFile, @NonNull final SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
-        Call<ResponseBody> mCall = apiService.downloadFile(url);
-        final String finalFilePath = filePath;
-        mCall.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull final Response<ResponseBody> response) {
-                //下载文件放在子线程
-                new Thread() {
+    private void downloadFile(@NonNull String url, @NonNull final String filePath, @NonNull final File tempFile, @NonNull final DownloadFileListener listener) {
+        if (downloadFileApiService == null) {
+            return;
+        }
+        downloadFileApiService.downloadFile(url)
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .map(new Function<ResponseBody, Map<String, Object>>() {
                     @Override
-                    public void run() {
-                        super.run();
-                        //保存到本地
-                        downloadFileToDisk(response, tempFile, finalFilePath, subscriberDownloadFileListener);
+                    public Map<String, Object> apply(ResponseBody responseBody) {
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("inputStream", responseBody.byteStream());
+                        map.put("contentLength", responseBody.contentLength());
+                        return map;
                     }
-                }.start();
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable throwable) {
-                subscriberDownloadFileListener.onError(throwable);
-            }
-        });
+                })
+                .observeOn(Schedulers.computation())
+                .doOnNext(new Consumer<Map<String, Object>>() {
+                    @Override
+                    public void accept(Map<String, Object> map) {
+                        downloadFileToDisk((InputStream) map.get("inputStream"), (long) map.get("contentLength"), tempFile, filePath, listener);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe();
     }
 
     /**
      * 校验字段
      *
-     * @param url                            下载地址
-     * @param fileDirName                    文件目录
-     * @param apiService                     接口
-     * @param subscriberDownloadFileListener 回调
+     * @param url         下载地址
+     * @param fileDirName 文件目录
+     * @param listener    回调
      * @return 是否为空
      */
-    private boolean checkDownloadFileElement(String url, String fileDirName, DownloadFileApiService apiService, SubscriberDownloadFileListener<String> subscriberDownloadFileListener) {
+    private boolean checkDownloadFileElement(String url, String fileDirName, DownloadFileListener listener) {
         if (url == null) {
             LogUtils.e("url is null in toObservableDownloadFile");
             return true;
@@ -339,11 +332,7 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
             LogUtils.e("fileDirName is null in toObservableDownloadFile");
             return true;
         }
-        if (apiService == null) {
-            LogUtils.e("BaseApiService is null in toObservableDownloadFile");
-            return true;
-        }
-        if (subscriberDownloadFileListener == null) {
+        if (listener == null) {
             LogUtils.e("subscriberDownloadFileListener is null in toObservableDownloadFile");
             return true;
         }
@@ -354,11 +343,10 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
      * 处理文件路径
      *
      * @param url         下载地址
-     * @param type        类型
      * @param fileDirName 文件夹名称
      * @return 文件路径
      */
-    private String onDownloadFilePath(String url, int type, String fileDirName) {
+    private String onDownloadFilePath(String url, String fileDirName) {
         String fileDir = Environment.getExternalStorageDirectory() + "/" + fileDirName;
         String filePath = "";
         //通过Url得到保存到本地的文件名
@@ -368,12 +356,10 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
             int i = decodeUrl.lastIndexOf('/');
             if (i != -1) {
                 decodeUrl = decodeUrl.substring(i);
-                if (type == 1) {
-                    if (decodeUrl.contains(".mp4")) {
-                        String[] temp = decodeUrl.split(".mp4");
-                        decodeUrl = temp[0];
-                    }
-                    decodeUrl = decodeUrl + ".mp4";
+                //预先处理视频地址
+                if (decodeUrl.contains(".mp4")) {
+                    String[] temp = decodeUrl.split(".mp4");
+                    decodeUrl = temp[0] + ".mp4";
                 }
                 filePath = fileDir + decodeUrl;
             }
@@ -384,24 +370,22 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
     /**
      * 保存文件到本地
      *
-     * @param response         返回的数据response
-     * @param file             文件
-     * @param filePath         文件路径
-     * @param downloadListener 回调
+     * @param file     文件
+     * @param filePath 文件路径
+     * @param listener 回调
      */
-    private void downloadFileToDisk(Response<ResponseBody> response, File file, String filePath, SubscriberDownloadFileListener<String> downloadListener) {
-        downloadListener.onStart();
+    private void downloadFileToDisk(InputStream is, long totalLength, File file, String filePath, DownloadFileListener listener) {
+        listener.onStart();
         long currentLength = 0;
         OutputStream os = null;
 
-        if (response.body() == null) {
-            ApiException apiException = new ApiException("资源错误！", ErrorMode.DATA_FORMAT_ERROR);
-            downloadListener.onError(apiException);
+        LogUtils.d("totalLength: " + totalLength);
+
+        if (totalLength == 0 || is == null) {
+            listener.onError("资源错误！");
+            LogUtils.d("资源错误！");
             return;
         }
-        InputStream is = response.body().byteStream();
-        long totalLength = response.body().contentLength();
-        LogUtils.d("totalLength: " + totalLength);
         //下载装态  0 未开始  1 下载中  2 下载完成
         int loadStatus = 0;
         try {
@@ -417,53 +401,37 @@ public class HttpRetrofitUtils extends AbstractRetrofitUtils {
 
                 int temp = (int) (100 * currentLength / totalLength);
                 LogUtils.d("当前进度: " + currentLength + "====进度比例：" + temp);
-                downloadListener.onProgress(temp);
-                if (temp == 100) {
-                    loadStatus = 2;
-                }
-            }
-            if (loadStatus != 2) {
-                loadStatus = 2;
+                listener.onProgress(temp);
             }
         } catch (FileNotFoundException e) {
             LogUtils.e(e.toString());
-            downloadListener.onError(e);
+            listener.onError(e.toString());
             e.printStackTrace();
         } catch (IOException e) {
             LogUtils.e(e.toString());
-            downloadListener.onError(e);
+            listener.onError(e.toString());
             e.printStackTrace();
         } finally {
             if (os != null) {
                 try {
-                    if (loadStatus != 2) {
-                        loadStatus = 2;
-                    }
                     os.close();
                     LogUtils.d("os资源关闭");
                 } catch (IOException e) {
                     LogUtils.e(e.toString());
-                    downloadListener.onError(e);
+                    listener.onError(e.toString());
                     e.printStackTrace();
                 }
             }
-            if (is != null) {
-                try {
-                    if (loadStatus != 2) {
-                        loadStatus = 2;
-                    }
-                    is.close();
-                    LogUtils.d("is资源关闭");
-                } catch (IOException e) {
-                    LogUtils.e(e.toString());
-                    downloadListener.onError(e);
-                    e.printStackTrace();
-                }
+            try {
+                is.close();
+                LogUtils.d("is资源关闭");
+            } catch (IOException e) {
+                LogUtils.e(e.toString());
+                listener.onError(e.toString());
+                e.printStackTrace();
             }
-            if (loadStatus == 2) {
-                LogUtils.d("下载完成: " + filePath);
-                downloadListener.onNext(filePath);
-            }
+            LogUtils.d("下载完成: " + filePath);
+            listener.onNext(filePath);
         }
     }
 
