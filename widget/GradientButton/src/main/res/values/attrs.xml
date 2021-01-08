@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="gb_StrongGradientButton">
+    <declare-styleable name="gb_GradientButton">
         <attr name="gb_leftTopRadius_Gradient" format="dimension" />
         <attr name="gb_leftBottomRadius_Gradient" format="dimension" />
         <attr name="gb_rightTopRadius_Gradient" format="dimension" />

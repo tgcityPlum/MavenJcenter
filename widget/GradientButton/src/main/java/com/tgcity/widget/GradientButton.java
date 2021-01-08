@@ -1,4 +1,4 @@
-package com.tgcity.utils;
+package com.tgcity.widget;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -17,7 +17,7 @@ import com.tgcity.widget.gradientbutton.R;
  * @author TGCity
  * copy了StrongButton，扩展了渐变色
  */
-public class StrongGradientButton extends AppCompatButton {
+public class GradientButton extends AppCompatButton {
 
     /**
      * 边框宽度
@@ -70,27 +70,27 @@ public class StrongGradientButton extends AppCompatButton {
     /**
      * 正常状态下渐变开始背景颜色
      */
-    private int mNormalStartBackgroundColor = getResources().getColor(R.color.gb_strong_gradient_button_normal_start_background_color);
+    private int mNormalStartBackgroundColor = getResources().getColor(R.color.gb_normal_start_background_color);
     /**
      * 正常状态下渐变结束背景颜色
      */
-    private int mNormalEndBackgroundColor = getResources().getColor(R.color.gb_strong_gradient_button_normal_end_background_color);
+    private int mNormalEndBackgroundColor = getResources().getColor(R.color.gb_normal_end_background_color);
     /**
      * 触摸状态下渐变开始背景颜色
      */
-    private int mPressedStartBackgroundColor = getResources().getColor(R.color.gb_strong_gradient_button_press_start_background_color);
+    private int mPressedStartBackgroundColor = getResources().getColor(R.color.gb_press_start_background_color);
     /**
      * 触摸状态下渐变结束背景颜色
      */
-    private int mPressedEndBackgroundColor = getResources().getColor(R.color.gb_strong_gradient_button_press_end_background_color);
+    private int mPressedEndBackgroundColor = getResources().getColor(R.color.gb_press_end_background_color);
     /**
      * 禁用状态下渐变开始背景颜色
      */
-    private int mUnableStartBackgroundColor = getResources().getColor(R.color.gb_strong_gradient_button_unable_start_background_color);
+    private int mUnableStartBackgroundColor = getResources().getColor(R.color.gb_unable_start_background_color);
     /**
      * 禁用状态下渐变结束背景颜色
      */
-    private int mUnableEndBackgroundColor = getResources().getColor(R.color.gb_strong_gradient_button_unable_end_background_color);
+    private int mUnableEndBackgroundColor = getResources().getColor(R.color.gb_unable_end_background_color);
     /**
      * 正常状态下边框宽度
      */
@@ -106,38 +106,38 @@ public class StrongGradientButton extends AppCompatButton {
     /**
      * 正常状态下边框颜色
      */
-    private int mNormalStrokeColor = getResources().getColor(R.color.gb_strong_gradient_button_normal_stroke_color);
+    private int mNormalStrokeColor = getResources().getColor(R.color.gb_normal_stroke_color);
     /**
      * 触摸状态下边框颜色
      */
-    private int mPressedStrokeColor = getResources().getColor(R.color.gb_strong_gradient_button_press_stroke_color);
+    private int mPressedStrokeColor = getResources().getColor(R.color.gb_press_stroke_color);
     /**
      * 禁止状态下边框颜色
      */
-    private int mUnableStrokeColor = getResources().getColor(R.color.gb_strong_gradient_button_unable_stroke_color);
+    private int mUnableStrokeColor = getResources().getColor(R.color.gb_unable_stroke_color);
     /**
      * 触摸状态下文字颜色
      */
-    private int mPressedTextColor = getResources().getColor(R.color.gb_strong_gradient_button_normal_text_color);
+    private int mPressedTextColor = getResources().getColor(R.color.gb_normal_text_color);
     /**
      * 正常状态下文字颜色
      */
-    private int mNormalTextColor = getResources().getColor(R.color.gb_strong_gradient_button_press_text_color);
+    private int mNormalTextColor = getResources().getColor(R.color.gb_press_text_color);
     /**
      * 禁止状态下文字颜色
      */
-    private int mUnableTextColor = getResources().getColor(R.color.gb_strong_gradient_button_unable_text_color);
+    private int mUnableTextColor = getResources().getColor(R.color.gb_unable_text_color);
 
-    public StrongGradientButton(Context context) {
+    public GradientButton(Context context) {
         super(context);
     }
 
-    public StrongGradientButton(Context context, AttributeSet attrs) {
+    public GradientButton(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context, attrs);
     }
 
-    public StrongGradientButton(Context context, AttributeSet attrs, int defStyleAttr) {
+    public GradientButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(context, attrs);
     }
@@ -178,31 +178,31 @@ public class StrongGradientButton extends AppCompatButton {
     }
 
     protected void init(Context context, AttributeSet attrs) {
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.gb_StrongGradientButton);
-        float radius = typedArray.getDimension(R.styleable.gb_StrongGradientButton_gb_radius_Gradient, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.gb_GradientButton);
+        float radius = typedArray.getDimension(R.styleable.gb_GradientButton_gb_radius_Gradient, 0);
         if (radius != 0) {
             mTopLeftRadius = mTopRightRadius = mBottomLeftRadius = mBottomRightRadius = radius;
         } else {
-            mTopLeftRadius = typedArray.getDimension(R.styleable.gb_StrongGradientButton_gb_leftTopRadius_Gradient, 0);
-            mTopRightRadius = typedArray.getDimension(R.styleable.gb_StrongGradientButton_gb_rightTopRadius_Gradient, 0);
-            mBottomLeftRadius = typedArray.getDimension(R.styleable.gb_StrongGradientButton_gb_leftBottomRadius_Gradient, 0);
-            mBottomRightRadius = typedArray.getDimension(R.styleable.gb_StrongGradientButton_gb_rightBottomRadius_Gradient, 0);
+            mTopLeftRadius = typedArray.getDimension(R.styleable.gb_GradientButton_gb_leftTopRadius_Gradient, 0);
+            mTopRightRadius = typedArray.getDimension(R.styleable.gb_GradientButton_gb_rightTopRadius_Gradient, 0);
+            mBottomLeftRadius = typedArray.getDimension(R.styleable.gb_GradientButton_gb_leftBottomRadius_Gradient, 0);
+            mBottomRightRadius = typedArray.getDimension(R.styleable.gb_GradientButton_gb_rightBottomRadius_Gradient, 0);
         }
-        mNormalTextColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_normalTextColor_Gradient, mNormalTextColor);
-        mPressedTextColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_pressTextColor_Gradient, mPressedTextColor);
-        mUnableTextColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_unableTextColor_Gradient, mUnableTextColor);
-        mNormalStartBackgroundColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_normalBackgroundColor_start_Gradient, mNormalStartBackgroundColor);
-        mNormalEndBackgroundColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_normalBackgroundColor_end_Gradient, mNormalEndBackgroundColor);
-        mPressedStartBackgroundColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_pressBackgroundColor_start_Gradient, mPressedStartBackgroundColor);
-        mPressedEndBackgroundColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_pressBackgroundColor_end_Gradient, mPressedEndBackgroundColor);
-        mUnableStartBackgroundColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_unableBackgroundColor_start_Gradient, mUnableStartBackgroundColor);
-        mUnableEndBackgroundColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_unableBackgroundColor_end_Gradient, mUnableEndBackgroundColor);
-        mNormalStrokeColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_normalStrokeColor_Gradient, mNormalStrokeColor);
-        mPressedStrokeColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_pressStrokeColor_Gradient, mPressedStrokeColor);
-        mUnableStrokeColor = typedArray.getColor(R.styleable.gb_StrongGradientButton_gb_unableStrokeColor_Gradient, mUnableStrokeColor);
-        mNormalStrokeWidth = typedArray.getDimension(R.styleable.gb_StrongGradientButton_gb_normalStrokeWidth_Gradient, mNormalStrokeWidth);
-        mPressedStrokeWidth = typedArray.getDimension(R.styleable.gb_StrongGradientButton_gb_pressStrokeWidth_Gradient, mPressedStrokeWidth);
-        mUnableStrokeWidth = typedArray.getDimension(R.styleable.gb_StrongGradientButton_gb_unableStrokeWidth_Gradient, mUnableStrokeWidth);
+        mNormalTextColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_normalTextColor_Gradient, mNormalTextColor);
+        mPressedTextColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_pressTextColor_Gradient, mPressedTextColor);
+        mUnableTextColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_unableTextColor_Gradient, mUnableTextColor);
+        mNormalStartBackgroundColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_normalBackgroundColor_start_Gradient, mNormalStartBackgroundColor);
+        mNormalEndBackgroundColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_normalBackgroundColor_end_Gradient, mNormalEndBackgroundColor);
+        mPressedStartBackgroundColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_pressBackgroundColor_start_Gradient, mPressedStartBackgroundColor);
+        mPressedEndBackgroundColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_pressBackgroundColor_end_Gradient, mPressedEndBackgroundColor);
+        mUnableStartBackgroundColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_unableBackgroundColor_start_Gradient, mUnableStartBackgroundColor);
+        mUnableEndBackgroundColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_unableBackgroundColor_end_Gradient, mUnableEndBackgroundColor);
+        mNormalStrokeColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_normalStrokeColor_Gradient, mNormalStrokeColor);
+        mPressedStrokeColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_pressStrokeColor_Gradient, mPressedStrokeColor);
+        mUnableStrokeColor = typedArray.getColor(R.styleable.gb_GradientButton_gb_unableStrokeColor_Gradient, mUnableStrokeColor);
+        mNormalStrokeWidth = typedArray.getDimension(R.styleable.gb_GradientButton_gb_normalStrokeWidth_Gradient, mNormalStrokeWidth);
+        mPressedStrokeWidth = typedArray.getDimension(R.styleable.gb_GradientButton_gb_pressStrokeWidth_Gradient, mPressedStrokeWidth);
+        mUnableStrokeWidth = typedArray.getDimension(R.styleable.gb_GradientButton_gb_unableStrokeWidth_Gradient, mUnableStrokeWidth);
         typedArray.recycle();
         prepareStyle()
                 .setCornerRadii()
@@ -215,7 +215,7 @@ public class StrongGradientButton extends AppCompatButton {
     /**
      * 初始化一些样式必须的东西
      */
-    private StrongGradientButton prepareStyle() {
+    private GradientButton prepareStyle() {
         //可用且触摸状态
         states[0] = new int[]{android.R.attr.state_enabled, android.R.attr.state_pressed};
         //可用且已获取焦点状态
@@ -239,7 +239,7 @@ public class StrongGradientButton extends AppCompatButton {
     /**
      * 设置圆角
      */
-    private StrongGradientButton setCornerRadii() {
+    private GradientButton setCornerRadii() {
         float[] radii = {
                 mTopLeftRadius, mTopLeftRadius,
                 mTopRightRadius, mTopRightRadius,
@@ -255,7 +255,7 @@ public class StrongGradientButton extends AppCompatButton {
     /**
      * 设置边框
      */
-    private StrongGradientButton setStroke() {
+    private GradientButton setStroke() {
         mNormalBackground.setStroke((int) mNormalStrokeWidth, mNormalStrokeColor, mStrokeDashWidth, mStrokeDashGap);
         mPressedBackground.setStroke((int) mPressedStrokeWidth, mPressedStrokeColor, mStrokeDashWidth, mStrokeDashGap);
         mUnableBackground.setStroke((int) mUnableStrokeWidth, mUnableStrokeColor, mStrokeDashWidth, mStrokeDashGap);
@@ -266,7 +266,7 @@ public class StrongGradientButton extends AppCompatButton {
     /**
      * 设置文字颜色
      */
-    private StrongGradientButton setTexColor() {
+    private GradientButton setTexColor() {
         int[] colors = new int[]{mPressedTextColor, mPressedTextColor, mNormalTextColor, mUnableTextColor};
         mTextColorStateList = new ColorStateList(states, colors);
         setTextColor(mTextColorStateList);
