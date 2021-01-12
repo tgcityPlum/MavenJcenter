@@ -3,6 +3,7 @@ package com.tgcity.profession.mvp.present;
 import com.tgcity.function.interfaces.OnPublicRefreshViewCallBack;
 import com.tgcity.function.network.cache.ErrorMode;
 import com.tgcity.function.network.retrofit.ApiException;
+import com.trello.rxlifecycle2.LifecycleTransformer;
 
 /**
  * @author TGCitY
@@ -10,11 +11,23 @@ import com.tgcity.function.network.retrofit.ApiException;
  */
 
 public abstract class BasePresenterImpl<V> {
+
+    public LifecycleTransformer lifecycleTransformer;
+
     public V view;
     /**
      * 这个字段用于列表loading动画的触发，仅仅使用一次
      */
     private boolean isInit;
+
+    /**
+     * 绑定生命周期
+     *
+     * @param bindToLifecycle  LifecycleTransformer
+     */
+    public void bindLifecycle(LifecycleTransformer bindToLifecycle) {
+        lifecycleTransformer = bindToLifecycle;
+    }
 
     /**
      * 绑定View接口

@@ -103,8 +103,8 @@ public abstract class BaseMemoryActivity extends BaseLoadingActivity {
     }
 
     @Override
-    public void onDestroy(LifecycleOwner owner) {
-        super.onDestroy(owner);
+    protected void onDestroy() {
+        super.onDestroy();
         //Glide clearMemory(must in main thread)
         Glide.get(this).clearMemory();
         //Glide clearDiskCache(must in child thread)
@@ -137,6 +137,7 @@ public abstract class BaseMemoryActivity extends BaseLoadingActivity {
 
                     }
                 });
+
     }
 
     @Override

@@ -29,6 +29,7 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
         }
         if (presenter != null) {
             presenter.attachView((V) this);
+            presenter.bindLifecycle(this.bindToLifecycle());
         }
 
         super.onCreate(savedInstanceState);
@@ -141,12 +142,12 @@ public abstract class BaseMVPActivity<V, P extends BasePresenterImpl<V>> extends
     }
 
     @Override
-    public void onDestroy(LifecycleOwner owner) {
+    public void onDestroy() {
         if (presenter != null) {
             presenter.detachView();
         }
         presenter = null;
 
-        super.onDestroy(owner);
+        super.onDestroy();
     }
 }

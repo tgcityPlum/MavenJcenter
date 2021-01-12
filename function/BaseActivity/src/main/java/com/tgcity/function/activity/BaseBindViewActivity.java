@@ -116,8 +116,8 @@ public abstract class BaseBindViewActivity extends BaseOrientationActivity {
     }
 
     @Override
-    public void onDestroy(LifecycleOwner owner) {
-        super.onDestroy(owner);
+    protected void onDestroy() {
+        super.onDestroy();
         //destroy unBinder
         if (unBind != null) {
             unBind.unbind();

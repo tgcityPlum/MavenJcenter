@@ -188,11 +188,11 @@ public abstract class BaseImmersionBarActivity extends BaseEventLogicActivity {
     }
 
     @Override
-    public void onDestroy(LifecycleOwner owner) {
+    public void onDestroy() {
         mImmersionBar = null;
         mToolBar = null;
         mTitleBar = null;
-        super.onDestroy(owner);
+        super.onDestroy();
     }
 
 }

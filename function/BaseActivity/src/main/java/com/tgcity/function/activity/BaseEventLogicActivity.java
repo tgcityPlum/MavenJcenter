@@ -87,8 +87,8 @@ public abstract class BaseEventLogicActivity extends BaseRouterActivity {
     }
 
     @Override
-    public void onDestroy(LifecycleOwner owner) {
-        super.onDestroy(owner);
+    public void onDestroy() {
+        super.onDestroy();
         launched = false;
     }
 

@@ -1,54 +1,98 @@
 package com.tgcity.function.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
+import android.os.Bundle;
+import android.support.annotation.CallSuper;
+import android.support.annotation.CheckResult;
+import android.support.annotation.NonNull;
+
+import androidx.annotation.Nullable;
 
 import com.tgcity.function.baseactivity.R;
-import com.tgcity.profession.lifecycler.BaseLifecycleObserver;
-import com.tgcity.utils.LogUtils;
+import com.trello.rxlifecycle2.LifecycleProvider;
+import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.trello.rxlifecycle2.RxLifecycle;
+import com.trello.rxlifecycle2.android.ActivityEvent;
+import com.trello.rxlifecycle2.android.RxLifecycleAndroid;
+
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
 
 /**
  * @author TGCity
  * 基础的activity
  * --管理activity的生命周期
  */
-public abstract class BaseLifecycleActivity extends AppCompatActivity implements BaseLifecycleObserver {
+public abstract class BaseLifecycleActivity extends BaseMemoryActivity implements LifecycleProvider<ActivityEvent> {
+
+    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
 
     @Override
-    public void onCreate(LifecycleOwner owner) {
+    @NonNull
+    @CheckResult
+    public final Observable<ActivityEvent> lifecycle() {
+        return lifecycleSubject.hide();
+    }
+
+    @Override
+    @NonNull
+    @CheckResult
+    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
+        return RxLifecycle.bindUntilEvent(lifecycleSubject, event);
+    }
+
+    @Override
+    @NonNull
+    @CheckResult
+    public final <T> LifecycleTransformer<T> bindToLifecycle() {
+        return RxLifecycleAndroid.bindActivity(lifecycleSubject);
+    }
+
+    @Override
+    @CallSuper
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        lifecycleSubject.onNext(ActivityEvent.CREATE);
         logActivity(getCurrentPageName(getString(R.string.activity_onCreate)));
     }
 
     @Override
-    public void onStart(LifecycleOwner owner) {
+    @CallSuper
+    protected void onStart() {
+        super.onStart();
+        lifecycleSubject.onNext(ActivityEvent.START);
         logActivity(getCurrentPageName(getString(R.string.activity_onStart)));
     }
 
     @Override
-    public void onResume(LifecycleOwner owner) {
+    @CallSuper
+    protected void onResume() {
+        super.onResume();
+        lifecycleSubject.onNext(ActivityEvent.RESUME);
         logActivity(getCurrentPageName(getString(R.string.activity_onResume)));
     }
 
     @Override
-    public void onPause(LifecycleOwner owner) {
+    @CallSuper
+    protected void onPause() {
+        lifecycleSubject.onNext(ActivityEvent.PAUSE);
+        super.onPause();
         logActivity(getCurrentPageName(getString(R.string.activity_onPause)));
     }
 
     @Override
-    public void onStop(LifecycleOwner owner) {
+    @CallSuper
+    protected void onStop() {
+        lifecycleSubject.onNext(ActivityEvent.STOP);
+        super.onStop();
         logActivity(getCurrentPageName(getString(R.string.activity_onStop)));
     }
 
     @Override
-    public void onDestroy(LifecycleOwner owner) {
+    @CallSuper
+    protected void onDestroy() {
+        lifecycleSubject.onNext(ActivityEvent.DESTROY);
+        super.onDestroy();
         logActivity(getCurrentPageName(getString(R.string.activity_onDestroy)));
-    }
-
-    /**
-     * 输出当前界面调用方法的日志
-     */
-    protected void logActivity(String message) {
-        LogUtils.d(message);
     }
 
     public String getCurrentPageName(String message) {

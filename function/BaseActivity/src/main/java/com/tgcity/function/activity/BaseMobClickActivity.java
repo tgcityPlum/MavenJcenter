@@ -1,27 +1,25 @@
 package com.tgcity.function.activity;
 
-import androidx.lifecycle.LifecycleOwner;
-
 import com.umeng.analytics.MobclickAgent;
 
 /**
  * @author TGCity
  * @date 2019/9/10
- * @describe 友盟点击事件监听
+ * @description 友盟点击事件监听
  */
 public abstract class BaseMobClickActivity extends BaseImmersionBarActivity {
 
     @Override
-    public void onResume(LifecycleOwner owner) {
-        super.onResume(owner);
+    public void onResume() {
+        super.onResume();
 
         MobclickAgent.onPageStart(getCurrentPage());
         MobclickAgent.onResume(getAppContext());
     }
 
     @Override
-    public void onPause(LifecycleOwner owner) {
-        super.onPause(owner);
+    public void onPause() {
+        super.onPause();
 
         MobclickAgent.onPageEnd(getCurrentPage());
         MobclickAgent.onPause(getAppContext());
