@@ -18,6 +18,7 @@ package com.tgcity.profession.network.cache.model;
 
 /**
  * 网络请求策略
+ *
  * @author TGCity
  */
 public enum CacheMode {
@@ -26,19 +27,23 @@ public enum CacheMode {
      **/
     NO_CACHE("NoStrategy"),
     /**
-     * 先请求网络，请求网络失败后再加载缓存
+     * 先请求网络，当请求网络失败后再加载缓存
      */
     FIRST_REMOTE("FirstRemoteStrategy"),
 
     /**
-     * 先加载缓存，缓存没有再去请求网络
+     * 先加载缓存，当缓存没有再去请求网络
      */
     FIRST_CACHE("FirstCacheStrategy"),
 
     /**
-     * 先使用缓存，不管是否存在，仍然请求网络，会先把缓存回调给你，
-     * 等网络请求回来发现数据是一样的就不会再返回，否则再返回
-     * （这样做的目的是防止数据是一样的你也需要刷新界面）
+     * 先显示缓存，再请求网络，不进行数据的查重处理
+     */
+    CACHE_AND_REMOTE("CacheAndRemoteStrategy"),
+
+    /**
+     * 先显示缓存，再请求网络，处理数据的重复逻辑
+     * 使用过程中需要重写返回实体类的toString方法
      */
     CACHE_AND_REMOTE_DISTINCT("CacheAndRemoteDistinctStrategy");
 

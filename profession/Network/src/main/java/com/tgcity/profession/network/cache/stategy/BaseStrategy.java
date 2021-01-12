@@ -1,7 +1,5 @@
 package com.tgcity.profession.network.cache.stategy;
 
-
-
 import android.support.annotation.NonNull;
 
 import com.tgcity.function.network.cache.ErrorMode;
