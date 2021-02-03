@@ -31,6 +31,7 @@ public class DigitalUtils {
     public static final int LEVEL_105 = 105;
     public static final int LEVEL_120 = 120;
     public static final int LEVEL_135 = 135;
+    public static final int LEVEL_400 = 400;
     public static final int LEVEL_401 = 401;
     public static final int LEVEL_500 = 500;
 
