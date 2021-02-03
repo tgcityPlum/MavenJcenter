@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tgcity.profession.multiimageselector.R;
@@ -32,6 +33,10 @@ public class MultiImageSelector {
     private ArrayList<String> mOriginData;
     private static MultiImageSelector sSelector;
 
+    /**
+     * @param context Context
+     * @deprecated Use {@link #MultiImageSelector()} instead
+     */
     @Deprecated
     private MultiImageSelector(Context context) {
 
@@ -40,6 +45,12 @@ public class MultiImageSelector {
     private MultiImageSelector() {
     }
 
+    /**
+     *
+     * @param context Context
+     * @return MultiImageSelector
+     * @deprecated Use {@link #create()} instead
+     */
     @Deprecated
     public static MultiImageSelector create(Context context) {
         if (sSelector == null) {

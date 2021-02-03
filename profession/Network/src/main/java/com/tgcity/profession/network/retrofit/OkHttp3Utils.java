@@ -94,9 +94,9 @@ public class OkHttp3Utils {
             mOkHttpClient = builder
                     .addInterceptor(mTokenInterceptor)
                     //设置请求读写的超时时间
-                    .connectTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(30, TimeUnit.SECONDS)
-                    .readTimeout(30, TimeUnit.SECONDS)
+                    .connectTimeout(100, TimeUnit.SECONDS)
+                    .writeTimeout(100, TimeUnit.SECONDS)
+                    .readTimeout(100, TimeUnit.SECONDS)
                     .retryOnConnectionFailure(true)
                     .sslSocketFactory(sslParams.sSLSocketFactory, sslParams.trustManager)
                     .build();

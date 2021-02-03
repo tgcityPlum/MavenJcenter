@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 /**
  * @author TGCity
@@ -26,6 +27,10 @@ public class SoftHideKeyBoardUtil {
     private Activity activity;
     private int statusBarHeight;
 
+    /**
+     * @param activity Activity
+     * @deprecated Use {@link #getInstall(Activity)} instead
+     */
     @Deprecated
     public static void assistActivity(Activity activity) {
         new SoftHideKeyBoardUtil(activity);

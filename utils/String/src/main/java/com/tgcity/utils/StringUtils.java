@@ -2,6 +2,7 @@ package com.tgcity.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.text.InputFilter;
 import android.text.Spanned;
 import android.widget.TextView;
@@ -233,6 +234,7 @@ public final class StringUtils {
      *
      * @param tv TextView
      * @return String
+     * @deprecated Use {@link #getText(TextView)} instead
      */
     @Deprecated
     public static String getStringFromView(TextView tv) {
