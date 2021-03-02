@@ -20,5 +20,6 @@
         <attr name="mv_center_hint_size" format="dimension" />
         <attr name="mv_left_icon" format="reference" />
         <attr name="mv_right_icon" format="reference" />
+        <attr name="mv_layout_height" format="dimension" />
     </declare-styleable>
 </resources>

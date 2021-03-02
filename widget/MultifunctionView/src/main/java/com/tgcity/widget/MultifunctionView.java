@@ -3,10 +3,12 @@ package com.tgcity.widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -48,11 +50,13 @@ public class MultifunctionView extends LinearLayout {
     private int leftIcon;
     private int leftColor = DigitalUtils.LEVEL_N_1;
     private int leftSize = DigitalUtils.LEVEL_N_1;
+    private int layoutHeight = DigitalUtils.LEVEL_N_1;
     private int rightIcon;
     private boolean lineVisibility = true;
     private boolean lineRightVisibility = true;
     private boolean requiredOptionsVisibility = false;
 
+    private ConstraintLayout clView;
     private TextView tvLeft;
     private TextView tvCenter;
     private TextView tvCenterBottom;
@@ -86,6 +90,7 @@ public class MultifunctionView extends LinearLayout {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.mv_MultifunctionView);
 
         layoutType = typedArray.getInt(R.styleable.mv_MultifunctionView_mv_layout_type, layoutType);
+        layoutHeight = typedArray.getLayoutDimension(R.styleable.mv_MultifunctionView_mv_layout_height, layoutHeight);
         leftText = typedArray.getString(R.styleable.mv_MultifunctionView_mv_left_text);
         leftIcon = typedArray.getResourceId(R.styleable.mv_MultifunctionView_mv_left_icon, DigitalUtils.LEVEL_0);
         leftColor = typedArray.getColor(R.styleable.mv_MultifunctionView_mv_left_color, leftColor);
@@ -147,6 +152,7 @@ public class MultifunctionView extends LinearLayout {
         if (rootView == null) {
             return;
         }
+
         tvLeft = rootView.findViewById(R.id.tvLeft);
         etCenter = rootView.findViewById(R.id.etCenter);
         ivRight = rootView.findViewById(R.id.ivRight);
@@ -246,10 +252,14 @@ public class MultifunctionView extends LinearLayout {
         if (rootView == null) {
             return;
         }
+
+        clView = rootView.findViewById(R.id.clView);
         ivLeft = rootView.findViewById(R.id.ivLeft);
         tvCenter = rootView.findViewById(R.id.tvCenter);
         ivRight = rootView.findViewById(R.id.ivRight);
         vLineBottom = rootView.findViewById(R.id.vLineBottom);
+
+        setLayoutHeight();
 
         ivLeft.setImageResource(leftIcon);
         tvCenter.setText(centerText);
@@ -300,6 +310,16 @@ public class MultifunctionView extends LinearLayout {
 
     private void initView(int layoutId) {
         rootView = LayoutInflater.from(mContext).inflate(layoutId, this, true);
+    }
+
+    private void setLayoutHeight() {
+        if (clView != null && layoutHeight != DigitalUtils.LEVEL_N_1){
+            ViewGroup.LayoutParams linearParams = clView.getLayoutParams();
+            if (linearParams != null){
+                linearParams.height = layoutHeight;
+                clView.setLayoutParams(linearParams);
+            }
+        }
     }
 
     public void setLeftText(String message) {
