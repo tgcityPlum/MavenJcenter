@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.text.Editable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -313,9 +312,9 @@ public class MultifunctionView extends LinearLayout {
     }
 
     private void setLayoutHeight() {
-        if (clView != null && layoutHeight != DigitalUtils.LEVEL_N_1){
+        if (clView != null && layoutHeight != DigitalUtils.LEVEL_N_1) {
             ViewGroup.LayoutParams linearParams = clView.getLayoutParams();
-            if (linearParams != null){
+            if (linearParams != null) {
                 linearParams.height = layoutHeight;
                 clView.setLayoutParams(linearParams);
             }
@@ -379,10 +378,13 @@ public class MultifunctionView extends LinearLayout {
      * 设置中间的文案
      */
     public void setCenterText(String message) {
-        if (tvCenter != null) {
-            tvCenter.setText(message);
-        } else if (etCenter != null) {
-            etCenter.setText(message);
+        if (message != null) {
+            if (tvCenter != null) {
+                tvCenter.setText(message);
+            } else if (etCenter != null) {
+                etCenter.setText(message);
+                etCenter.setSelection(message.length());
+            }
         }
     }
 

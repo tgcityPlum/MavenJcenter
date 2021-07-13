@@ -57,4 +57,22 @@ public class DateUtils {
         return getSimpleDateFormatDate(getLongFormatPattern(time, pattern1), pattern2);
     }
 
+    /**
+     * 转换时间格式
+     * 今日时间显示 HH:mm:ss
+     * 其它时间显示 yyyy-MM-dd HH:mm:ss
+     */
+    public static String getSimpleDate(String date, String pattern) {
+        long time = getLongFormatPattern(date, pattern);
+        long currentTime = System.currentTimeMillis();
+        long intervalTime = currentTime - time;
+        if (intervalTime > 1000 * 60 * 60 * 24) {
+            return date;
+        }
+        if (getSimpleDateFormatDate(time,PATTERN_STYLE_4).equals(getSimpleDateFormatDate(currentTime,PATTERN_STYLE_4))){
+            return getSimpleDateFormatDate(time,PATTERN_STYLE_2);
+        }
+        return date;
+    }
+
 }
