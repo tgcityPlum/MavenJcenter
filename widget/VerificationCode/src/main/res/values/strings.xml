@@ -1,4 +1,0 @@
-<resources>
-    <string name="vc_un_click_msg">发送验证码</string>
-    <string name="vc_click_msg">秒后重新发送</string>
-</resources>
