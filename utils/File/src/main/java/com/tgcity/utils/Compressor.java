@@ -144,7 +144,9 @@ public class Compressor {
         } else if (orientation == 8) {
             matrix.postRotate(270);
         }
-        scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+        if (orientation != 0){
+            scaledBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
+        }
         return scaledBitmap;
     }
 

@@ -89,7 +89,7 @@ ext {
             log             : "com.tgcity.utils:Log:latest.release",
             file            : "com.tgcity.utils:File:1.1.1",
             toast           : "com.tgcity.utils:Toast:latest.release",
-            string          : "com.tgcity.utils:String:latest.release",
+            string          : "com.github.tgcityPlum:MavenJcenter:Utils-String-1.0.7",
             system          : "com.tgcity.utils:System:latest.release",
             digital         : "com.tgcity.utils:Digital:latest.release",
             density         : "com.tgcity.utils:Density:latest.release",
