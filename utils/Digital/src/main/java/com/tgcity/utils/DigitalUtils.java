@@ -39,4 +39,6 @@ public class DigitalUtils {
     public static final int REQUEST_CODE_LOCATION = 1001;
     public static final int REQUEST_CODE_CAMERA = 1002;
     public static final int REQUEST_CODE_ALBUM = 1003;
+    public static final int REQUEST_CODE_ID_FRONT_PHOTO = 0x10031;
+    public static final int REQUEST_CODE_ID_REVERSE_PHOTO = 0x10032;
 }
